@@ -29,7 +29,7 @@ export default function FAQsPage() {
         badge="Frequently asked questions"
         image={pageImage("faqs")}
         imageAlt="Editorial photograph of a family conversation"
-        title="Questions are welcome. Clarity is part of care."
+        title="Psychiatric Consultation Frequently Asked Questions"
         description="Understand appointments, treatment, privacy, family involvement and practical details before you decide on a next step."
         breadcrumbs={[{ label: "FAQs" }]}
         actions={<Button asChild><Link prefetch={false} href="/appointment"><CalendarDays />Request appointment</Link></Button>}

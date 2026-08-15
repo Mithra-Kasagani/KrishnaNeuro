@@ -68,7 +68,7 @@ export const faqs: FAQ[] = [
   {
     question: "How do I request an appointment?",
     answer:
-      "Use the short appointment form, WhatsApp the clinic on 81217 43999, or call 81217 43999 / 81257 43999. A requested time is not confirmed until the clinic replies.",
+      "Use the short appointment form or WhatsApp the clinic on +91 81257 43999. For voice calls, use 81217 43999. A requested time is not confirmed until the clinic replies.",
     category: "Practical",
   },
   {

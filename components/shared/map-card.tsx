@@ -1,6 +1,6 @@
-import { Clock3, ExternalLink, MapPin, Phone } from "lucide-react";
+import { Clock3, ExternalLink, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, whatsappHref } from "@/lib/site";
 
 export function MapCard() {
   return (
@@ -11,7 +11,8 @@ export function MapCard() {
         <div className="mt-6 grid gap-5 text-sm leading-6 text-muted-foreground">
           <div className="flex gap-3"><MapPin className="mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"/><span>{siteConfig.address.line1}<br/>{siteConfig.address.line2}<br/>{siteConfig.address.locality}, {siteConfig.address.city} – {siteConfig.address.postalCode}</span></div>
           <div className="flex gap-3"><Clock3 className="mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"/><span>{siteConfig.hours.summary}<br/>{siteConfig.hours.closed} · Please call to confirm</span></div>
-          <div className="flex gap-3"><Phone className="mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"/><span>{siteConfig.displayPhones[0]}<br/>{siteConfig.displayPhones[1]}</span></div>
+          <div className="flex gap-3"><Phone className="mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"/><span><strong className="text-foreground">Calls:</strong> {siteConfig.displayPhones[0]}</span></div>
+          <div className="flex gap-3"><MessageCircle className="mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"/><a href={whatsappHref()} target="_blank" rel="noreferrer"><strong className="text-foreground">WhatsApp:</strong> {siteConfig.whatsappDisplay}</a></div>
         </div>
         <Button asChild variant="outline" className="mt-7"><a href={siteConfig.googleMapsUrl} target="_blank" rel="noreferrer">Open directions <ExternalLink aria-hidden="true"/></a></Button>
       </div>

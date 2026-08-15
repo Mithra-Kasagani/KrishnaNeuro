@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/noto-sans-telugu/wght.css";
 import "./globals.css";
 import { FloatingActions } from "@/components/conversion/floating-actions";
-import { ExitIntent } from "@/components/conversion/exit-intent";
 import { BiText } from "@/components/i18n/bilingual-text";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -12,7 +11,7 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: { default: "Psychiatrist in Vijayawada | Dr. Pamarthi Krishna Das", template: "%s | Krishna Neuro Vijayawada" },
+  title: "Krishna Neuro Psychiatric Centre | Dr. Pamarthi Krishna Das",
   description: siteConfig.description,
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
@@ -52,7 +51,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main-content" className="min-h-screen">{children}</main>
         <SiteFooter />
         <FloatingActions />
-        <ExitIntent />
         <AnalyticsConsent />
       </body>
     </html>

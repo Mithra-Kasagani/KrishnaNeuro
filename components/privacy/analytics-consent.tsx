@@ -15,6 +15,9 @@ export function AnalyticsConsent() {
     if(choice==='accepted')load(); else if(!choice&&box)box.hidden=false;
     var yes=document.getElementById('analytics-accept'), no=document.getElementById('analytics-decline');
     function decide(value){try{localStorage.setItem(KEY,value)}catch(e){}if(box)box.hidden=true;if(value==='accepted')load()}
+    function track(name){var allowed=false;try{allowed=localStorage.getItem(KEY)==='accepted'}catch(e){}if(!allowed)return;window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:name,page_path:location.pathname})}
+    document.addEventListener('click',function(event){var target=event.target&&event.target.closest?event.target.closest('a'):null;if(!target)return;var href=target.getAttribute('href')||'';if(href.indexOf('tel:')===0)track('clinic_phone_click');else if(href.indexOf('wa.me/')>=0)track('clinic_whatsapp_click');else if(href.indexOf('/appointment')>=0)track('appointment_button_click');else if(href.indexOf('google.com/maps')>=0)track('directions_click')});
+    window.addEventListener('knpc-safe-event',function(event){if(event.detail&&event.detail.name)track(event.detail.name)});
     if(yes)yes.addEventListener('click',function(){decide('accepted')});
     if(no)no.addEventListener('click',function(){decide('declined')});
   })();`;

@@ -13,7 +13,7 @@ function JsonLd({ data }: { data: Record<string, unknown> | Record<string, unkno
 export function OrganizationJsonLd() {
   const clinic = {
     "@context": "https://schema.org",
-    "@type": ["MedicalClinic", "LocalBusiness"],
+    "@type": ["MedicalClinic", "LocalBusiness", "Organization"],
     "@id": `${siteConfig.url}/#clinic`,
     name: siteConfig.name,
     url: siteConfig.url,
@@ -23,7 +23,6 @@ export function OrganizationJsonLd() {
     medicalSpecialty: "Psychiatric",
     telephone: siteConfig.phones[0],
     email: siteConfig.email,
-    priceRange: "₹₹",
     address: {
       "@type": "PostalAddress",
       streetAddress: `${siteConfig.address.line1}, ${siteConfig.address.line2}`,
@@ -38,6 +37,7 @@ export function OrganizationJsonLd() {
       longitude: siteConfig.geo.longitude,
     },
     hasMap: siteConfig.googleMapsUrl,
+    sameAs: ["https://www.facebook.com/vijayawadapsychiatry/"],
     openingHoursSpecification: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: `https://schema.org/${day}`,
@@ -46,10 +46,10 @@ export function OrganizationJsonLd() {
     })),
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: siteConfig.phones[0],
-      contactType: "appointments",
+      telephone: siteConfig.phones[1],
+      contactType: "appointments and WhatsApp",
       areaServed: "IN-AP",
-      availableLanguage: ["English", "Hindi", "Telugu"],
+      availableLanguage: ["English", "Telugu"],
     },
   };
 
@@ -58,7 +58,7 @@ export function OrganizationJsonLd() {
     "@type": "Physician",
     "@id": `${siteConfig.url}/#physician`,
     name: siteConfig.doctor,
-    url: absoluteUrl("/about-doctor"),
+    url: absoluteUrl("/doctor/pamarthi-krishna-das"),
     image: absoluteUrl("/images/doctor-portrait.webp"),
     description: `${siteConfig.credentials}. ${siteConfig.role} in Vijayawada.`,
     medicalSpecialty: "Psychiatry",
@@ -66,7 +66,17 @@ export function OrganizationJsonLd() {
     address: { "@id": `${siteConfig.url}/#clinic` },
   };
 
-  return <JsonLd data={[clinic, physician]} />;
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
+    name: siteConfig.name,
+    url: siteConfig.url,
+    publisher: { "@id": `${siteConfig.url}/#clinic` },
+    inLanguage: ["en-IN", "te-IN"],
+  };
+
+  return <JsonLd data={[clinic, physician, website]} />;
 }
 
 export function BreadcrumbJsonLd({ items }: { items: { name: string; item: string }[] }) {

@@ -6,21 +6,24 @@ A production-ready Next.js website for **Dr. Pamarthi Krishna Das, MBBS, MD (Psy
 
 - Premium responsive home page with light/dark themes, sticky navigation and mobile CTAs
 - Complete English and Telugu experiences with a page-preserving language toggle (`/` ↔ `/te`)
+- Canonical `/doctor/pamarthi-krishna-das` and `/faq` architecture with permanent redirects from legacy URLs
+- Structured SEO content model requiring title, description, canonical, H1, schema type, Open Graph, indexability, dates and authorship
+- No exit-intent or scarcity popup; conversion relies on clear, non-intrusive call, WhatsApp, directions and appointment actions
 - Self-hosted Noto Sans Telugu variable font for consistent Telugu rendering
 - 30 separate dignity-preserving, symptom-focused condition visuals—one unique image file for every condition and counselling topic
 - Clean clinical presentation without visible image-generation badges or overlay tags
 - Symptom-specific editorial imagery across English/Telugu clinical routes, cards and condition-aware Open Graph images
 - Bilingual Gallery / గ్యాలరీ section on both homepages plus dedicated `/gallery` and `/te/gallery` pages
 - 30 locally optimised archive slides: 7 representative album images plus 23 additional public Facebook Photos-page images, each linked back to its original source
-- Borderless gallery with 9-second autoplay, slow cinematic zoom, 1.5-second fade-in, play/pause, previous/next, thumbnails, keyboard arrows, swipe, hover pause and reduced-motion support
-- About, treatments, services, patient journey, patient experience, resources, FAQ, appointment, contact, emergency, privacy and terms pages in both languages
+- Direct full-width gallery with no embedded window, border or blurred backdrop; 9-second autoplay, slow zoom, 1.5-second fade-in, play/pause, previous/next, thumbnails, keyboard arrows, mobile swipe, hover pause and reduced-motion support
+- Canonical clinic, doctor, services, conditions, patient journey, resources, FAQ, appointment, contact, emergency, privacy and terms pages in both languages
 - 30 medically responsible condition guides in English and Telugu
 - 10 service pages in both languages
 - 12 local-access pages plus dedicated Vijayawada search-intent pages in both languages
 - 12 long-form patient/family articles translated into Telugu, plus 100 detailed SEO editorial briefs
-- Multi-step React Hook Form + Zod appointment flow
+- Privacy-minimised React Hook Form + Zod appointment flow collecting only name, phone, consultation preference, preferred date/time and reply method
 - Optional secure webhook with a privacy-preserving direct WhatsApp fallback
-- Native call, WhatsApp, directions and emergency pathways
+- Native call, WhatsApp, directions and emergency pathways with voice calls fixed to 81217 43999 and WhatsApp/appointment messages routed to +91 81257 43999
 - Conditional, consent-based Google Analytics / Tag Manager loading
 - MedicalClinic, LocalBusiness, Physician, FAQ, Breadcrumb, MedicalWebPage, Article and Service structured data
 - Review schema that remains disabled until verified first-party Google data is configured
@@ -56,9 +59,11 @@ npm run typecheck
 npm run lint
 npm run build
 npm run start
+# in another terminal:
+npm run seo:audit
 ```
 
-The bilingual build generates **174 routes** and the sitemap exposes **166 English/Telugu canonical URLs** with reciprocal `hreflang` alternates.
+The bilingual build generates **180 routes**. The deliberately curated sitemap exposes **138 canonical English/Telugu URLs** with reciprocal `hreflang` alternates; redirects and noindex utility/local-access routes are excluded.
 
 ## Environment
 
@@ -77,8 +82,11 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - TypeScript: passed
 - ESLint: passed
 - Next.js production build: passed
-- 166 English/Telugu sitemap routes: HTTP 200 smoke test passed
+- Automated SEO audit passed across all 138 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, image alt attributes, robots and sitemap
+- Full 174-URL audit: 0 CRITICAL, 0 HIGH, 2 MEDIUM and 0 LOW findings; the two MEDIUM rows document the English/Telugu homepage mobile LCP lab risk
+- 126 discovered internal links tested without broken destinations
 - English and Telugu appointment validation plus WhatsApp fallback: browser-tested
+- Voice call links verified on +91 81217 43999; all WhatsApp and appointment-form delivery links verified on +91 81257 43999
 - Page-preserving language toggle, `te-IN` document language, theme, consent controls and mobile navigation: browser-tested
 - Reciprocal English/Telugu canonical and `hreflang` links verified
 - All clinical routes retain mapped editorial imagery; gallery routes use the supplied Facebook archive photographs
@@ -86,7 +94,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - Condition and archive image files, condition/article mappings and responsive image delivery verified
 - No visible image-generation tags remain in English, Telugu, article, condition or gallery output
 - No browser runtime errors in tested flows
-- Local production Lighthouse desktop audit: **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO**, with CLS 0 (results vary by machine, network and deployment)
+- Final local production Lighthouse: desktop **99 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.9s, CLS 0); mobile lab **89 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 3.5s, CLS 0, TBT 80ms). Results vary by device, network and deployment CDN.
 
 ## Before public launch
 

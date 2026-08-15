@@ -9,8 +9,8 @@
 - **Secondary category (only if genuinely applicable and available in Google):** Mental health clinic
 - **Doctor:** Dr. Pamarthi Krishna Das, MBBS, MD (Psychiatry)
 - **Address:** D.No. 29-10-31, Narasimha Rao Naidu Street, 3rd left from Vijaya Talkies towards Nakkala Road, Suryaraopet, Vijayawada, Andhra Pradesh 520002
-- **Phone:** 81217 43999
-- **Alternate phone:** 81257 43999
+- **Voice calls:** 81217 43999
+- **WhatsApp and appointment requests:** +91 81257 43999
 - **Hours from supplied brochure:** Monday–Saturday, 9:00 AM–9:00 PM; Sunday closed. Confirm before publishing.
 - **Appointment URL:** `https://www.krishnaneuropsychiatric.com/appointment`
 - **Website:** `https://www.krishnaneuropsychiatric.com/`

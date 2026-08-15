@@ -54,7 +54,7 @@ function createCondition(seed: ConditionSeed): Condition {
       [
         {
           question: `Is ${seed.name.toLowerCase()} treatable?`,
-          answer: `Many people improve with the right combination of education, practical changes, psychological support and, when clinically appropriate, medication. The plan depends on symptoms, health, preferences and goals. No responsible clinician can promise a guaranteed cure.`,
+          answer: `Many people improve with the right combination of education, practical changes, psychological support and, when clinically appropriate, medication. The plan depends on symptoms, health, preferences and goals. Outcomes vary, and responsible care avoids absolute promises.`,
         },
         {
           question: "Will I need medication for life?",

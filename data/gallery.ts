@@ -178,8 +178,8 @@ const facebookPagePhotos: FacebookPagePhoto[] = [
     "photoUrl": "https://www.facebook.com/photo.php?fbid=513296382188648&set=pb.100063699067434.-2207520000&type=3",
     "width": 552,
     "height": 397,
-    "title": "Professional recognition and public education",
-    "titleTe": "వృత్తిపరమైన గుర్తింపు మరియు ప్రజా విద్య"
+    "title": "Professional event and public education",
+    "titleTe": "వృత్తిపరమైన కార్యక్రమం మరియు ప్రజా విద్య"
   },
   {
     "id": "513296318855321",
@@ -187,8 +187,8 @@ const facebookPagePhotos: FacebookPagePhoto[] = [
     "photoUrl": "https://www.facebook.com/photo.php?fbid=513296318855321&set=pb.100063699067434.-2207520000&type=3",
     "width": 552,
     "height": 433,
-    "title": "Health education and community recognition",
-    "titleTe": "ఆరోగ్య విద్య మరియు సమాజ గుర్తింపు"
+    "title": "Health education and community programme",
+    "titleTe": "ఆరోగ్య విద్య మరియు సమాజ కార్యక్రమం"
   },
   {
     "id": "513296242188662",
@@ -205,8 +205,8 @@ const facebookPagePhotos: FacebookPagePhoto[] = [
     "photoUrl": "https://www.facebook.com/photo.php?fbid=513296182188668&set=pb.100063699067434.-2207520000&type=3",
     "width": 552,
     "height": 327,
-    "title": "Mental-health education and recognition",
-    "titleTe": "మానసిక ఆరోగ్య విద్య మరియు గుర్తింపు"
+    "title": "Mental-health education in local media",
+    "titleTe": "స్థానిక మీడియాలో మానసిక ఆరోగ్య విద్య"
   },
   {
     "id": "513296135522006",
@@ -223,8 +223,8 @@ const facebookPagePhotos: FacebookPagePhoto[] = [
     "photoUrl": "https://www.facebook.com/photo.php?fbid=513296055522014&set=pb.100063699067434.-2207520000&type=3",
     "width": 552,
     "height": 414,
-    "title": "Mental-health service recognition",
-    "titleTe": "మానసిక ఆరోగ్య సేవలకు గుర్తింపు"
+    "title": "Mental-health service coverage",
+    "titleTe": "మానసిక ఆరోగ్య సేవల కథనం"
   },
   {
     "id": "496395807212039",
@@ -322,8 +322,8 @@ const facebookPagePhotos: FacebookPagePhoto[] = [
     "photoUrl": "https://www.facebook.com/photo.php?fbid=458746274310326&set=pb.100063699067434.-2207520000&type=3",
     "width": 552,
     "height": 311,
-    "title": "World Mental Health Day recognition",
-    "titleTe": "ప్రపంచ మానసిక ఆరోగ్య దినోత్సవ గుర్తింపు"
+    "title": "World Mental Health Day programme",
+    "titleTe": "ప్రపంచ మానసిక ఆరోగ్య దినోత్సవ కార్యక్రమం"
   }
 ];
 
@@ -340,3 +340,4 @@ export const gallerySlides: GallerySlide[] = [
     altTe: item.titleTe,
   })),
 ];
+

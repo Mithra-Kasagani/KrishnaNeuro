@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import type { SeoContentModel } from "@/data/seo-pages";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
-export function createMetadata({ title, description, path = "/", image = "/opengraph-image", noIndex = false, keywords = [] }: { title: string; description: string; path?: string; image?: string; noIndex?: boolean; keywords?: string[] }): Metadata {
+export function createMetadata({ title, description, path = "/", image = "/opengraph-image", noIndex = false, keywords = [], ogTitle = title, ogDescription = description }: { title: string; description: string; path?: string; image?: string; noIndex?: boolean; keywords?: string[]; ogTitle?: string; ogDescription?: string }): Metadata {
   const canonical = absoluteUrl(path);
   const teluguPath = path === "/" ? "/te" : `/te${path.startsWith("/") ? path : `/${path}`}`;
   return {
@@ -16,10 +17,23 @@ export function createMetadata({ title, description, path = "/", image = "/openg
       alternateLocale: ["te_IN"],
       url: canonical,
       siteName: siteConfig.name,
-      title,
-      description,
-      images: [{ url: absoluteUrl(image), width: 1200, height: 630, alt: `${siteConfig.name} — hope, dignity and evidence-based care` }],
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: absoluteUrl(image), width: 1200, height: 630, alt: `${siteConfig.name} — professional mental-health care` }],
     },
-    twitter: { card: "summary_large_image", title, description, images: [absoluteUrl(image)] },
+    twitter: { card: "summary_large_image", title: ogTitle, description: ogDescription, images: [absoluteUrl(image)] },
   };
+}
+
+export function createMetadataFromModel(page: SeoContentModel, keywords: string[] = []): Metadata {
+  return createMetadata({
+    title: page.pageTitle,
+    description: page.metaDescription,
+    path: page.canonicalUrl,
+    image: page.ogImage,
+    noIndex: !page.indexable,
+    keywords,
+    ogTitle: page.ogTitle,
+    ogDescription: page.ogDescription,
+  });
 }

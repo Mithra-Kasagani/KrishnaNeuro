@@ -14,7 +14,7 @@ export const metadata: Metadata = createMetadata({ title: "Dr. Pamarthi Krishna 
 
 const principles = [
   { title: "Dignity before diagnosis", text: "A diagnosis can guide treatment, but it should never become the whole identity of a person.", icon: HeartHandshake },
-  { title: "Evidence before promises", text: "Discuss benefits, limits and uncertainty honestly. Never market a guaranteed cure.", icon: BookOpenCheck },
+  { title: "Evidence before promises", text: "Discuss benefits, limits and uncertainty honestly. Never make absolute outcome promises.", icon: BookOpenCheck },
   { title: "Thoughtful prescribing", text: "Use medication for a clear clinical purpose, monitor it and avoid unnecessary treatment burden.", icon: Scale },
   { title: "Recovery in real life", text: "Measure progress in sleep, relationships, work, study, independence and quality of life.", icon: Brain },
 ];
@@ -24,7 +24,7 @@ const scope = ["Depression, anxiety, panic and OCD", "Bipolar disorder, psychosi
 export default function AboutDoctorPage() {
   return (
     <>
-      <PageHero badge="About the doctor" title="Clinical clarity. Human warmth. A plan you can understand." description="Dr. Pamarthi Krishna Das is an MBBS, MD (Psychiatry) Consultant Psychiatrist in Vijayawada, supporting patients and families with respectful, evidence-based care." breadcrumbs={[{ label: "About Dr. Krishna Das" }]} actions={<><Button asChild><Link prefetch={false} href="/appointment">Request an appointment<ArrowRight aria-hidden="true"/></Link></Button><Button asChild variant="outline"><Link href="/patient-journey">What to expect</Link></Button></>} aside={<div className="mx-auto max-w-sm overflow-hidden rounded-[2rem] border border-border bg-muted shadow-soft"><Image src="/images/doctor-portrait.webp" alt="Portrait of Dr. Pamarthi Krishna Das in his Vijayawada clinic" width={960} height={1160} priority sizes="(max-width: 1024px) 90vw, 32vw" className="aspect-[4/4.8] w-full object-cover object-top"/></div>} />
+      <PageHero badge="About the doctor" title="Dr. Pamarthi Krishna Das" description="Consultant Psychiatrist at Krishna Neuro Psychiatric Centre in Vijayawada. This page presents verified professional and consultation information." breadcrumbs={[{ label: "About Dr. Krishna Das" }]} actions={<><Button asChild><Link prefetch={false} href="/appointment">Request an appointment<ArrowRight aria-hidden="true"/></Link></Button><Button asChild variant="outline"><Link href="/patient-journey">What to expect</Link></Button></>} aside={<div className="mx-auto max-w-sm overflow-hidden rounded-[2rem] border border-border bg-muted shadow-soft"><Image src="/images/doctor-portrait.webp" alt="Portrait of Dr. Pamarthi Krishna Das in his Vijayawada clinic" width={960} height={1160} priority sizes="(max-width: 1024px) 90vw, 32vw" className="aspect-[4/4.8] w-full object-cover object-top"/></div>} />
 
       <section className="container-page py-18 md:py-26">
         <div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-18">

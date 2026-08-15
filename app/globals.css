@@ -191,6 +191,11 @@ img {
   border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
 }
 
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
 .card-lift {
   transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
 }
@@ -294,11 +299,6 @@ img {
   to { transform: scale(1.055); }
 }
 
-@keyframes gallery-backdrop-zoom {
-  from { transform: scale(1.1); }
-  to { transform: scale(1.16); }
-}
-
 .gallery-slide {
   animation: gallery-in 1.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -307,12 +307,8 @@ img {
   animation: gallery-zoom 9s ease-out both;
 }
 
-.gallery-backdrop {
-  animation: gallery-in 1.8s ease both;
-}
-
-.gallery-backdrop img {
-  animation: gallery-backdrop-zoom 10s ease-out both;
+.gallery-preview-image {
+  animation: gallery-in 1.5s cubic-bezier(0.22, 1, 0.36, 1) both, gallery-zoom 9s ease-out both;
 }
 
 .animate-soft-pulse {

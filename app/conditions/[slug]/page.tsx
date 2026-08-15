@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const condition = getCondition(slug);
   if (!condition) return {};
   return createMetadata({
-    title: `${condition.name} Treatment in Vijayawada`,
+    title: `${condition.name} Care in Vijayawada`,
     description: `${condition.summary} Learn symptoms, causes, diagnosis and evidence-based treatment options with a Consultant Psychiatrist in Vijayawada.`,
     path: `/conditions/${condition.slug}`,
     image: conditionImage(condition.slug),

@@ -6,13 +6,13 @@ export const siteConfig = {
   role: "Consultant Psychiatrist",
   description:
     "Compassionate, evidence-based psychiatric care for adults, children, older adults and families in Vijayawada.",
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://www.krishnaneuropsychiatric.com",
+  // Required in production. The localhost fallback prevents inventing an unverified public domain.
+  url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "http://localhost:3000",
   email: "pkrishna9999@gmail.com",
   phones: ["+918121743999", "+918125743999"],
   displayPhones: ["81217 43999", "81257 43999"],
-  whatsapp: "918121743999",
+  whatsapp: "918125743999",
+  whatsappDisplay: "+91 81257 43999",
   address: {
     line1: "D.No. 29-10-31, Narasimha Rao Naidu Street",
     line2: "3rd left from Vijaya Talkies towards Nakkala Road",
@@ -44,7 +44,7 @@ export const siteConfig = {
 
 export const primaryNavigation = [
   { label: "Home", href: "/" },
-  { label: "Doctor", href: "/about-doctor" },
+  { label: "Doctor", href: "/doctor/pamarthi-krishna-das" },
   { label: "Conditions", href: "/conditions" },
   { label: "Care", href: "/treatments" },
   { label: "Resources", href: "/resources" },
@@ -61,7 +61,7 @@ export const careNavigation = [
 export const resourceNavigation = [
   { label: "Mental health resources", href: "/resources" },
   { label: "Articles", href: "/blog" },
-  { label: "Frequently asked questions", href: "/faqs" },
+  { label: "Frequently asked questions", href: "/faq" },
   { label: "Emergency guidance", href: "/emergency" },
 ] as const;
 

@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 
 const navigation = [
   { en: "Home", te: "హోమ్", href: "/" },
-  { en: "Doctor", te: "డాక్టర్", href: "/about-doctor" },
+  { en: "Doctor", te: "డాక్టర్", href: "/doctor/pamarthi-krishna-das" },
   { en: "Conditions", te: "వ్యాధులు", href: "/conditions" },
   { en: "Care", te: "చికిత్స", href: "/treatments" },
   { en: "Resources", te: "వనరులు", href: "/resources" },
@@ -15,7 +15,7 @@ const navigation = [
   { en: "Contact", te: "సంప్రదించండి", href: "/contact" },
   { en: "Services", te: "సేవలు", href: "/services" },
   { en: "Articles", te: "వ్యాసాలు", href: "/blog" },
-  { en: "FAQs", te: "ప్రశ్నలు", href: "/faqs" },
+  { en: "FAQs", te: "ప్రశ్నలు", href: "/faq" },
 ];
 
 export function SiteHeader() {

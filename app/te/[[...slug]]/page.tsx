@@ -16,6 +16,9 @@ export function generateStaticParams() {
   return [
     { slug: [] },
     ...standard.map((page) => ({ slug: [page] })),
+    { slug: ["about"] },
+    { slug: ["doctor", "pamarthi-krishna-das"] },
+    { slug: ["faq"] },
     { slug: ["conditions"] },
     ...conditions.map((item) => ({ slug: ["conditions", item.slug] })),
     { slug: ["services"] },
@@ -32,10 +35,11 @@ export function generateStaticParams() {
 
 function pageTitle(parts: string[]) {
   if (!parts.length) return "విజయవాడలో సైకియాట్రిస్ట్ — డా. పామర్తి కృష్ణ దాస్";
+  if (parts[0] === "doctor" && parts[1] === "pamarthi-krishna-das") return "డా. పామర్తి కృష్ణ దాస్ | విజయవాడ సైకియాట్రిస్ట్";
   if (parts[0] === "conditions" && parts[1]) return `${teConditions[parts[1]]?.name || "మానసిక ఆరోగ్యం"} చికిత్స విజయవాడ`;
   if (parts[0] === "services" && parts[1]) return `${teServices[parts[1]]?.name || "సైకియాట్రిక్ సేవలు"} విజయవాడ`;
   if (parts[0] === "blog" && parts[1]) return teArticleMeta[parts[1]]?.title || "తెలుగు మానసిక ఆరోగ్య వ్యాసం";
-  const titles: Record<string,string> = { gallery: "క్లినిక్ గ్యాలరీ", conditions: "మానసిక ఆరోగ్య పరిస్థితులు", services: "సైకియాట్రిక్ సేవలు", blog: "తెలుగు మానసిక ఆరోగ్య వ్యాసాలు", locations: "విజయవాడ సమీప ప్రాంతాల కోసం సైకియాట్రిస్ట్", appointment: "సైకియాట్రిస్ట్ అపాయింట్‌మెంట్", "about-doctor": "డా. పామర్తి కృష్ణ దాస్ గురించి", treatments: "సైకియాట్రిక్ చికిత్స విధానం", "patient-journey": "రోగి ప్రయాణం", testimonials: "రోగి అనుభవం", resources: "మానసిక ఆరోగ్య వనరులు", faqs: "తరచుగా అడిగే ప్రశ్నలు", contact: "క్లినిక్ సంప్రదింపు", "privacy-policy": "గోప్యతా విధానం", terms: "వెబ్‌సైట్ నిబంధనలు", emergency: "మానసిక ఆరోగ్య అత్యవసర సహాయం", "psychiatrist-in-vijayawada": "విజయవాడలో సైకియాట్రిస్ట్", "best-psychiatrist-in-vijayawada": "విజయవాడలో మంచి సైకియాట్రిస్ట్‌ను ఎలా ఎంచుకోవాలి" };
+  const titles: Record<string,string> = { about: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్ గురించి", faq: "తరచుగా అడిగే ప్రశ్నలు", gallery: "క్లినిక్ గ్యాలరీ", conditions: "మానసిక ఆరోగ్య పరిస్థితులు", services: "సైకియాట్రిక్ సేవలు", blog: "తెలుగు మానసిక ఆరోగ్య వ్యాసాలు", locations: "విజయవాడ సమీప ప్రాంతాల కోసం సైకియాట్రిస్ట్", appointment: "సైకియాట్రిస్ట్ అపాయింట్‌మెంట్", "about-doctor": "డా. పామర్తి కృష్ణ దాస్ గురించి", treatments: "సైకియాట్రిక్ చికిత్స విధానం", "patient-journey": "రోగి ప్రయాణం", testimonials: "రోగి అనుభవం", resources: "మానసిక ఆరోగ్య వనరులు", faqs: "తరచుగా అడిగే ప్రశ్నలు", contact: "క్లినిక్ సంప్రదింపు", "privacy-policy": "గోప్యతా విధానం", terms: "వెబ్‌సైట్ నిబంధనలు", emergency: "మానసిక ఆరోగ్య అత్యవసర సహాయం", "psychiatrist-in-vijayawada": "విజయవాడలో సైకియాట్రిస్ట్", "best-psychiatrist-in-vijayawada": "విజయవాడలో మంచి సైకియాట్రిస్ట్‌ను ఎలా ఎంచుకోవాలి" };
   return titles[parts[0]] || "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్";
 }
 
@@ -44,11 +48,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
   const route = `/${slug.join("/")}`.replace(/\/$/, "") || "/";
   const tePath = `/te${route === "/" ? "" : route}`;
   const title = pageTitle(slug);
-  const description = "విజయవాడలో డా. పామర్తి కృష్ణ దాస్‌తో దయతో కూడిన, ఆధారిత మానసిక ఆరోగ్య సంరక్షణ. లక్షణాలు, చికిత్స మరియు అపాయింట్‌మెంట్ సమాచారం తెలుగులో.";
+  const description = `${title} గురించి బాధ్యతాయుత తెలుగు సమాచారం. విజయవాడలో Krishna Neuro Psychiatric Centre వద్ద డా. పామర్తి కృష్ణ దాస్‌తో కన్సల్టేషన్ మరియు అపాయింట్‌మెంట్ వివరాలు.`;
   const image = slug[0] === "gallery" ? gallerySlides[0].src : slug[0] === "conditions" && slug[1] ? conditionImage(slug[1]) : slug[0] === "services" && slug[1] ? serviceImage(slug[1]) : slug[0] === "blog" && slug[1] ? articleImage(slug[1]) : slug[0] === "locations" ? locationImage() : pageImage(slug[0] || "home");
   return {
     title,
     description,
+    robots: slug[0] === "locations" ? { index: false, follow: true } : { index: true, follow: true },
     alternates: { canonical: absoluteUrl(tePath), languages: { "te-IN": absoluteUrl(tePath), "en-IN": absoluteUrl(route) } },
     openGraph: { type: "website", locale: "te_IN", alternateLocale: ["en_IN"], url: absoluteUrl(tePath), siteName: siteConfig.name, title, description, images: [{ url: absoluteUrl(image), width: 1586, height: 992, alt: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్" }] },
     twitter: { card: "summary_large_image", title, description, images: [absoluteUrl(image)] },
@@ -58,6 +63,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
 export default async function TeluguRoute({ params, searchParams }: { params: Promise<{ slug?: string[] }>; searchParams: Promise<{ reference?: string }> }) {
   const { slug = [] } = await params;
   if (!slug.length) return <TeHome />;
+  if (slug[0] === "about" && slug.length === 1) return <TeStandardPage page="about-doctor" />;
+  if (slug[0] === "doctor" && slug[1] === "pamarthi-krishna-das") return <TeStandardPage page="about-doctor" />;
+  if (slug[0] === "faq" && slug.length === 1) return <TeStandardPage page="faqs" />;
   if (standard.includes(slug[0]) && slug.length === 1) return <TeStandardPage page={slug[0]} />;
   if (slug[0] === "conditions" && slug.length === 1) return <TeConditionsIndex />;
   if (slug[0] === "conditions" && slug[1] && teConditions[slug[1]]) return <TeConditionPage slug={slug[1]} />;
