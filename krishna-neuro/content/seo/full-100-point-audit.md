@@ -34,11 +34,11 @@ Google does not provide a single universal SEO score. This report separates:
 - Redirect/noindex URLs: 40
 - CRITICAL findings: 0
 - HIGH findings: 0
-- MEDIUM findings: 2
+- MEDIUM findings: 0
 - LOW findings: 0
-- No-change rows: 176
+- No-change rows: 178
 
-The two MEDIUM rows are the English and Telugu homepage mobile-LCP field-risk records.
+No code-verifiable critical, high, medium or low findings remain in the full public-route audit.
 
 ## Performance
 
@@ -54,15 +54,15 @@ The two MEDIUM rows are the English and Telugu homepage mobile-LCP field-risk re
 
 ### Mobile lab — verified
 
-- Performance: 90
+- Performance: 97 median across three repeated runs (94 / 97 / 98)
 - Accessibility: 100
 - Best Practices: 100
 - SEO: 100
-- LCP: 3.4s
+- LCP: 2.4s median (2.6s / 2.4s / 2.2s)
 - CLS: 0
-- TBT: 60ms
+- TBT: 120ms median
 
-**Mobile performance is not 100/100.** The <2.5s LCP target is not currently verified. Field performance after CDN deployment is also not verified.
+**Mobile lab LCP target is now met on the median run.** A 100 Performance score is not consistent across runs, and production field performance after CDN deployment is still not verified.
 
 ## Medical E-E-A-T
 
@@ -109,7 +109,7 @@ Not verified externally:
 
 ## What prevents a legitimate overall 100/100 claim
 
-1. Mobile LCP remains 3.4s in the current lab test.
+1. Production real-user Core Web Vitals are not yet available.
 2. Doctor review of medical content is not verified.
 3. Telugu medical review is not verified.
 4. Final production domain is not configured in this environment.
@@ -132,5 +132,5 @@ Not verified externally:
 - Technical SEO: **100/100 verified**
 - Desktop Lighthouse categories: **100/100 verified**
 - Mobile Lighthouse SEO/Accessibility/Best Practices: **100/100 verified**
-- Mobile Lighthouse Performance: **90/100 verified**
+- Mobile Lighthouse Performance: **97 median verified across three runs; not consistently 100**
 - Overall organic ranking readiness: **cannot truthfully be represented as 100/100 until the external and medical-review requirements above are completed**

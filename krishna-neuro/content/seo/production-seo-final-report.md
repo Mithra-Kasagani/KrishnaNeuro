@@ -31,6 +31,12 @@
 27. `content/seo/optimization-change-log.md`
 28. `content/seo/production-seo-final-report.md`
 29. `README.md`
+30. `app/globals.css`
+31. `components/i18n/bilingual-text.tsx`
+32. `components/layout/site-footer.tsx`
+33. `components/shared/map-card.tsx`
+34. `components/shared/page-loading-skeleton.tsx` — reusable skeleton moved from the former root `app/loading.tsx`
+35. `content/seo/full-100-point-audit.md`
 
 ## SEO changes implemented
 
@@ -190,10 +196,12 @@ Therefore the site intentionally does not display “Medically reviewed by Dr. P
 Changes:
 
 - Removed priority preloading from decorative, hidden-mobile and non-LCP images.
-- Retained Next.js responsive image optimization.
-- Retained self-hosted fonts.
-- Kept below-fold gallery free of React hydration on the homepage.
-- Preserved useful animations and reduced-motion support.
+- Removed the global App Router loading boundary that delayed the homepage H1; preserved the skeleton as a reusable component.
+- Prevented the Telugu font subset from loading on English pages by using Latin language-toggle labels and hiding Telugu-only taglines on English routes.
+- Deferred the Google Maps iframe until it approaches the viewport, eliminating initial third-party map requests.
+- Retained Next.js responsive image optimization and self-hosted Telugu fonts on Telugu routes.
+- Kept the below-fold gallery free of React hydration on the homepage.
+- Preserved useful animations, content and reduced-motion support.
 
 Latest verified Lighthouse results:
 
@@ -203,21 +211,21 @@ Latest verified Lighthouse results:
 - Accessibility: 100
 - Best Practices: 100
 - SEO: 100
-- LCP: 0.8s
+- LCP: 0.7s
 - CLS: 0
-- TBT: 0ms
+- TBT: 20ms
 
 ### Mobile lab
 
-- Performance: 90
+- Performance: 97 median across three runs (94 / 97 / 98)
 - Accessibility: 100
 - Best Practices: 100
 - SEO: 100
-- LCP: 3.4s
+- LCP: 2.4s median (2.6s / 2.4s / 2.2s)
 - CLS: 0
-- TBT: 60ms
+- TBT: 120ms median
 
-**Mobile LCP below 2.5s: Not verified.** It remains a documented production field-data risk; no accessibility or useful content was removed to manufacture a score.
+**Mobile lab LCP below 2.5s: verified on the median run.** Production real-user field data is still not verified, and no accessibility or useful content was removed to manufacture a score.
 
 ## Validation
 

@@ -17,6 +17,7 @@ import {
   Users,
 } from "lucide-react";
 import { GallerySection } from "@/components/gallery/gallery-section";
+import { BiText } from "@/components/i18n/bilingual-text";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { AppointmentCTA } from "@/components/shared/appointment-cta";
 import { EmergencyNote } from "@/components/shared/emergency-note";
@@ -67,16 +68,15 @@ const reasons = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-card">
-        <Image src="/illustrations/hero-aurora.svg" alt="" fill unoptimized sizes="100vw" aria-hidden="true" className="object-cover opacity-60 dark:opacity-20" />
+      <section className="hero-ambient relative overflow-hidden border-b border-border bg-card">
         <div className="absolute inset-0 surface-grid opacity-75" aria-hidden="true" />
-        <div className="absolute -left-32 top-20 size-96 rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
-        <div className="absolute -right-40 bottom-0 size-[32rem] rounded-full bg-secondary/10 blur-3xl" aria-hidden="true" />
+        <div className="absolute -left-32 top-20 hidden size-96 rounded-full bg-accent/10 blur-3xl md:block" aria-hidden="true" />
+        <div className="absolute -right-40 bottom-0 hidden size-[32rem] rounded-full bg-secondary/10 blur-3xl md:block" aria-hidden="true" />
         <div className="container-page relative grid min-h-[calc(100svh-7.25rem)] items-center gap-12 py-10 lg:grid-cols-[1.08fr_.92fr] lg:py-16">
           <div className="relative z-10 max-w-3xl">
             <div>
               <Badge className="gap-2 border-secondary/20 bg-secondary/8 text-secondary"><span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-40"/><span className="relative inline-flex size-2 rounded-full bg-success"/></span>Appointments · Monday–Saturday</Badge>
-              <p className="mt-7 text-sm font-bold tracking-wide text-secondary">మనసుకు తోడు. కోలుకునే దారిలో ఆశ.</p>
+              <p className="mt-7 text-sm font-bold tracking-wide text-secondary"><BiText en="Support for the mind. Hope for recovery." te="మనసుకు తోడు. కోలుకునే దారిలో ఆశ." /></p>
               <h1 className="display-title mt-4 max-w-3xl text-foreground">Psychiatric &amp; Mental Health Care in <span className="text-primary">Vijayawada</span></h1>
               <p className="mt-7 max-w-2xl text-pretty text-lg leading-8 text-muted-foreground md:text-xl"><strong className="font-bold text-foreground">Krishna Neuro Psychiatric Centre</strong> offers professional, compassionate and confidential care with <strong className="font-bold text-foreground">Dr. Pamarthi Krishna Das</strong>.</p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -110,7 +110,7 @@ export default function HomePage() {
         </div>
 
         <div className="container-page relative -mb-px">
-          <Stagger className="grid overflow-hidden rounded-t-[1.7rem] border border-border bg-card/94 shadow-[0_-10px_35px_-28px_rgb(15_76_129/.45)] backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-4">
+          <Stagger className="grid overflow-hidden rounded-t-[1.7rem] border border-border bg-card shadow-[0_-10px_35px_-28px_rgb(15_76_129/.45)] sm:grid-cols-2 lg:grid-cols-4">
             {trustItems.map((item, index) => {
               const Icon = item.icon;
               return <StaggerItem key={item.label} className={`flex items-center gap-3.5 p-4.5 md:p-5 ${index > 0 ? "border-t border-border sm:border-l sm:border-t-0" : ""} ${index === 2 ? "sm:border-l-0 lg:border-l" : ""}`}><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/7 text-primary"><Icon className="size-4.5" aria-hidden="true"/></span><div><p className="text-[0.65rem] font-extrabold uppercase tracking-[0.11em] text-muted-foreground">{item.label}</p><p className="mt-1 text-sm font-extrabold text-foreground">{item.value}</p></div></StaggerItem>;

@@ -19,7 +19,15 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   category: "health",
   manifest: "/site.webmanifest",
-  icons: { icon: "/icon.svg", shortcut: "/icon.svg", apple: "/icon.svg" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+  },
   alternates: { canonical: siteConfig.url, languages: { "en-IN": siteConfig.url, "te-IN": absoluteUrl("/te") } },
   openGraph: { type: "website", locale: "en_IN", alternateLocale: ["te_IN"], url: siteConfig.url, siteName: siteConfig.name, title: "Hopeful psychiatric care in Vijayawada", description: siteConfig.description, images: [{ url: absoluteUrl("/opengraph-image"), width: 1200, height: 630, alt: "Krishna Neuro Psychiatric Centre in Vijayawada" }] },
   twitter: { card: "summary_large_image", title: "Hopeful psychiatric care in Vijayawada", description: siteConfig.description, images: [absoluteUrl("/opengraph-image")] },

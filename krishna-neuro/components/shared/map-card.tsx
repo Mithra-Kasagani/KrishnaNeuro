@@ -17,7 +17,8 @@ export function MapCard() {
         <Button asChild variant="outline" className="mt-7"><a href={siteConfig.googleMapsUrl} target="_blank" rel="noreferrer">Open directions <ExternalLink aria-hidden="true"/></a></Button>
       </div>
       <div className="relative min-h-80 border-t border-border bg-muted lg:min-h-full lg:border-l lg:border-t-0">
-        <iframe src={siteConfig.googleMapsEmbed} className="absolute inset-0 h-full w-full border-0 grayscale-[10%]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Map showing Krishna Neuro Psychiatric Centre in Suryaraopet, Vijayawada" />
+        <iframe data-lazy-map data-src={siteConfig.googleMapsEmbed} className="absolute inset-0 h-full w-full border-0 grayscale-[10%]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Map showing Krishna Neuro Psychiatric Centre in Suryaraopet, Vijayawada" />
+        <script dangerouslySetInnerHTML={{__html:`(function(){var frames=document.querySelectorAll('iframe[data-lazy-map]:not([src])');if(!('IntersectionObserver'in window)){frames.forEach(function(f){f.src=f.dataset.src});return}var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.src=entry.target.dataset.src;observer.unobserve(entry.target)}})},{rootMargin:'300px'});frames.forEach(function(f){observer.observe(f)})})();`}}/>
       </div>
     </div>
   );

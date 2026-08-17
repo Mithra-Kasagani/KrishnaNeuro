@@ -85,7 +85,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - ESLint: passed
 - Next.js production build: passed
 - Automated SEO audit passed across all 138 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, image alt attributes, robots and sitemap
-- Full 178-URL audit: 0 CRITICAL, 0 HIGH, 2 MEDIUM and 0 LOW findings; the two MEDIUM rows document the English/Telugu homepage mobile LCP lab risk
+- Full 178-URL audit: 0 CRITICAL, 0 HIGH, 0 MEDIUM and 0 LOW findings
 - 126 discovered internal links tested without broken destinations
 - English and Telugu appointment validation plus WhatsApp fallback: browser-tested
 - Voice call links verified on +91 81217 43999; all WhatsApp and appointment-form delivery links verified on +91 81257 43999
@@ -96,7 +96,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - Condition and archive image files, condition/article mappings and responsive image delivery verified
 - No visible image-generation tags remain in English, Telugu, article, condition or gallery output
 - No browser runtime errors in tested flows
-- Final local production Lighthouse: desktop **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.8s, CLS 0, TBT 0ms); mobile lab **90 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 3.4s, CLS 0, TBT 60ms). The mobile LCP target is not yet verified below 2.5s and remains a documented field-monitoring risk.
+- Final local production Lighthouse: desktop **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.7s, CLS 0, TBT 20ms); mobile lab median **97 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** across three runs (LCP median 2.4s, CLS 0, TBT median 120ms). Production field data is not yet available.
 
 ## Before public launch
 

@@ -12,9 +12,9 @@ Post-implementation verification generated against the complete current route in
 
 - CRITICAL: **0**
 - HIGH: **0**
-- MEDIUM: **2**
+- MEDIUM: **0**
 - LOW: **0**
-- NO CHANGE: **176**
+- NO CHANGE: **178**
 
 ## Audit dimensions
 
@@ -26,8 +26,7 @@ No CRITICAL or HIGH issues detected in the current optimized baseline.
 
 ## MEDIUM and LOW template findings
 
-- **MEDIUM** `/` — mobile Core Web Vitals lab risk: LCP approximately 3.4s; continue monitoring production field data
-- **MEDIUM** `/te` — mobile Core Web Vitals lab risk: LCP approximately 3.4s; continue monitoring production field data
+No medium/low findings.
 
 ## Full page-level report
 

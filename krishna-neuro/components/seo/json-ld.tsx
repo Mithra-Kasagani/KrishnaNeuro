@@ -18,7 +18,12 @@ export function OrganizationJsonLd() {
     "@id": `${siteConfig.url}/#clinic`,
     name: siteConfig.name,
     url: siteConfig.url,
-    logo: absoluteUrl("/icon.svg"),
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/images/brand/krishna-neuro-logo.webp"),
+      width: 512,
+      height: 512,
+    },
     image: absoluteUrl("/images/doctor-office.webp"),
     description: siteConfig.description,
     medicalSpecialty: "Psychiatric",

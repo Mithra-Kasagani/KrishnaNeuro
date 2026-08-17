@@ -176,6 +176,12 @@ img {
   opacity: 0.6;
 }
 
+.hero-ambient {
+  background-image:
+    radial-gradient(circle at 8% 48%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 38%),
+    radial-gradient(circle at 92% 70%, color-mix(in srgb, var(--secondary) 9%, transparent), transparent 36%);
+}
+
 .surface-grid {
   background-image:
     linear-gradient(to right, color-mix(in srgb, var(--primary) 6%, transparent) 1px, transparent 1px),
@@ -193,6 +199,7 @@ img {
 
 .cv-auto {
   content-visibility: auto;
+  contain: layout style paint;
   contain-intrinsic-size: 800px;
 }
 

@@ -130,7 +130,7 @@ for (let offset = 0; offset < inventory.length; offset += 10) {
     if (indexable && unsupportedClaims && !url.includes("psychiatrist-in-vijayawada")) issues.push("unsupported superlative or cure claim");
     if (indexable && wordCount < 180 && !["/appointment", "/contact", "/gallery"].some((item) => url.endsWith(item))) issues.push(`thin content risk (${wordCount} words)`);
     if (htmlKb > 450) issues.push(`large HTML payload (${htmlKb} KB)`);
-    if (["/", "/te"].includes(url)) issues.push("mobile Core Web Vitals lab risk: LCP approximately 3.4s; continue monitoring production field data");
+
 
     const intent = searchIntent(url);
     const topic = primaryKeyword(url, title);
