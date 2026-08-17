@@ -1,0 +1,31 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, BookOpen, Brain, ExternalLink, HeartHandshake, ListChecks, MoonStar, ShieldAlert, Smartphone, Users } from "lucide-react";
+import { AppointmentCTA } from "@/components/shared/appointment-cta";
+import { EmergencyNote } from "@/components/shared/emergency-note";
+import { PageHero } from "@/components/shared/page-hero";
+import { Button } from "@/components/ui/button";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({ title: "Mental Health Resources for Patients & Families", description: "Practical mental-health resources for first appointments, sleep, family support, safety planning and crisis help in India.", path: "/resources", keywords: ["mental health resources India", "Tele-MANAS 14416", "mental health family guide Vijayawada"] });
+
+const collections = [
+  { title: "Start understanding symptoms", text: "Plain-language guides to mood, anxiety, psychosis, addiction, memory and child concerns.", icon: Brain, href: "/conditions", label: "Browse conditions" },
+  { title: "Prepare for an appointment", text: "Know what to bring, what may be asked and how shared decisions work.", icon: ListChecks, href: "/patient-journey", label: "See the journey" },
+  { title: "Support someone you love", text: "Learn calmer communication, boundaries and warning signs without taking over.", icon: HeartHandshake, href: "/blog/how-to-talk-to-someone-experiencing-psychosis", label: "Family guide" },
+  { title: "Improve the sleep conversation", text: "Track timing and patterns before relying only on sleeping tablets.", icon: MoonStar, href: "/blog/chronic-insomnia-guide", label: "Sleep guide" },
+  { title: "Understand treatment choices", text: "Questions about therapy, medication, monitoring, duration and safe review.", icon: BookOpen, href: "/treatments", label: "Treatment approach" },
+  { title: "Help children and teens", text: "Developmentally informed guides for behaviour, learning, attention, autism and mood.", icon: Users, href: "/conditions/child-psychiatry", label: "Child mental health" },
+];
+
+export default function ResourcesPage() {
+  return (
+    <>
+      <PageHero badge="Mental health library" title="Good information should reduce fear—not create it." description="Use these resources to notice patterns, ask better questions and support timely care. They do not replace an individual diagnosis." breadcrumbs={[{label:"Resources"}]} actions={<Button asChild><Link href="/blog">Read all articles<ArrowRight/></Link></Button>} />
+      <section className="container-page py-14 md:py-20"><EmergencyNote/><div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{collections.map(item=>{const Icon=item.icon;return <Link key={item.title} href={item.href} className="group rounded-[1.6rem] border border-border bg-card p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:border-accent/35 hover:shadow-soft"><span className="flex size-11 items-center justify-center rounded-2xl bg-primary/8 text-primary"><Icon className="size-5"/></span><h2 className="mt-5 text-xl font-extrabold tracking-[-0.03em] group-hover:text-primary">{item.title}</h2><p className="mt-3 text-sm leading-6 text-muted-foreground">{item.text}</p><span className="mt-5 inline-flex items-center gap-1 text-xs font-extrabold text-primary">{item.label}<ArrowRight className="size-3.5 transition group-hover:translate-x-1"/></span></Link>})}</div></section>
+      <section className="border-y border-border bg-muted/55 py-16 md:py-20"><div className="container-page grid gap-8 lg:grid-cols-2"><div><p className="eyebrow">Trusted public services</p><h2 className="section-title mt-5">Help in India, beyond this clinic.</h2><p className="mt-5 text-sm leading-7 text-muted-foreground">Use official and established services for urgent support and reliable public information. Availability can change; 112 is the national emergency number.</p></div><div className="grid gap-4"><a href="tel:14416" className="group flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-card"><span className="flex size-11 items-center justify-center rounded-2xl bg-secondary/10 text-secondary"><Smartphone/></span><div className="flex-1"><h3 className="font-extrabold">Tele-MANAS · 14416</h3><p className="mt-1 text-sm text-muted-foreground">Free, 24/7 national tele-mental-health support.</p></div><ArrowRight className="size-4 text-muted-foreground group-hover:translate-x-1"/></a><a href="tel:112" className="group flex items-center gap-4 rounded-2xl border border-amber-300/45 bg-amber-50 p-5 text-amber-950 dark:border-amber-400/25 dark:bg-amber-950/25 dark:text-amber-100"><span className="flex size-11 items-center justify-center rounded-2xl bg-amber-200/50"><ShieldAlert/></span><div className="flex-1"><h3 className="font-extrabold">Emergency services · 112</h3><p className="mt-1 text-sm opacity-80">Immediate danger, attempt, overdose, violence or medical emergency.</p></div><ArrowRight className="size-4"/></a><a href="https://dghs.mohfw.gov.in/national-mental-health-programme.php" target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-card"><span className="flex size-11 items-center justify-center rounded-2xl bg-primary/8 text-primary"><ExternalLink/></span><div className="flex-1"><h3 className="font-extrabold">National Mental Health Programme</h3><p className="mt-1 text-sm text-muted-foreground">Official Government of India information.</p></div><ArrowRight className="size-4 text-muted-foreground group-hover:translate-x-1"/></a></div></div></section>
+      <section className="container-page py-14"><div className="rounded-2xl border border-border bg-card p-6 text-xs leading-6 text-muted-foreground"><strong className="text-foreground">Medical information policy:</strong> Articles explain general patterns in simple language, name urgent exceptions and avoid guaranteed outcomes. They should be periodically reviewed against current clinical guidance. Online content cannot account for your health, medicines, pregnancy, age or safety.</div></section>
+      <AppointmentCTA />
+    </>
+  );
+}
