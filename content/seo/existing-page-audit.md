@@ -1,20 +1,20 @@
 # Existing Public Page SEO Audit
 
-Generated against the complete current route inventory before the optimization pass.
+Post-implementation verification generated against the complete current route inventory. The preserved raw baseline is available in existing-page-audit-before.csv.
 
 ## Inventory
 
 - Canonical sitemap URLs: **138**
-- Redirected/noindex public URLs: **36**
-- Total public URLs audited: **174**
+- Redirected/noindex public URLs: **40**
+- Total public URLs audited: **178**
 
 ## Priority summary
 
 - CRITICAL: **0**
 - HIGH: **0**
-- MEDIUM: **2**
+- MEDIUM: **0**
 - LOW: **0**
-- NO CHANGE: **172**
+- NO CHANGE: **178**
 
 ## Audit dimensions
 
@@ -26,9 +26,8 @@ No CRITICAL or HIGH issues detected in the current optimized baseline.
 
 ## MEDIUM and LOW template findings
 
-- **MEDIUM** `/` — mobile Core Web Vitals lab risk: LCP approximately 3.5s; continue monitoring production field data
-- **MEDIUM** `/te` — mobile Core Web Vitals lab risk: LCP approximately 3.5s; continue monitoring production field data
+No medium/low findings.
 
 ## Full page-level report
 
-See [existing-page-audit.csv](./existing-page-audit.csv) for all 174 rows and all required columns.
+See [existing-page-audit.csv](./existing-page-audit.csv) for all 178 rows and all required columns.

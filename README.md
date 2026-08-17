@@ -25,7 +25,9 @@ A production-ready Next.js website for **Dr. Pamarthi Krishna Das, MBBS, MD (Psy
 - Optional secure webhook with a privacy-preserving direct WhatsApp fallback
 - Native call, WhatsApp, directions and emergency pathways with voice calls fixed to 81217 43999 and WhatsApp/appointment messages routed to +91 81257 43999
 - Conditional, consent-based Google Analytics / Tag Manager loading
-- MedicalClinic, LocalBusiness, Physician, FAQ, Breadcrumb, MedicalWebPage, Article and Service structured data
+- MedicalClinic, LocalBusiness, Organization, WebSite, Physician, FAQPage, BreadcrumbList, MedicalWebPage, Article and Service structured data
+- Conditional medical-review UI and reviewedBy/lastReviewed schema support; nothing is displayed until a verified review flag and date exist
+- Sitemap modification dates derive from static-page, condition, service and article content dates rather than request time
 - Review schema that remains disabled until verified first-party Google data is configured
 - Dynamic sitemap, robots, canonical metadata, Open Graph and Twitter cards
 - Loading, empty, success, error, global error and 404 states
@@ -83,7 +85,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - ESLint: passed
 - Next.js production build: passed
 - Automated SEO audit passed across all 138 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, image alt attributes, robots and sitemap
-- Full 174-URL audit: 0 CRITICAL, 0 HIGH, 2 MEDIUM and 0 LOW findings; the two MEDIUM rows document the English/Telugu homepage mobile LCP lab risk
+- Full 178-URL audit: 0 CRITICAL, 0 HIGH, 0 MEDIUM and 0 LOW findings
 - 126 discovered internal links tested without broken destinations
 - English and Telugu appointment validation plus WhatsApp fallback: browser-tested
 - Voice call links verified on +91 81217 43999; all WhatsApp and appointment-form delivery links verified on +91 81257 43999
@@ -94,7 +96,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - Condition and archive image files, condition/article mappings and responsive image delivery verified
 - No visible image-generation tags remain in English, Telugu, article, condition or gallery output
 - No browser runtime errors in tested flows
-- Final local production Lighthouse: desktop **99 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.9s, CLS 0); mobile lab **89 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 3.5s, CLS 0, TBT 80ms). Results vary by device, network and deployment CDN.
+- Final local production Lighthouse: desktop **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.7s, CLS 0, TBT 20ms); mobile lab median **97 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** across three runs (LCP median 2.4s, CLS 0, TBT median 120ms). Production field data is not yet available.
 
 ## Before public launch
 

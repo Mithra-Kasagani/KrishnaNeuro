@@ -5,6 +5,7 @@
   "description": "Premium, accessible mental healthcare website for Dr. Pamarthi Krishna Das in Vijayawada.",
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
+    "prebuild": "node scripts/validate-production-env.mjs",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
     "lint": "eslint .",

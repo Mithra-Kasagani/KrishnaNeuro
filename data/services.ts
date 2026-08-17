@@ -21,12 +21,14 @@ export type Service = {
   suitableFor: string[];
   note: string;
   icon: LucideIcon;
+  updatedAt: string;
 };
 
 export const services: Service[] = [
   {
     name: "Psychiatric Consultation",
     slug: "psychiatric-consultation",
+    updatedAt: "2026-08-15",
     short: "A careful, confidential assessment—not a rushed label.",
     description:
       "An initial consultation brings together symptoms, medical health, sleep, medicines, relationships and daily function. Dr. Krishna Das explains the working understanding and options in simple language.",
@@ -38,6 +40,7 @@ export const services: Service[] = [
   {
     name: "Medication Management",
     slug: "medication-management",
+    updatedAt: "2026-08-15",
     short: "Thoughtful prescribing with clear goals and regular review.",
     description:
       "When medication is clinically appropriate, the choice is based on expected benefit, health conditions, other medicines, daily routine and preferences. The aim is the lowest effective treatment burden consistent with safety and recovery.",
@@ -49,6 +52,7 @@ export const services: Service[] = [
   {
     name: "Counselling",
     slug: "counselling",
+    updatedAt: "2026-08-15",
     short: "A structured conversation that builds understanding and practical skills.",
     description:
       "Counselling supports coping, problem solving, emotional regulation and behaviour change. The recommended approach and session frequency depend on the concern and may involve referral to an appropriate therapist.",
@@ -60,6 +64,7 @@ export const services: Service[] = [
   {
     name: "Family Counselling",
     slug: "family-counselling",
+    updatedAt: "2026-08-15",
     short: "Help families understand illness, communicate and support recovery.",
     description:
       "Sessions can reduce blame, clarify boundaries and give families practical ways to respond to symptoms, relapse signs, addiction or caregiver strain.",
@@ -71,6 +76,7 @@ export const services: Service[] = [
   {
     name: "Child & Adolescent Psychiatry",
     slug: "child-psychiatry",
+    updatedAt: "2026-08-15",
     short: "Developmentally informed care for children, teenagers and caregivers.",
     description:
       "Assessment considers development, school, family, strengths, physical health and the young person's own experience. Parents and teachers may contribute with appropriate consent.",
@@ -82,6 +88,7 @@ export const services: Service[] = [
   {
     name: "De-addiction Care",
     slug: "de-addiction",
+    updatedAt: "2026-08-15",
     short: "Non-judgemental help for alcohol, tobacco and other substance use.",
     description:
       "Care begins with safety: the substance, withdrawal and overdose risk determine whether outpatient treatment, medical detoxification or a higher level of care is needed.",
@@ -93,6 +100,7 @@ export const services: Service[] = [
   {
     name: "Stress Management",
     slug: "stress-management",
+    updatedAt: "2026-08-15",
     short: "Turn an overwhelming problem into clear, workable next steps.",
     description:
       "Stress care maps demands, recovery time, habits and supports. It also checks whether depression, anxiety, insomnia or burnout requires more specific treatment.",
@@ -104,6 +112,7 @@ export const services: Service[] = [
   {
     name: "Sleep Clinic",
     slug: "sleep-clinic",
+    updatedAt: "2026-08-15",
     short: "Understand the pattern before reaching for a sleeping tablet.",
     description:
       "A focused sleep review examines timing, routine, snoring, restless legs, medicines, substances, mood and daytime impact. Tests or specialist referral are arranged when needed.",
@@ -115,6 +124,7 @@ export const services: Service[] = [
   {
     name: "Tele Consultation",
     slug: "tele-consultation",
+    updatedAt: "2026-08-15",
     short: "Remote follow-up and selected consultations, subject to clinical suitability.",
     description:
       "Teleconsultation can improve continuity when travel is difficult. Identity, consent, location and clinical appropriateness are confirmed in line with applicable telemedicine standards.",
@@ -126,6 +136,7 @@ export const services: Service[] = [
   {
     name: "Urgent Consultation Guidance",
     slug: "emergency-consultation",
+    updatedAt: "2026-08-15",
     short: "Call for same-day availability; immediate danger belongs in emergency care.",
     description:
       "The clinic can guide families facing rapid symptom worsening and advise whether a scheduled consultation is suitable. It is not a 24-hour emergency department.",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { TeAppointmentPage, TeAppointmentSuccess, TeArticlePage, TeBlogIndex, TeConditionPage, TeConditionsIndex, TeGalleryPage, TeHome, TeLocationPage, TeLocationsIndex, TeServicePage, TeServicesIndex, TeStandardPage } from "@/components/te/telugu-pages";
 import { articles } from "@/data/articles";
 import { conditions } from "@/data/conditions";
@@ -47,36 +48,45 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
   const { slug = [] } = await params;
   const route = `/${slug.join("/")}`.replace(/\/$/, "") || "/";
   const tePath = `/te${route === "/" ? "" : route}`;
-  const title = pageTitle(slug);
-  const description = `${title} గురించి బాధ్యతాయుత తెలుగు సమాచారం. విజయవాడలో Krishna Neuro Psychiatric Centre వద్ద డా. పామర్తి కృష్ణ దాస్‌తో కన్సల్టేషన్ మరియు అపాయింట్‌మెంట్ వివరాలు.`;
+  const localizedCondition = slug[0] === "conditions" && slug[1] ? teConditions[slug[1]] : undefined;
+  const title = localizedCondition?.seoTitle || pageTitle(slug);
+  const description = localizedCondition?.seoDescription || (localizedCondition ? `${localizedCondition.name} లక్షణాలు, నిర్ధారణ, చికిత్స ఎంపికలు మరియు విజయవాడలో సైకియాట్రిక్ కన్సల్టేషన్ సమాచారం.` : `${title} గురించి బాధ్యతాయుత తెలుగు సమాచారం మరియు విజయవాడలో కన్సల్టేషన్ వివరాలు.`);
   const image = slug[0] === "gallery" ? gallerySlides[0].src : slug[0] === "conditions" && slug[1] ? conditionImage(slug[1]) : slug[0] === "services" && slug[1] ? serviceImage(slug[1]) : slug[0] === "blog" && slug[1] ? articleImage(slug[1]) : slug[0] === "locations" ? locationImage() : pageImage(slug[0] || "home");
   return {
     title,
     description,
     robots: slug[0] === "locations" ? { index: false, follow: true } : { index: true, follow: true },
     alternates: { canonical: absoluteUrl(tePath), languages: { "te-IN": absoluteUrl(tePath), "en-IN": absoluteUrl(route) } },
-    openGraph: { type: "website", locale: "te_IN", alternateLocale: ["en_IN"], url: absoluteUrl(tePath), siteName: siteConfig.name, title, description, images: [{ url: absoluteUrl(image), width: 1586, height: 992, alt: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్" }] },
+    openGraph: { type: slug[0] === "blog" && Boolean(slug[1]) ? "article" : "website", locale: "te_IN", alternateLocale: ["en_IN"], url: absoluteUrl(tePath), siteName: siteConfig.name, title, description, images: [{ url: absoluteUrl(image), width: 1586, height: 992, alt: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్" }] },
     twitter: { card: "summary_large_image", title, description, images: [absoluteUrl(image)] },
   };
 }
 
+function teluguBreadcrumbLabel(slug: string[]) {
+  if (slug[0] === "conditions" && slug[1]) return teConditions[slug[1]]?.name || "పరిస్థితి";
+  if (slug[0] === "services" && slug[1]) return teServices[slug[1]]?.name || "సేవ";
+  if (slug[0] === "blog" && slug[1]) return teArticleMeta[slug[1]]?.title || "వ్యాసం";
+  return pageTitle(slug);
+}
+
 export default async function TeluguRoute({ params, searchParams }: { params: Promise<{ slug?: string[] }>; searchParams: Promise<{ reference?: string }> }) {
   const { slug = [] } = await params;
+  const withBreadcrumb = (content: React.ReactNode) => <><BreadcrumbJsonLd items={[{ name: "హోమ్", item: "/te" }, { name: teluguBreadcrumbLabel(slug), item: "" }]} />{content}</>;
   if (!slug.length) return <TeHome />;
-  if (slug[0] === "about" && slug.length === 1) return <TeStandardPage page="about-doctor" />;
-  if (slug[0] === "doctor" && slug[1] === "pamarthi-krishna-das") return <TeStandardPage page="about-doctor" />;
-  if (slug[0] === "faq" && slug.length === 1) return <TeStandardPage page="faqs" />;
-  if (standard.includes(slug[0]) && slug.length === 1) return <TeStandardPage page={slug[0]} />;
-  if (slug[0] === "conditions" && slug.length === 1) return <TeConditionsIndex />;
-  if (slug[0] === "conditions" && slug[1] && teConditions[slug[1]]) return <TeConditionPage slug={slug[1]} />;
-  if (slug[0] === "services" && slug.length === 1) return <TeServicesIndex />;
-  if (slug[0] === "services" && slug[1] && teServices[slug[1]]) return <TeServicePage slug={slug[1]} />;
-  if (slug[0] === "blog" && slug.length === 1) return <TeBlogIndex />;
-  if (slug[0] === "blog" && slug[1] && teArticleMeta[slug[1]]) return <TeArticlePage slug={slug[1]} />;
-  if (slug[0] === "locations" && slug.length === 1) return <TeLocationsIndex />;
-  if (slug[0] === "locations" && slug[1] && localPages.some((item) => item.slug === slug[1])) return <TeLocationPage slug={slug[1]} />;
-  if (slug[0] === "gallery" && slug.length === 1) return <TeGalleryPage />;
-  if (slug[0] === "appointment" && slug.length === 1) return <TeAppointmentPage />;
-  if (slug[0] === "appointment" && slug[1] === "success") { const query = await searchParams; return <TeAppointmentSuccess reference={query.reference} />; }
+  if (slug[0] === "about" && slug.length === 1) return withBreadcrumb(<TeStandardPage page="about-doctor" />);
+  if (slug[0] === "doctor" && slug[1] === "pamarthi-krishna-das") return withBreadcrumb(<TeStandardPage page="about-doctor" />);
+  if (slug[0] === "faq" && slug.length === 1) return withBreadcrumb(<TeStandardPage page="faqs" />);
+  if (standard.includes(slug[0]) && slug.length === 1) return withBreadcrumb(<TeStandardPage page={slug[0]} />);
+  if (slug[0] === "conditions" && slug.length === 1) return withBreadcrumb(<TeConditionsIndex />);
+  if (slug[0] === "conditions" && slug[1] && teConditions[slug[1]]) return withBreadcrumb(<TeConditionPage slug={slug[1]} />);
+  if (slug[0] === "services" && slug.length === 1) return withBreadcrumb(<TeServicesIndex />);
+  if (slug[0] === "services" && slug[1] && teServices[slug[1]]) return withBreadcrumb(<TeServicePage slug={slug[1]} />);
+  if (slug[0] === "blog" && slug.length === 1) return withBreadcrumb(<TeBlogIndex />);
+  if (slug[0] === "blog" && slug[1] && teArticleMeta[slug[1]]) return withBreadcrumb(<TeArticlePage slug={slug[1]} />);
+  if (slug[0] === "locations" && slug.length === 1) return withBreadcrumb(<TeLocationsIndex />);
+  if (slug[0] === "locations" && slug[1] && localPages.some((item) => item.slug === slug[1])) return withBreadcrumb(<TeLocationPage slug={slug[1]} />);
+  if (slug[0] === "gallery" && slug.length === 1) return withBreadcrumb(<TeGalleryPage />);
+  if (slug[0] === "appointment" && slug.length === 1) return withBreadcrumb(<TeAppointmentPage />);
+  if (slug[0] === "appointment" && slug[1] === "success") { const query = await searchParams; return withBreadcrumb(<TeAppointmentSuccess reference={query.reference} />); }
   notFound();
 }

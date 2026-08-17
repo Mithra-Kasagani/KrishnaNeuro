@@ -1,3 +1,5 @@
+import type { MedicalReview } from "@/data/conditions";
+
 export type ArticleSection = {
   heading: string;
   paragraphs: string[];
@@ -18,6 +20,7 @@ export type Article = {
   faqs: { question: string; answer: string }[];
   internalLinks: { label: string; href: string }[];
   references: { label: string; href: string }[];
+  medicalReview?: MedicalReview;
 };
 
 const commonReferences = [

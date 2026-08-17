@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { SeoContentModel } from "@/data/seo-pages";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
-export function createMetadata({ title, description, path = "/", image = "/opengraph-image", noIndex = false, keywords = [], ogTitle = title, ogDescription = description }: { title: string; description: string; path?: string; image?: string; noIndex?: boolean; keywords?: string[]; ogTitle?: string; ogDescription?: string }): Metadata {
+export function createMetadata({ title, description, path = "/", image = "/opengraph-image", noIndex = false, keywords = [], ogTitle = title, ogDescription = description, ogType = "website" }: { title: string; description: string; path?: string; image?: string; noIndex?: boolean; keywords?: string[]; ogTitle?: string; ogDescription?: string; ogType?: "website" | "article" }): Metadata {
   const canonical = absoluteUrl(path);
   const teluguPath = path === "/" ? "/te" : `/te${path.startsWith("/") ? path : `/${path}`}`;
   return {
@@ -12,7 +12,7 @@ export function createMetadata({ title, description, path = "/", image = "/openg
     alternates: { canonical, languages: { "en-IN": canonical, "te-IN": absoluteUrl(teluguPath) } },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
     openGraph: {
-      type: "website",
+      type: ogType,
       locale: "en_IN",
       alternateLocale: ["te_IN"],
       url: canonical,

@@ -13,10 +13,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/doctor", destination: "/doctor/pamarthi-krishna-das", statusCode: 301 },
+      { source: "/articles", destination: "/blog", statusCode: 301 },
       { source: "/about-doctor", destination: "/doctor/pamarthi-krishna-das", statusCode: 301 },
       { source: "/faqs", destination: "/faq", statusCode: 301 },
       { source: "/best-psychiatrist-in-vijayawada", destination: "/psychiatrist-in-vijayawada", statusCode: 301 },
       { source: "/testimonials", destination: "/about", statusCode: 301 },
+      { source: "/te/doctor", destination: "/te/doctor/pamarthi-krishna-das", statusCode: 301 },
+      { source: "/te/articles", destination: "/te/blog", statusCode: 301 },
       { source: "/te/about-doctor", destination: "/te/doctor/pamarthi-krishna-das", statusCode: 301 },
       { source: "/te/faqs", destination: "/te/faq", statusCode: 301 },
       { source: "/te/best-psychiatrist-in-vijayawada", destination: "/te/psychiatrist-in-vijayawada", statusCode: 301 },

@@ -2,7 +2,7 @@
 
 ## Audit scope
 
-- 174 public URLs inventoried and audited.
+- 178 public URLs inventoried and audited.
 - 138 canonical indexable English/Telugu URLs reviewed.
 - 36 legacy redirect, noindex local-access and appointment-success URLs reviewed separately.
 - Page-level data is available in `existing-page-audit.csv`.
@@ -63,6 +63,8 @@ All internal navigation, canonicals, hreflang links and sitemap entries use fina
 - `npm run build` — passed.
 - `npm audit --audit-level=high` — zero vulnerabilities.
 - `npm run seo:audit` — passed all 138 canonical URLs and 126 internal links.
-- Full page audit after optimization — 0 CRITICAL, 0 HIGH, 2 MEDIUM and 0 LOW findings. The two MEDIUM rows are the English/Telugu homepage mobile LCP lab risk; no metadata, indexability, content, schema or link failures remain.
-- Lighthouse desktop — 99 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; LCP 0.9s, CLS 0.
-- Lighthouse mobile lab — 89 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; LCP 3.5s, CLS 0, TBT 80ms. Mobile LCP remains a monitored performance risk for production field data.
+- Full page audit after optimization — 0 CRITICAL, 0 HIGH, 0 MEDIUM and 0 LOW findings.
+- Lighthouse desktop — 100 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; LCP 0.7s, CLS 0, TBT 20ms.
+- Lighthouse mobile lab — median 97 Performance across three runs (94 / 97 / 98), with 100 Accessibility, 100 Best Practices and 100 SEO; LCP median 2.4s (2.6s / 2.4s / 2.2s), CLS 0, TBT median 120ms. Production field data remains unverified.
+- Conditional medical-review component and schema relationships implemented. Medical review is **not verified** for the current 84 condition/article language URLs, so reviewer claims are intentionally not rendered.
+- Dynamic sitemap now uses genuine stored modification dates from static, condition, service and article content data.

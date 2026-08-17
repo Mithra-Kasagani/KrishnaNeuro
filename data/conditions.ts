@@ -7,6 +7,12 @@ export type ConditionCategory =
   | "Children & adolescents"
   | "Life stages & relationships";
 
+export type MedicalReview = {
+  reviewed: boolean;
+  reviewedAt?: string;
+  reviewerName?: string;
+};
+
 export type Condition = {
   name: string;
   slug: string;
@@ -24,15 +30,19 @@ export type Condition = {
   related: string[];
   urgent?: boolean;
   ageNote?: string;
+  updatedAt: string;
+  medicalReview?: MedicalReview;
 };
 
 type ConditionSeed = Omit<
   Condition,
-  "whenToConsult" | "earlyTreatment" | "faqs"
+  "whenToConsult" | "earlyTreatment" | "faqs" | "updatedAt" | "medicalReview"
 > & {
   whenToConsult?: string[];
   earlyTreatment?: string;
   faqs?: { question: string; answer: string }[];
+  updatedAt?: string;
+  medicalReview?: MedicalReview;
 };
 
 const commonWhenToConsult = (name: string) => [
@@ -45,6 +55,8 @@ const commonWhenToConsult = (name: string) => [
 function createCondition(seed: ConditionSeed): Condition {
   return {
     ...seed,
+    updatedAt: seed.updatedAt || "2026-08-15",
+    medicalReview: seed.medicalReview,
     whenToConsult: seed.whenToConsult || commonWhenToConsult(seed.name),
     earlyTreatment:
       seed.earlyTreatment ||

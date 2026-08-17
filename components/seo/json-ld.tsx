@@ -1,3 +1,4 @@
+import type { MedicalReview } from "@/data/conditions";
 import { articleImage } from "@/lib/page-images";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
@@ -17,7 +18,12 @@ export function OrganizationJsonLd() {
     "@id": `${siteConfig.url}/#clinic`,
     name: siteConfig.name,
     url: siteConfig.url,
-    logo: absoluteUrl("/icon.svg"),
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/images/brand/krishna-neuro-logo.webp"),
+      width: 512,
+      height: 512,
+    },
     image: absoluteUrl("/images/doctor-office.webp"),
     description: siteConfig.description,
     medicalSpecialty: "Psychiatric",
@@ -112,7 +118,8 @@ export function FAQJsonLd({ faqs }: { faqs: { question: string; answer: string }
   );
 }
 
-export function MedicalWebPageJsonLd({ name, description, path, about }: { name: string; description: string; path: string; about: string }) {
+export function MedicalWebPageJsonLd({ name, description, path, about, dateModified, review }: { name: string; description: string; path: string; about: string; dateModified: string; review?: MedicalReview }) {
+  const reviewed = Boolean(review?.reviewed && review.reviewedAt);
   return (
     <JsonLd
       data={{
@@ -121,15 +128,18 @@ export function MedicalWebPageJsonLd({ name, description, path, about }: { name:
         name,
         description,
         url: absoluteUrl(path),
+        dateModified,
         about: { "@type": "MedicalCondition", name: about },
         publisher: { "@id": `${siteConfig.url}/#clinic` },
+        ...(reviewed ? { reviewedBy: { "@id": `${siteConfig.url}/#physician` }, lastReviewed: review?.reviewedAt } : {}),
         inLanguage: "en-IN",
       }}
     />
   );
 }
 
-export function ArticleJsonLd({ article }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string } }) {
+export function ArticleJsonLd({ article }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string; medicalReview?: MedicalReview } }) {
+  const reviewed = Boolean(article.medicalReview?.reviewed && article.medicalReview.reviewedAt);
   return (
     <JsonLd
       data={{
@@ -141,6 +151,7 @@ export function ArticleJsonLd({ article }: { article: { title: string; descripti
         datePublished: article.publishedAt,
         dateModified: article.updatedAt,
         author: { "@type": "Organization", name: `${siteConfig.name} Editorial Team`, url: siteConfig.url },
+        ...(reviewed ? { reviewedBy: { "@id": `${siteConfig.url}/#physician` }, lastReviewed: article.medicalReview?.reviewedAt } : {}),
         publisher: { "@id": `${siteConfig.url}/#clinic` },
         image: absoluteUrl(articleImage(article.slug)),
         inLanguage: "en-IN",

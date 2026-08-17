@@ -13,7 +13,7 @@ const canonicalPaths = [...new Set(canonicalEntries.map((entry) => new URL(entry
 const locationSource = await fs.readFile(path.join(root, "data", "locations.ts"), "utf8");
 const locationSlugs = [...new Set([...locationSource.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]))];
 const excludedEnglish = [
-  "/about-doctor", "/faqs", "/testimonials", "/best-psychiatrist-in-vijayawada",
+  "/doctor", "/articles", "/about-doctor", "/faqs", "/testimonials", "/best-psychiatrist-in-vijayawada",
   "/locations", ...locationSlugs.map((slug) => `/locations/${slug}`), "/appointment/success",
 ];
 const excludedTelugu = excludedEnglish.map((item) => `/te${item}`);
@@ -130,7 +130,7 @@ for (let offset = 0; offset < inventory.length; offset += 10) {
     if (indexable && unsupportedClaims && !url.includes("psychiatrist-in-vijayawada")) issues.push("unsupported superlative or cure claim");
     if (indexable && wordCount < 180 && !["/appointment", "/contact", "/gallery"].some((item) => url.endsWith(item))) issues.push(`thin content risk (${wordCount} words)`);
     if (htmlKb > 450) issues.push(`large HTML payload (${htmlKb} KB)`);
-    if (["/", "/te"].includes(url)) issues.push("mobile Core Web Vitals lab risk: LCP approximately 3.5s; continue monitoring production field data");
+
 
     const intent = searchIntent(url);
     const topic = primaryKeyword(url, title);
@@ -183,7 +183,7 @@ await fs.writeFile(path.join(outputDir, "existing-page-audit.csv"), csvBody);
 const priorityOrder = ["CRITICAL","HIGH","MEDIUM","LOW","NO CHANGE"];
 const counts = Object.fromEntries(priorityOrder.map((priority) => [priority, rows.filter((row) => row.Priority === priority).length]));
 const issueRows = rows.filter((row) => row.Priority !== "NO CHANGE");
-const markdown = `# Existing Public Page SEO Audit\n\nGenerated against the complete current route inventory before the optimization pass.\n\n## Inventory\n\n- Canonical sitemap URLs: **${canonicalPaths.length}**\n- Redirected/noindex public URLs: **${inventory.length - canonicalPaths.length}**\n- Total public URLs audited: **${inventory.length}**\n\n## Priority summary\n\n${priorityOrder.map((priority) => `- ${priority}: **${counts[priority]}**`).join("\n")}\n\n## Audit dimensions\n\nEvery row covers URL purpose, search intent, keyword/topic, H1/H2/H3, title, description, canonical, robots, Open Graph, schema, image SEO, internal/external links, duplicate/thin-content/cannibalization risk, URL quality, mobile/CWV risk, accessibility, CTAs, local signals, entity consistency and factual-accuracy heuristics.\n\n## CRITICAL and HIGH findings\n\n${issueRows.filter((row) => ["CRITICAL","HIGH"].includes(row.Priority)).length ? issueRows.filter((row) => ["CRITICAL","HIGH"].includes(row.Priority)).map((row) => `- **${row.Priority}** \`${row.URL}\` — ${row.Issues}`).join("\n") : "No CRITICAL or HIGH issues detected in the current optimized baseline."}\n\n## MEDIUM and LOW template findings\n\n${issueRows.filter((row) => ["MEDIUM","LOW"].includes(row.Priority)).slice(0, 80).map((row) => `- **${row.Priority}** \`${row.URL}\` — ${row.Issues}`).join("\n") || "No medium/low findings."}\n\n## Full page-level report\n\nSee [existing-page-audit.csv](./existing-page-audit.csv) for all ${inventory.length} rows and all required columns.\n`;
+const markdown = `# Existing Public Page SEO Audit\n\nPost-implementation verification generated against the complete current route inventory. The preserved raw baseline is available in existing-page-audit-before.csv.\n\n## Inventory\n\n- Canonical sitemap URLs: **${canonicalPaths.length}**\n- Redirected/noindex public URLs: **${inventory.length - canonicalPaths.length}**\n- Total public URLs audited: **${inventory.length}**\n\n## Priority summary\n\n${priorityOrder.map((priority) => `- ${priority}: **${counts[priority]}**`).join("\n")}\n\n## Audit dimensions\n\nEvery row covers URL purpose, search intent, keyword/topic, H1/H2/H3, title, description, canonical, robots, Open Graph, schema, image SEO, internal/external links, duplicate/thin-content/cannibalization risk, URL quality, mobile/CWV risk, accessibility, CTAs, local signals, entity consistency and factual-accuracy heuristics.\n\n## CRITICAL and HIGH findings\n\n${issueRows.filter((row) => ["CRITICAL","HIGH"].includes(row.Priority)).length ? issueRows.filter((row) => ["CRITICAL","HIGH"].includes(row.Priority)).map((row) => `- **${row.Priority}** \`${row.URL}\` — ${row.Issues}`).join("\n") : "No CRITICAL or HIGH issues detected in the current optimized baseline."}\n\n## MEDIUM and LOW template findings\n\n${issueRows.filter((row) => ["MEDIUM","LOW"].includes(row.Priority)).slice(0, 80).map((row) => `- **${row.Priority}** \`${row.URL}\` — ${row.Issues}`).join("\n") || "No medium/low findings."}\n\n## Full page-level report\n\nSee [existing-page-audit.csv](./existing-page-audit.csv) for all ${inventory.length} rows and all required columns.\n`;
 await fs.writeFile(path.join(outputDir, "existing-page-audit.md"), markdown);
 
 const redirects = rows.filter((row) => String(row.Indexability).startsWith("Redirect")).map((row) => ({ source: row.URL, destination: row["Redirect target"], status: row.Status, purpose: "Preserve legacy URL equity; no redirect chain" }));

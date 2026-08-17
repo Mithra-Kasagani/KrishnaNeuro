@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, BookOpenCheck, CalendarDays, Check, Clock3, ExternalLink, Info, ShieldAlert } from "lucide-react";
+import { MedicalReview } from "@/components/medical/medical-review";
 import { ArticleJsonLd } from "@/components/seo/json-ld";
 import { AiEditorialImage } from "@/components/shared/ai-editorial-image";
 import { AppointmentCTA } from "@/components/shared/appointment-cta";
@@ -18,7 +19,7 @@ export function generateStaticParams() { return articles.map((article) => ({ slu
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; const article = getArticle(slug); if (!article) return {};
-  return createMetadata({ title: article.title, description: article.description, path: `/blog/${article.slug}`, image: articleImage(article.slug), keywords: [article.category, "mental health guide", "psychiatrist Vijayawada"] });
+  return createMetadata({ title: article.title, description: article.description, path: `/blog/${article.slug}`, image: articleImage(article.slug), ogType: "article", keywords: [article.category, "mental health guide", "psychiatrist Vijayawada"] });
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -28,10 +29,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       <ArticleJsonLd article={article}/>
       <article>
-        <header className="relative overflow-hidden border-b border-border bg-card"><div className="absolute inset-0 surface-grid opacity-65"/><div className="container-page relative py-12 md:py-18"><Breadcrumbs items={[{label:"Articles",href:"/blog"},{label:article.title}]}/><div className="mt-9 max-w-4xl"><Badge>{article.category}</Badge><h1 className="mt-5 text-balance text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.055em]">{article.title}</h1><p className="mt-6 max-w-3xl text-pretty text-lg leading-8 text-muted-foreground md:text-xl">{article.description}</p><div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold text-muted-foreground"><span className="inline-flex items-center gap-1.5"><BookOpenCheck className="size-4 text-primary"/>Krishna Neuro Editorial Team</span><span className="inline-flex items-center gap-1.5"><CalendarDays className="size-4 text-primary"/>Updated {formatDate(article.updatedAt)}</span><span className="inline-flex items-center gap-1.5"><Clock3 className="size-4 text-primary"/>{article.readingMinutes} min read</span></div></div><AiEditorialImage src={articleImage(article.slug)} alt={aiImageAlt(article.title)} priority className="mt-9 aspect-[16/7]" sizes="100vw" /></div></header>
+        <header className="relative overflow-hidden border-b border-border bg-card"><div className="absolute inset-0 surface-grid opacity-65"/><div className="container-page relative py-12 md:py-18"><Breadcrumbs items={[{label:"Articles",href:"/blog"},{label:article.title}]}/><div className="mt-9 max-w-4xl"><Badge>{article.category}</Badge><h1 className="mt-5 text-balance text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.055em]">{article.title}</h1><p className="mt-6 max-w-3xl text-pretty text-lg leading-8 text-muted-foreground md:text-xl">{article.description}</p><div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold text-muted-foreground"><span className="inline-flex items-center gap-1.5"><BookOpenCheck className="size-4 text-primary"/>Written by: Krishna Neuro Psychiatric Centre Editorial Team</span><span className="inline-flex items-center gap-1.5"><CalendarDays className="size-4 text-primary"/>Updated {formatDate(article.updatedAt)}</span><span className="inline-flex items-center gap-1.5"><Clock3 className="size-4 text-primary"/>{article.readingMinutes} min read</span></div></div><AiEditorialImage src={articleImage(article.slug)} alt={aiImageAlt(article.title)} className="mt-9 aspect-[16/7]" sizes="100vw" /></div></header>
         <div className="container-page grid gap-12 py-14 lg:grid-cols-[minmax(0,1fr)_19rem] lg:py-20">
           <div className="min-w-0">
             <div className="rounded-[1.6rem] border border-primary/15 bg-primary/6 p-6"><h2 className="text-lg font-extrabold">Key points</h2><ul className="mt-4 grid gap-3">{article.takeaways.map(item=><li key={item} className="flex gap-3 text-sm leading-6 text-muted-foreground"><span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-secondary/12 text-secondary"><Check className="size-3" strokeWidth={3}/></span>{item}</li>)}</ul></div>
+            {article.medicalReview?.reviewed && <div className="mt-6"><MedicalReview review={article.medicalReview} /></div>}
             <p className="mt-9 text-xl font-semibold leading-9 tracking-[-0.018em] text-foreground">{article.lead}</p>
             <div className="prose-clinic">{article.sections.map(section=><section key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map(paragraph=><p key={paragraph}>{paragraph}</p>)}{section.bullets&&<ul>{section.bullets.map(item=><li key={item}>{item}</li>)}</ul>}</section>)}</div>
             <aside className="mt-10 flex gap-4 rounded-2xl border border-amber-300/45 bg-amber-50 p-5 text-amber-950 dark:border-amber-400/25 dark:bg-amber-950/25 dark:text-amber-100"><ShieldAlert className="mt-0.5 size-5 shrink-0"/><p className="text-sm leading-7"><strong>Emergency reminder:</strong> immediate danger, overdose, seizure, severe confusion, violence or inability to stay safe requires 112 or the nearest emergency department. Tele-MANAS: 14416.</p></aside>
