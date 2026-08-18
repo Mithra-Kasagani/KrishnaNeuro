@@ -56,7 +56,14 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
 
   return (
     <>
-      <MedicalWebPageJsonLd name={`${seoName} Treatment in Vijayawada`} description={condition.summary} path={`/conditions/${condition.slug}`} about={condition.name} dateModified={condition.updatedAt} review={condition.medicalReview} />
+      <MedicalWebPageJsonLd
+  name={`${seoName} Treatment in Vijayawada`}
+  description={condition.summary}
+  path={`/conditions/${condition.slug}`}
+  about={condition.name}
+  dateModified={condition.updatedAt ?? "2026-08-18"}
+  review={condition.medicalReview}
+/>
       <PageHero
         badge={condition.category}
         image={conditionImage(condition.slug)}

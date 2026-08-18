@@ -30,7 +30,7 @@ export type Condition = {
   related: string[];
   urgent?: boolean;
   ageNote?: string;
-  updatedAt: string;
+  updatedAt: "2026-08-18",
   medicalReview?: MedicalReview;
 };
 
