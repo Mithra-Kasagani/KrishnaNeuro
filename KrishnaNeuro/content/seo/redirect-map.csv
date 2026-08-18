@@ -1,0 +1,9 @@
+source,destination,status,purpose
+/about-doctor,/doctor/pamarthi-krishna-das,301,Preserve legacy URL equity; no redirect chain
+/best-psychiatrist-in-vijayawada,/psychiatrist-in-vijayawada,301,Preserve legacy URL equity; no redirect chain
+/faqs,/faq,301,Preserve legacy URL equity; no redirect chain
+/te/about-doctor,/te/doctor/pamarthi-krishna-das,301,Preserve legacy URL equity; no redirect chain
+/te/best-psychiatrist-in-vijayawada,/te/psychiatrist-in-vijayawada,301,Preserve legacy URL equity; no redirect chain
+/te/faqs,/te/faq,301,Preserve legacy URL equity; no redirect chain
+/te/testimonials,/te/about,301,Preserve legacy URL equity; no redirect chain
+/testimonials,/about,301,Preserve legacy URL equity; no redirect chain

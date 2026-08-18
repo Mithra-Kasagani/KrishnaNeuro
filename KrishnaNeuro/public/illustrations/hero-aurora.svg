@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="blue" cx="0" cy="0" r="1" gradientTransform="translate(170 410) rotate(20) scale(470 390)"><stop stop-color="#dceeff" stop-opacity=".9"/><stop offset="1" stop-color="#dceeff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="green" cx="0" cy="0" r="1" gradientTransform="translate(1030 600) rotate(200) scale(480 360)"><stop stop-color="#dff4e8" stop-opacity=".85"/><stop offset="1" stop-color="#dff4e8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#ffffff" fill-opacity=".01"/>
+  <rect width="1200" height="800" fill="url(#blue)"/>
+  <rect width="1200" height="800" fill="url(#green)"/>
+  <path d="M-80 620C210 500 350 710 650 575s470-35 680-170" fill="none" stroke="#4a90e2" stroke-opacity=".08" stroke-width="58" stroke-linecap="round"/>
+</svg>
