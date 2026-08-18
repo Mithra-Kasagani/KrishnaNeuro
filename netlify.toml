@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit"
+
+# Netlify automatically provisions its modern OpenNext adapter for Next.js.
+# Configure production secrets in the Netlify dashboard, never in this file.

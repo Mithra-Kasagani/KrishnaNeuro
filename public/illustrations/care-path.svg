@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+<title id="title">A calm path toward wellbeing</title><desc id="desc">Abstract figures walking along a gentle path with leaves and a rising sun.</desc>
+<defs><linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eaf4ff"/><stop offset="1" stop-color="#edf9f3"/></linearGradient><linearGradient id="path" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4A90E2"/><stop offset="1" stop-color="#2E8B57"/></linearGradient></defs>
+<rect width="720" height="360" rx="38" fill="url(#sky)"/>
+<circle cx="584" cy="84" r="36" fill="#f8cc73" opacity=".75"/>
+<path d="M0 284c101-48 192-44 274-2s183 59 446-27v105H0Z" fill="#d9f0e4"/>
+<path d="M128 360c91-96 169-124 265-112 76 10 136-7 209-74" fill="none" stroke="url(#path)" stroke-width="22" stroke-linecap="round" opacity=".3"/>
+<path d="M128 360c91-96 169-124 265-112 76 10 136-7 209-74" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+<g fill="none" stroke="#0F4C81" stroke-width="6" stroke-linecap="round">
+<circle cx="342" cy="176" r="14" fill="#f1bd91" stroke="none"/><path d="M342 193v48m0-31-23 22m23-20 25 17m-25 11-18 34m18-34 21 33"/>
+<circle cx="407" cy="158" r="13" fill="#e3a978" stroke="none"/><path d="M407 175v52m0-33-21 20m21-20 22 20m-22 13-18 31m18-31 20 31"/>
+</g>
+<g fill="#2E8B57" opacity=".9"><ellipse cx="103" cy="249" rx="11" ry="27" transform="rotate(-35 103 249)"/><ellipse cx="127" cy="228" rx="11" ry="27" transform="rotate(35 127 228)"/><ellipse cx="620" cy="201" rx="10" ry="25" transform="rotate(-38 620 201)"/><ellipse cx="644" cy="179" rx="10" ry="25" transform="rotate(38 644 179)"/></g>
+<path d="M117 279V210m516 31v-79" stroke="#2E8B57" stroke-width="5" stroke-linecap="round"/>
+</svg>

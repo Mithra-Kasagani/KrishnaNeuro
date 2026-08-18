@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Krishna Neuro Psychiatric Centre">
+  <defs><linearGradient id="g" x1="8" y1="8" x2="56" y2="56"><stop stop-color="#4A90E2"/><stop offset="1" stop-color="#2E8B57"/></linearGradient></defs>
+  <rect width="64" height="64" rx="18" fill="#0F4C81"/>
+  <path d="M17 33c0-11 6-19 15-19s15 8 15 19c0 9-6 16-15 18-9-2-15-9-15-18Z" fill="none" stroke="white" stroke-width="3"/>
+  <path d="M23 34c6-1 9-5 9-12 0 7 3 11 9 12M32 22v23" fill="none" stroke="url(#g)" stroke-linecap="round" stroke-width="4"/>
+  <path d="M24 42c3-1 6 0 8 3 2-3 5-4 8-3" fill="none" stroke="white" stroke-linecap="round" stroke-width="3"/>
+</svg>
