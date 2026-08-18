@@ -6,5 +6,8 @@
   NODE_VERSION = "20"
   NPM_FLAGS = "--no-audit"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 # Netlify automatically provisions its modern OpenNext adapter for Next.js.
 # Configure production secrets in the Netlify dashboard, never in this file.
