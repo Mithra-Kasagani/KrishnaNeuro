@@ -15,6 +15,7 @@
 - [ ] Secure CRM/webhook for appointment delivery, or approve WhatsApp-only flow
 - [ ] Legal review of privacy policy and terms under applicable Indian law
 - [ ] Clinical review and signed approval of all medical content
+- [ ] Assign the final publication approver and qualified Telugu reviewer listed as TODOs in `content/medical-content-governance.md`
 
 ## Technical release
 

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BookOpen, Brain, CalendarDays, Check, CircleAlert, ClipboardCheck, HeartPulse, SearchCheck, ShieldCheck, Sparkles } from "lucide-react";
-import { MedicalReview } from "@/components/medical/medical-review";
+import { ArrowRight, BookOpen, Brain, CalendarDays, Check, CircleAlert, ClipboardCheck, HeartHandshake, HeartPulse, SearchCheck, ShieldCheck, Sparkles } from "lucide-react";
+import { ContentAttribution } from "@/components/medical/content-attribution";
+import { MedicalReferences } from "@/components/medical/medical-references";
 import { Reveal } from "@/components/motion/reveal";
 import { MedicalWebPageJsonLd } from "@/components/seo/json-ld";
 import { AppointmentCTA } from "@/components/shared/appointment-cta";
@@ -14,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { articles } from "@/data/articles";
 import { conditions, getCondition, getRelatedConditions } from "@/data/conditions";
+import { getMedicalReferences } from "@/data/medical-references";
 import { createMetadata } from "@/lib/metadata";
 import { aiImageAlt, conditionImage } from "@/lib/page-images";
 
@@ -51,12 +53,13 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
   if (!condition) notFound();
   const seoName = seoConditionName(condition.slug, condition.name);
   const related = getRelatedConditions(condition);
+  const references = getMedicalReferences(condition.slug);
   const relatedArticles = articles.filter((article) => article.internalLinks.some((link) => link.href === `/conditions/${condition.slug}`)).slice(0, 3);
   const fallbackArticles = relatedArticles.length ? relatedArticles : articles.slice(0, 3);
 
   return (
     <>
-      <MedicalWebPageJsonLd name={`${seoName} Treatment in Vijayawada`} description={condition.summary} path={`/conditions/${condition.slug}`} about={condition.name} dateModified={condition.updatedAt} review={condition.medicalReview} />
+      <MedicalWebPageJsonLd name={`${seoName} Treatment in Vijayawada`} description={condition.summary} path={`/conditions/${condition.slug}`} about={condition.name} dateModified={condition.updatedAt} review={condition.medicalReview} citations={references.map((reference) => reference.href)} />
       <PageHero
         badge={condition.category}
         image={conditionImage(condition.slug)}
@@ -68,7 +71,7 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
         aside={<div className="rounded-[2rem] border border-border bg-card/80 p-6 shadow-soft backdrop-blur-xl"><div className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/12 to-secondary/12 text-primary"><Brain className="size-5"/></div><h2 className="mt-5 text-xl font-extrabold tracking-[-0.025em] text-foreground">What Is {condition.name}?</h2><p className="mt-3 text-base leading-7 text-muted-foreground">{condition.overview}</p></div>}
       />
 
-      {condition.medicalReview?.reviewed && <div className="container-page pt-8"><MedicalReview review={condition.medicalReview} /></div>}
+      <div className="container-page pt-8"><ContentAttribution updatedAt={condition.updatedAt} review={condition.medicalReview} /></div>
       {condition.urgent && <div className="container-page pt-8"><EmergencyNote /></div>}
 
       <section id="symptoms" className="container-page py-16 md:py-22">
@@ -92,7 +95,14 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      <section className="border-y border-border bg-card py-16 md:py-22">
+      <section className="border-y border-border bg-muted/55 py-16 md:py-20">
+        <div className="container-page grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:gap-16">
+          <div><HeartHandshake className="size-7 text-secondary"/><h2 className="mt-5 text-3xl font-extrabold tracking-[-0.04em]">How family and caregivers can help</h2><p className="mt-4 text-sm leading-7 text-muted-foreground">Support works best when it protects dignity, consent and safety rather than using blame, secrecy or force.</p></div>
+          <ul className="grid gap-3 sm:grid-cols-2">{condition.familyGuidance.map((item)=><li key={item} className="flex gap-3 rounded-2xl border border-border bg-card p-5 text-sm leading-7 text-muted-foreground shadow-card"><span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-secondary/12 text-secondary"><Check className="size-3" strokeWidth={3}/></span>{item}</li>)}</ul>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-card py-16 md:py-22">
         <div className="container-page grid gap-8 lg:grid-cols-2">
           <Reveal><div className="h-full rounded-[1.8rem] border border-border bg-muted/55 p-7"><CircleAlert className="size-6 text-primary"/><h2 className="mt-5 text-2xl font-extrabold tracking-[-0.035em]">When Should You Consult a Psychiatrist?</h2><ul className="mt-6 grid gap-4">{condition.whenToConsult.map((item)=><li key={item} className="flex gap-3 text-sm leading-6 text-muted-foreground"><span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/8 text-primary"><ArrowRight className="size-3"/></span>{item}</li>)}</ul></div></Reveal>
           <Reveal delay={0.08}><div className="h-full rounded-[1.8rem] border border-secondary/20 bg-secondary/7 p-7"><Sparkles className="size-6 text-secondary"/><h2 className="mt-5 text-2xl font-extrabold tracking-[-0.035em]">Why early treatment matters</h2><p className="mt-5 text-sm leading-7 text-muted-foreground">{condition.earlyTreatment}</p><Button asChild variant="secondary" className="mt-7"><Link prefetch={false} href="/appointment">Take a first step<ArrowRight/></Link></Button></div></Reveal>
@@ -101,6 +111,7 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
 
       <section className="container-page py-16 md:py-22">
         <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-18"><Reveal><SectionHeading eyebrow={`Questions about ${condition.name}`} title="Frequently Asked Questions" description="General answers can orient you; your own plan requires an individual assessment."/></Reveal><Reveal delay={0.08} className="rounded-[1.7rem] border border-border bg-card px-6 shadow-card md:px-8"><FAQList faqs={condition.faqs}/></Reveal></div>
+        <div className="mt-12"><MedicalReferences references={references} updatedAt={condition.updatedAt} /></div>
       </section>
 
       <section className="border-y border-border bg-muted/55 py-16 md:py-20">

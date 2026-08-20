@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
+import { BreadcrumbJsonLd, WebPageJsonLd } from "@/components/seo/json-ld";
 import { TeAppointmentPage, TeAppointmentSuccess, TeArticlePage, TeBlogIndex, TeConditionPage, TeConditionsIndex, TeGalleryPage, TeHome, TeLocationPage, TeLocationsIndex, TeServicePage, TeServicesIndex, TeStandardPage } from "@/components/te/telugu-pages";
 import { articles } from "@/data/articles";
 import { conditions } from "@/data/conditions";
@@ -11,7 +11,7 @@ import { teArticleMeta, teConditions, teServices } from "@/data/te";
 import { articleImage, conditionImage, locationImage, pageImage, serviceImage } from "@/lib/page-images";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
-const standard = ["about-doctor", "treatments", "patient-journey", "testimonials", "resources", "faqs", "contact", "privacy-policy", "terms", "emergency", "psychiatrist-in-vijayawada", "best-psychiatrist-in-vijayawada"];
+const standard = ["about-doctor", "treatments", "patient-journey", "testimonials", "resources", "faqs", "contact", "clinic-vijayawada", "privacy-policy", "medical-disclaimer", "terms", "emergency", "psychiatrist-in-vijayawada", "best-psychiatrist-in-vijayawada"];
 
 export function generateStaticParams() {
   return [
@@ -40,7 +40,7 @@ function pageTitle(parts: string[]) {
   if (parts[0] === "conditions" && parts[1]) return `${teConditions[parts[1]]?.name || "మానసిక ఆరోగ్యం"} చికిత్స విజయవాడ`;
   if (parts[0] === "services" && parts[1]) return `${teServices[parts[1]]?.name || "సైకియాట్రిక్ సేవలు"} విజయవాడ`;
   if (parts[0] === "blog" && parts[1]) return teArticleMeta[parts[1]]?.title || "తెలుగు మానసిక ఆరోగ్య వ్యాసం";
-  const titles: Record<string,string> = { about: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్ గురించి", faq: "తరచుగా అడిగే ప్రశ్నలు", gallery: "క్లినిక్ గ్యాలరీ", conditions: "మానసిక ఆరోగ్య పరిస్థితులు", services: "సైకియాట్రిక్ సేవలు", blog: "తెలుగు మానసిక ఆరోగ్య వ్యాసాలు", locations: "విజయవాడ సమీప ప్రాంతాల కోసం సైకియాట్రిస్ట్", appointment: "సైకియాట్రిస్ట్ అపాయింట్‌మెంట్", "about-doctor": "డా. పామర్తి కృష్ణ దాస్ గురించి", treatments: "సైకియాట్రిక్ చికిత్స విధానం", "patient-journey": "రోగి ప్రయాణం", testimonials: "రోగి అనుభవం", resources: "మానసిక ఆరోగ్య వనరులు", faqs: "తరచుగా అడిగే ప్రశ్నలు", contact: "క్లినిక్ సంప్రదింపు", "privacy-policy": "గోప్యతా విధానం", terms: "వెబ్‌సైట్ నిబంధనలు", emergency: "మానసిక ఆరోగ్య అత్యవసర సహాయం", "psychiatrist-in-vijayawada": "విజయవాడలో సైకియాట్రిస్ట్", "best-psychiatrist-in-vijayawada": "విజయవాడలో మంచి సైకియాట్రిస్ట్‌ను ఎలా ఎంచుకోవాలి" };
+  const titles: Record<string,string> = { about: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్ గురించి", faq: "తరచుగా అడిగే ప్రశ్నలు", gallery: "క్లినిక్ గ్యాలరీ", conditions: "మానసిక ఆరోగ్య పరిస్థితులు", services: "సైకియాట్రిక్ సేవలు", blog: "తెలుగు మానసిక ఆరోగ్య వ్యాసాలు", locations: "విజయవాడ సమీప ప్రాంతాల కోసం సైకియాట్రిస్ట్", appointment: "సైకియాట్రిస్ట్ అపాయింట్‌మెంట్", "about-doctor": "డా. పామర్తి కృష్ణ దాస్ గురించి", treatments: "సైకియాట్రిక్ చికిత్స విధానం", "patient-journey": "రోగి ప్రయాణం", testimonials: "రోగి అనుభవం", resources: "మానసిక ఆరోగ్య వనరులు", faqs: "తరచుగా అడిగే ప్రశ్నలు", contact: "క్లినిక్ సంప్రదింపు", "clinic-vijayawada": "విజయవాడలో కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్", "privacy-policy": "గోప్యతా విధానం", "medical-disclaimer": "వైద్య సమాచార పరిమితులు", terms: "వెబ్‌సైట్ నిబంధనలు", emergency: "మానసిక ఆరోగ్య అత్యవసర సహాయం", "psychiatrist-in-vijayawada": "విజయవాడలో సైకియాట్రిస్ట్", "best-psychiatrist-in-vijayawada": "విజయవాడలో మంచి సైకియాట్రిస్ట్‌ను ఎలా ఎంచుకోవాలి" };
   return titles[parts[0]] || "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్";
 }
 
@@ -74,11 +74,18 @@ function teluguBreadcrumbLabel(slug: string[]) {
 export default async function TeluguRoute({ params, searchParams }: { params: Promise<{ slug?: string[] }>; searchParams: Promise<{ reference?: string }> }) {
   const { slug = [] } = await params;
   const withBreadcrumb = (content: React.ReactNode) => <div lang="te-IN"><BreadcrumbJsonLd items={[{ name: "హోమ్", item: "/te" }, { name: teluguBreadcrumbLabel(slug), item: "" }]} />{content}</div>;
-  if (!slug.length) return <div lang="te-IN"><TeHome /></div>;
-  if (slug[0] === "about" && slug.length === 1) return withBreadcrumb(<TeStandardPage page="about-doctor" />);
-  if (slug[0] === "doctor" && slug[1] === "pamarthi-krishna-das") return withBreadcrumb(<TeStandardPage page="about-doctor" />);
+  const withStandardSchema = (content: React.ReactNode, page: string) => {
+    const path = `/te/${page}`;
+    const profile = page === "about" || page === "about-doctor" || page === "doctor/pamarthi-krishna-das";
+    const type: "ProfilePage" | "ContactPage" | "WebPage" = profile ? "ProfilePage" : page === "contact" ? "ContactPage" : "WebPage";
+    const updated = ["clinic-vijayawada", "medical-disclaimer"].includes(page) ? "2026-08-20" : "2026-08-15";
+    return withBreadcrumb(<><WebPageJsonLd name={pageTitle(page.split("/"))} description={`${pageTitle(page.split("/"))} గురించి బాధ్యతాయుత తెలుగు సమాచారం.`} path={path} type={type} aboutId={profile ? "#physician" : "#clinic"} mainEntityId={profile ? "#physician" : undefined} dateModified={updated} language="te-IN" />{content}</>);
+  };
+  if (!slug.length) return <div lang="te-IN"><WebPageJsonLd name={pageTitle([])} description="విజయవాడలో డా. పామర్తి కృష్ణ దాస్‌తో మానసిక ఆరోగ్య సేవల అధికారిక తెలుగు వెబ్‌సైట్." path="/te" type="MedicalWebPage" aboutId="#clinic" dateModified="2026-08-15" language="te-IN" /><TeHome /></div>;
+  if (slug[0] === "about" && slug.length === 1) return withStandardSchema(<TeStandardPage page="about-doctor" />, "about");
+  if (slug[0] === "doctor" && slug[1] === "pamarthi-krishna-das") return withStandardSchema(<TeStandardPage page="about-doctor" />, "doctor/pamarthi-krishna-das");
   if (slug[0] === "faq" && slug.length === 1) return withBreadcrumb(<TeStandardPage page="faqs" />);
-  if (standard.includes(slug[0]) && slug.length === 1) return withBreadcrumb(<TeStandardPage page={slug[0]} />);
+  if (standard.includes(slug[0]) && slug.length === 1) return withStandardSchema(<TeStandardPage page={slug[0]} />, slug[0]);
   if (slug[0] === "conditions" && slug.length === 1) return withBreadcrumb(<TeConditionsIndex />);
   if (slug[0] === "conditions" && slug[1] && teConditions[slug[1]]) return withBreadcrumb(<TeConditionPage slug={slug[1]} />);
   if (slug[0] === "services" && slug.length === 1) return withBreadcrumb(<TeServicesIndex />);

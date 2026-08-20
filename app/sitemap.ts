@@ -24,11 +24,13 @@ const staticPages: SitemapSource[] = [
   { path: "/faq", updatedAt: "2026-08-15", priority: 0.72, changeFrequency: "monthly" },
   { path: "/appointment", updatedAt: "2026-08-15", priority: 0.9, changeFrequency: "monthly" },
   { path: "/contact", updatedAt: "2026-08-15", priority: 0.86, changeFrequency: "monthly" },
+  { path: "/clinic-vijayawada", updatedAt: "2026-08-20", priority: 0.82, changeFrequency: "monthly" },
   { path: "/privacy-policy", updatedAt: "2026-08-15", priority: 0.45, changeFrequency: "monthly" },
+  { path: "/medical-disclaimer", updatedAt: "2026-08-20", priority: 0.45, changeFrequency: "monthly" },
   { path: "/terms", updatedAt: "2026-08-15", priority: 0.45, changeFrequency: "monthly" },
   { path: "/emergency", updatedAt: "2026-08-15", priority: 0.75, changeFrequency: "monthly" },
   { path: "/gallery", updatedAt: "2026-08-15", priority: 0.62, changeFrequency: "monthly" },
-  { path: "/psychiatrist-in-vijayawada", updatedAt: "2026-08-15", priority: 0.88, changeFrequency: "monthly" },
+  { path: "/psychiatrist-in-vijayawada", updatedAt: "2026-08-20", priority: 0.88, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -48,6 +48,9 @@ async function auditPath(path) {
   const hasMedicalWebPageSchema = /"@type":"MedicalWebPage"/.test(html);
   const hasArticleSchema = /"@type":"Article"/.test(html);
   const hasServiceSchema = /"@type":"Service"/.test(html);
+  const hasMedicalSources = /Sources and further reading|ఆధారాలు మరియు మరింత సమాచారం/.test(html);
+  const hasFamilyGuidance = /How family and caregivers can help|కుటుంబం మరియు సంరక్షకులు ఎలా సహాయం చేయవచ్చు/.test(html);
+  const hasEditorialAttribution = /Krishna Neuro Psychiatric Centre Editorial Team|కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్ ఎడిటోరియల్ టీమ్/.test(html);
 
   const jsonLdScripts = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map((match) => match[1]);
   let invalidJsonLd = 0;
@@ -74,6 +77,9 @@ async function auditPath(path) {
   if (conditionContent && !hasMedicalWebPageSchema) failures.push(`${path}: missing MedicalWebPage schema`);
   if (articleContent && !hasArticleSchema) failures.push(`${path}: missing Article schema`);
   if (serviceContent && !hasServiceSchema) failures.push(`${path}: missing Service schema`);
+  if (medicalContent && !hasMedicalSources) failures.push(`${path}: missing visible sources and further reading`);
+  if (conditionContent && !hasFamilyGuidance) failures.push(`${path}: missing patient/family guidance`);
+  if (medicalContent && !hasEditorialAttribution) failures.push(`${path}: missing visible editorial attribution`);
   if (nestedMedicalPage && !hasBreadcrumb) failures.push(`${path}: missing breadcrumb structured data`);
   if (!hasEnglishAlternate || !hasTeluguAlternate) failures.push(`${path}: missing reciprocal locale alternate`);
   if (missingAlt) failures.push(`${path}: ${missingAlt} images without alt attributes`);
@@ -115,9 +121,15 @@ for (const path of ["/appointment/success", "/te/appointment/success"]) {
 
 const redirects = new Map([
   ["/doctor", "/doctor/pamarthi-krishna-das"],
+  ["/doctor/dr-pamarthi-krishna-das", "/doctor/pamarthi-krishna-das"],
+  ["/psychiatrist-vijayawada", "/psychiatrist-in-vijayawada"],
+  ["/clinic", "/clinic-vijayawada"],
   ["/articles", "/blog"],
   ["/about-doctor", "/doctor/pamarthi-krishna-das"],
   ["/faqs", "/faq"],
+  ["/te/doctor/dr-pamarthi-krishna-das", "/te/doctor/pamarthi-krishna-das"],
+  ["/te/psychiatrist-vijayawada", "/te/psychiatrist-in-vijayawada"],
+  ["/te/clinic", "/te/clinic-vijayawada"],
 ]);
 for (const [source, destination] of redirects) {
   const response = await fetch(`${base}${source}`, { redirect: "manual" });

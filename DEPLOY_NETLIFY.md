@@ -76,6 +76,8 @@ Open and test:
 https://drkrishnadas.netlify.app/
 https://drkrishnadas.netlify.app/te
 https://drkrishnadas.netlify.app/gallery
+https://drkrishnadas.netlify.app/clinic-vijayawada
+https://drkrishnadas.netlify.app/medical-disclaimer
 https://drkrishnadas.netlify.app/appointment
 https://drkrishnadas.netlify.app/robots.txt
 https://drkrishnadas.netlify.app/sitemap.xml

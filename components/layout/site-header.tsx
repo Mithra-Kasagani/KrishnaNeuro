@@ -8,13 +8,14 @@ import { siteConfig } from "@/lib/site";
 const navigation = [
   { en: "Home", te: "హోమ్", href: "/" },
   { en: "Doctor", te: "డాక్టర్", href: "/doctor/pamarthi-krishna-das" },
-  { en: "Conditions", te: "వ్యాధులు", href: "/conditions" },
-  { en: "Care", te: "చికిత్స", href: "/treatments" },
+  { en: "Conditions", te: "పరిస్థితులు", href: "/conditions" },
+  { en: "Services", te: "సేవలు", href: "/services" },
+  { en: "Clinic", te: "క్లినిక్", href: "/clinic-vijayawada" },
+  { en: "Articles", te: "వ్యాసాలు", href: "/blog" },
+  { en: "Contact", te: "సంప్రదించండి", href: "/contact" },
+  { en: "Treatment approach", te: "చికిత్స విధానం", href: "/treatments" },
   { en: "Resources", te: "వనరులు", href: "/resources" },
   { en: "Gallery", te: "గ్యాలరీ", href: "/gallery" },
-  { en: "Contact", te: "సంప్రదించండి", href: "/contact" },
-  { en: "Services", te: "సేవలు", href: "/services" },
-  { en: "Articles", te: "వ్యాసాలు", href: "/blog" },
   { en: "FAQs", te: "ప్రశ్నలు", href: "/faq" },
 ];
 
@@ -31,8 +32,7 @@ export function SiteHeader() {
         <div className="container-page flex h-19 items-center justify-between gap-3">
           <BrandLogo />
           <nav aria-label="Main navigation" className="hidden items-center gap-0.5 lg:flex">
-            {navigation.slice(0, 6).map((item) => <a key={item.href} href={item.href} data-i18n-link className="rounded-full px-3 py-2 text-[0.8rem] font-bold text-muted-foreground transition-colors hover:bg-muted hover:text-primary"><BiText en={item.en} te={item.te} /></a>)}
-            <a href="/blog" data-i18n-link className="rounded-full px-3 py-2 text-[0.8rem] font-bold text-muted-foreground transition-colors hover:bg-muted hover:text-primary"><BiText en="Articles" te="వ్యాసాలు" /></a>
+            {navigation.slice(0, 7).map((item) => <a key={item.href} href={item.href} data-i18n-link className="rounded-full px-3 py-2 text-[0.8rem] font-bold text-muted-foreground transition-colors hover:bg-muted hover:text-primary"><BiText en={item.en} te={item.te} /></a>)}
           </nav>
           <div className="flex items-center gap-1">
             <LanguageToggle />

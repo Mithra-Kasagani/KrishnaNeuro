@@ -88,6 +88,8 @@ const pageMap: Record<string, string> = {
   faqs: aiImages.family,
   appointment: aiImages.wellbeing,
   contact: aiImages.mood,
+  "clinic-vijayawada": "/images/doctor-office.webp",
+  "medical-disclaimer": aiImages.wellbeing,
   emergency: aiImages.wellbeing,
   locations: aiImages.mood,
   "privacy-policy": aiImages.wellbeing,

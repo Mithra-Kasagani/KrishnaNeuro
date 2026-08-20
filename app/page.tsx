@@ -19,6 +19,7 @@ import {
 import { GallerySection } from "@/components/gallery/gallery-section";
 import { BiText } from "@/components/i18n/bilingual-text";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { WebPageJsonLd } from "@/components/seo/json-ld";
 import { AppointmentCTA } from "@/components/shared/appointment-cta";
 import { EmergencyNote } from "@/components/shared/emergency-note";
 import { FAQList } from "@/components/shared/faq-list";
@@ -68,6 +69,7 @@ const reasons = [
 export default function HomePage() {
   return (
     <>
+      <WebPageJsonLd name={coreSeoPages.home.h1} description={coreSeoPages.home.metaDescription} path="/" type="MedicalWebPage" aboutId="#clinic" dateModified={coreSeoPages.home.lastUpdated} />
       <section className="hero-ambient relative overflow-hidden border-b border-border bg-card">
         <div className="absolute inset-0 surface-grid opacity-75" aria-hidden="true" />
         <div className="absolute -left-32 top-20 hidden size-96 rounded-full bg-accent/10 blur-3xl md:block" aria-hidden="true" />
@@ -206,7 +208,7 @@ export default function HomePage() {
 
 
 
-      <GallerySection compact className="cv-auto bg-muted/45" />
+      <GallerySection className="cv-auto bg-muted/45" />
 
       <section className="cv-auto border-y border-border bg-muted/55 py-20 md:py-28">
         <div className="container-page grid gap-12 lg:grid-cols-[.8fr_1.2fr]">

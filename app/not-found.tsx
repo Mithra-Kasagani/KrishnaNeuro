@@ -1,4 +1,4 @@
-import { ArrowLeft, Compass, Search } from "lucide-react";
+import { ArrowLeft, CalendarDays, Compass, Search, Stethoscope, UserRound } from "lucide-react";
 import Link from "next/link";
 import { AiEditorialImage } from "@/components/shared/ai-editorial-image";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,12 @@ export default function NotFound() {
           <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-muted-foreground">The page may have moved, but help is still close. Explore conditions, read a guide, or return home.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild><Link href="/"><ArrowLeft aria-hidden="true"/>Back home</Link></Button>
-            <Button asChild variant="outline"><Link href="/conditions"><Search aria-hidden="true"/>Browse conditions</Link></Button>
+            <Button asChild variant="outline"><Link href="/conditions"><Search aria-hidden="true"/>Conditions</Link></Button>
+            <Button asChild variant="outline"><Link href="/services"><Stethoscope aria-hidden="true"/>Services</Link></Button>
+            <Button asChild variant="outline"><Link href="/doctor/pamarthi-krishna-das"><UserRound aria-hidden="true"/>Doctor</Link></Button>
+            <Button asChild variant="secondary"><Link href="/appointment"><CalendarDays aria-hidden="true"/>Appointment</Link></Button>
           </div>
+          <p className="mt-6 text-sm text-muted-foreground">Still unsure? <Link href="/contact" className="font-extrabold text-primary underline underline-offset-4">Contact the clinic</Link>.</p>
         </div>
       </div>
     </section>

@@ -36,7 +36,9 @@ export function GET() {
 - Patient and family resources: ${absoluteUrl("/resources")}
 - Mental-health articles: ${absoluteUrl("/blog")}
 - Appointment request: ${absoluteUrl("/appointment")}
+- Clinic visit information: ${absoluteUrl("/clinic-vijayawada")}
 - Contact and directions: ${absoluteUrl("/contact")}
+- Medical disclaimer: ${absoluteUrl("/medical-disclaimer")}
 - Telugu website: ${absoluteUrl("/te")}
 - Emergency guidance: ${absoluteUrl("/emergency")}
 

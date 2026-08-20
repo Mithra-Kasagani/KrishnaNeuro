@@ -13,7 +13,8 @@ const canonicalPaths = [...new Set(canonicalEntries.map((entry) => new URL(entry
 const locationSource = await fs.readFile(path.join(root, "data", "locations.ts"), "utf8");
 const locationSlugs = [...new Set([...locationSource.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]))];
 const excludedEnglish = [
-  "/doctor", "/articles", "/about-doctor", "/faqs", "/testimonials", "/best-psychiatrist-in-vijayawada",
+  "/doctor", "/doctor/dr-pamarthi-krishna-das", "/articles", "/about-doctor", "/faqs", "/testimonials", "/best-psychiatrist-in-vijayawada",
+  "/psychiatrist-vijayawada", "/clinic",
   "/locations", ...locationSlugs.map((slug) => `/locations/${slug}`), "/appointment/success",
 ];
 const excludedTelugu = excludedEnglish.map((item) => `/te${item}`);
@@ -30,6 +31,7 @@ function searchIntent(url) {
   if (normalized.includes("/doctor/")) return "Branded navigational / local clinical";
   if (normalized === "/appointment") return "Transactional appointment";
   if (normalized === "/contact") return "Local navigational / transactional";
+  if (normalized === "/clinic-vijayawada") return "Local visit-planning / navigational";
   if (normalized === "/psychiatrist-in-vijayawada") return "Local transactional";
   if (normalized.startsWith("/conditions/")) return "Medical informational with consultation intent";
   if (normalized.startsWith("/services/")) return "Service / consultation intent";
@@ -51,6 +53,8 @@ function primaryKeyword(url, title) {
   if (normalized === "/") return te ? "విజయవాడ మానసిక ఆరోగ్య సేవలు" : "psychiatric mental health care Vijayawada";
   if (normalized.includes("/doctor/")) return te ? "డా. పామర్తి కృష్ణ దాస్" : "Dr Pamarthi Krishna Das psychiatrist";
   if (normalized === "/contact") return te ? "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్ సంప్రదింపు" : "Krishna Neuro Psychiatric Centre contact Vijayawada";
+  if (normalized === "/clinic-vijayawada") return te ? "విజయవాడ కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్" : "Krishna Neuro Psychiatric Centre Vijayawada";
+  if (normalized === "/medical-disclaimer") return te ? "వైద్య సమాచార పరిమితులు" : "medical disclaimer";
   return clean(title).toLowerCase() || pathTopic(url);
 }
 function expectedCanonical(url) { return url === "/" ? canonicalOrigin : `${canonicalOrigin}${url}`; }

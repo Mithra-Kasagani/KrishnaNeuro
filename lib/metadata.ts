@@ -26,13 +26,14 @@ export function createMetadata({ title, description, path = "/", image = "/openg
 }
 
 export function createMetadataFromModel(page: SeoContentModel, keywords: string[] = []): Metadata {
+  const mappedKeywords = [...new Set([page.primaryKeyword, ...page.secondaryKeywords, ...keywords])];
   return createMetadata({
     title: page.pageTitle,
     description: page.metaDescription,
     path: page.canonicalUrl,
     image: page.ogImage,
     noIndex: !page.indexable,
-    keywords,
+    keywords: mappedKeywords,
     ogTitle: page.ogTitle,
     ogDescription: page.ogDescription,
   });

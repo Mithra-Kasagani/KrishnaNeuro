@@ -18,7 +18,7 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function BrandLogo({ compact = false, className }: { compact?: boolean; className?: string }) {
   return (
-    <a href="/" data-i18n-link className={cn("group inline-flex items-center gap-3 rounded-lg", className)} aria-label="Krishna Neuro Psychiatric Centre home">
+    <a href="/" data-i18n-link className={cn("group inline-flex items-center gap-3 rounded-lg", className)} aria-label={compact ? "Krishna Neuro Psychiatric Centre home" : undefined}>
       <LogoMark className="shrink-0 transition-transform duration-300 group-hover:rotate-[-3deg] group-hover:scale-[1.03]" />
       {!compact && (
         <span className="leading-none">

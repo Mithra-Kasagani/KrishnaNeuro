@@ -24,6 +24,7 @@ export type Condition = {
   riskFactors: string[];
   diagnosis: string;
   treatments: { title: string; description: string }[];
+  familyGuidance: string[];
   whenToConsult: string[];
   earlyTreatment: string;
   faqs: { question: string; answer: string }[];
@@ -36,8 +37,9 @@ export type Condition = {
 
 type ConditionSeed = Omit<
   Condition,
-  "whenToConsult" | "earlyTreatment" | "faqs" | "updatedAt" | "medicalReview"
+  "familyGuidance" | "whenToConsult" | "earlyTreatment" | "faqs" | "updatedAt" | "medicalReview"
 > & {
+  familyGuidance?: string[];
   whenToConsult?: string[];
   earlyTreatment?: string;
   faqs?: { question: string; answer: string }[];
@@ -45,8 +47,53 @@ type ConditionSeed = Omit<
   medicalReview?: MedicalReview;
 };
 
+const familyGuidanceByCategory: Record<ConditionCategory, string[]> = {
+  "Mood & anxiety": [
+    "Listen without minimising, blaming or immediately trying to solve every feeling.",
+    "Ask what practical support would help with sleep, meals, appointments or daily responsibilities.",
+    "Encourage treatment without threats or repeated reassurance that keeps anxiety cycles going.",
+    "Ask directly about safety when hopelessness, impulsivity or major behaviour change appears.",
+  ],
+  "Thought & perception": [
+    "Use calm, short sentences and acknowledge distress without arguing about unusual beliefs.",
+    "Reduce noise and conflict while supporting food, fluids, sleep and prescribed follow-up.",
+    "Notice early changes in sleep, self-care, suspiciousness, speech or medicine use.",
+    "Seek urgent assessment when the person cannot stay safe, care for themselves or understand immediate danger.",
+  ],
+  Addiction: [
+    "Support change without shame while keeping clear boundaries around money, substances and unsafe behaviour.",
+    "Do not conceal overdose, severe withdrawal, violence or other immediate safety risks.",
+    "Avoid forcing sudden alcohol or sedative withdrawal without medical advice because complications can be dangerous.",
+    "Protect caregiver wellbeing and consider family or peer support alongside the person's treatment.",
+  ],
+  "Sleep & stress": [
+    "Help protect a consistent wake time, realistic workload and opportunities for recovery.",
+    "Avoid policing sleep or giving unprescribed sleeping tablets, alcohol or sedatives.",
+    "Share observations about snoring, breathing pauses, night behaviour or daytime sleepiness when invited.",
+    "Encourage assessment when symptoms persist, functioning declines or safety is affected.",
+  ],
+  "Memory & ageing": [
+    "Use simple choices, familiar routines and respectful reminders rather than repeated correction.",
+    "With consent, help track medicines, appointments, finances, driving and home-safety concerns.",
+    "Treat sudden confusion, new weakness, fever, seizure or rapid decline as urgent medical change.",
+    "Share care responsibilities and plan respite so one caregiver is not carrying everything alone.",
+  ],
+  "Children & adolescents": [
+    "Listen to the young person's view and avoid treating every difficult behaviour as deliberate disobedience.",
+    "Use predictable routines, clear expectations and calm responses suited to developmental age.",
+    "Coordinate with school or other caregivers only with appropriate consent and privacy.",
+    "Seek urgent help for self-harm risk, overdose, severe aggression, psychosis or inability to remain safe.",
+  ],
+  "Life stages & relationships": [
+    "Respect privacy, autonomy and consent; support should not become surveillance or control.",
+    "Listen without taking sides, blaming one person or forcing disclosure before they feel safe.",
+    "Offer practical help with appointments, rest, childcare or daily demands when welcomed.",
+    "Prioritise individual safety planning when there is violence, coercion, self-harm or immediate danger.",
+  ],
+};
+
 const commonWhenToConsult = (name: string) => [
-  `Symptoms linked with ${name.toLowerCase()} are continuing, returning, or becoming harder to manage.`,
+  `Symptoms linked with ${name.toLowerCase()} are continuing, returning, or becoming harder to manage.`, 
   "Sleep, studies, work, relationships, self-care, or physical health are being affected.",
   "You are relying on alcohol, tobacco, non-prescribed medicines, or other substances to cope.",
   "You or your family are worried about safety, major behaviour change, or loss of day-to-day functioning.",
@@ -55,8 +102,9 @@ const commonWhenToConsult = (name: string) => [
 function createCondition(seed: ConditionSeed): Condition {
   return {
     ...seed,
-    updatedAt: seed.updatedAt || "2026-08-15",
+    updatedAt: seed.updatedAt || "2026-08-20",
     medicalReview: seed.medicalReview,
+    familyGuidance: seed.familyGuidance || familyGuidanceByCategory[seed.category],
     whenToConsult: seed.whenToConsult || commonWhenToConsult(seed.name),
     earlyTreatment:
       seed.earlyTreatment ||

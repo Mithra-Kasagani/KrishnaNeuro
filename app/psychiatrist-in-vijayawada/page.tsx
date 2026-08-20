@@ -13,7 +13,7 @@ import {
   ShieldCheck,
   Stethoscope,
 } from "lucide-react";
-import { FAQJsonLd, LocalServiceJsonLd } from "@/components/seo/json-ld";
+import { FAQJsonLd, LocalServiceJsonLd, WebPageJsonLd } from "@/components/seo/json-ld";
 import { AppointmentCTA } from "@/components/shared/appointment-cta";
 import { FAQList } from "@/components/shared/faq-list";
 import { MapCard } from "@/components/shared/map-card";
@@ -112,6 +112,7 @@ export default function VijayawadaPage() {
         path="/psychiatrist-in-vijayawada"
         area="Vijayawada"
       />
+      <WebPageJsonLd name="Psychiatric care in Vijayawada, grounded in dignity and evidence" description="Meet Dr. Pamarthi Krishna Das, MBBS, MD (Psychiatry), at Krishna Neuro Psychiatric Centre in Suryaraopet." path="/psychiatrist-in-vijayawada" aboutId="#physician" mainEntityId="#physician" dateModified="2026-08-20" />
       <FAQJsonLd faqs={faqs} />
       <PageHero
         badge="Consultant Psychiatrist · Vijayawada"
@@ -220,6 +221,7 @@ export default function VijayawadaPage() {
             <p className="mt-4 text-sm leading-7 text-muted-foreground">
               Review the <Link href="/services" className="font-bold text-primary underline underline-offset-4">clinic services</Link>,
               learn about <Link href="/doctor/pamarthi-krishna-das" className="font-bold text-primary underline underline-offset-4">Dr. Pamarthi Krishna Das</Link>,
+              use the <Link href="/clinic-vijayawada" className="font-bold text-primary underline underline-offset-4">clinic visit guide</Link>,
               or request a time when you are ready.
             </p>
             <Link href="/locations" className="mt-5 inline-flex items-center gap-1 text-xs font-extrabold text-primary">

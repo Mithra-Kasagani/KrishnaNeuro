@@ -5,9 +5,17 @@ import { appointmentSchema } from "@/lib/appointment-schema";
 const attempts = new Map<string, { count: number; resetAt: number }>();
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_ATTEMPTS = 5;
+const MAX_BODY_BYTES = 12_000;
+
+function json(body: Record<string, unknown>, status = 200) {
+  return NextResponse.json(body, { status, headers: { "Cache-Control": "no-store, max-age=0" } });
+}
 
 function checkRateLimit(key: string) {
   const now = Date.now();
+  if (attempts.size > 500) {
+    for (const [storedKey, value] of attempts) if (value.resetAt < now) attempts.delete(storedKey);
+  }
   const current = attempts.get(key);
   if (!current || current.resetAt < now) {
     attempts.set(key, { count: 1, resetAt: now + WINDOW_MS });
@@ -19,22 +27,21 @@ function checkRateLimit(key: string) {
 }
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (!checkRateLimit(ip)) {
-    return NextResponse.json({ ok: false, message: "Too many requests. Please wait a few minutes or call the clinic." }, { status: 429 });
-  }
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > MAX_BODY_BYTES) return json({ ok: false, message: "Request is too large." }, 413);
+
+  const ip = request.headers.get("x-nf-client-connection-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!checkRateLimit(ip)) return json({ ok: false, message: "Too many requests. Please wait a few minutes or call the clinic." }, 429);
 
   let body: unknown;
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, message: "Invalid request." }, { status: 400 });
+    return json({ ok: false, message: "Invalid request." }, 400);
   }
 
   const parsed = appointmentSchema.safeParse(body);
-  if (!parsed.success) {
-    return NextResponse.json({ ok: false, message: "Please review the highlighted details.", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
-  }
+  if (!parsed.success) return json({ ok: false, message: "Please review the highlighted details.", issues: parsed.error.flatten().fieldErrors }, 400);
 
   const reference = `KN-${new Date().toISOString().slice(2, 10).replaceAll("-", "")}-${randomUUID().slice(0, 6).toUpperCase()}`;
   const webhook = process.env.APPOINTMENT_WEBHOOK_URL;
@@ -58,7 +65,7 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  return NextResponse.json({
+  return json({
     ok: true,
     reference,
     delivery: delivered ? "webhook" : "whatsapp",

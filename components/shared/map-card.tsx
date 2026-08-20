@@ -14,7 +14,7 @@ export function MapCard() {
           <div className="flex gap-3"><Phone className="mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"/><span><strong className="text-foreground">Calls:</strong> {siteConfig.displayPhones[0]}</span></div>
           <div className="flex gap-3"><MessageCircle className="mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"/><a href={whatsappHref()} target="_blank" rel="noreferrer"><strong className="text-foreground">WhatsApp:</strong> {siteConfig.whatsappDisplay}</a></div>
         </div>
-        <Button asChild variant="outline" className="mt-7"><a href={siteConfig.googleMapsUrl} target="_blank" rel="noreferrer">Open directions <ExternalLink aria-hidden="true"/></a></Button>
+        <div className="mt-7 flex flex-wrap gap-3"><Button asChild variant="outline"><a href={siteConfig.googleMapsUrl} target="_blank" rel="noreferrer">Open directions <ExternalLink aria-hidden="true"/></a></Button><Button asChild variant="soft"><a href="/clinic-vijayawada" data-i18n-link>Plan a clinic visit</a></Button></div>
       </div>
       <div className="relative min-h-80 border-t border-border bg-muted lg:min-h-full lg:border-l lg:border-t-0">
         <iframe data-lazy-map data-src={siteConfig.googleMapsEmbed} className="absolute inset-0 h-full w-full border-0 grayscale-[10%]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Map showing Krishna Neuro Psychiatric Centre in Suryaraopet, Vijayawada" />

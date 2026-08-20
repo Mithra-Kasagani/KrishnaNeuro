@@ -2,9 +2,9 @@
 
 ## Audit scope
 
-- 178 public URLs inventoried and audited.
-- 138 canonical indexable English/Telugu URLs reviewed.
-- 40 legacy redirect, noindex local-access and appointment-success URLs reviewed separately.
+- 188 public canonical/redirect/noindex URLs inventoried and audited.
+- 142 canonical indexable English/Telugu URLs reviewed.
+- 46 legacy redirect, noindex local-access and appointment-success URLs reviewed separately.
 - Page-level data is available in `existing-page-audit.csv`.
 - The preserved initial baseline is available in `existing-page-audit-before.csv`.
 
@@ -87,3 +87,23 @@ All internal navigation, canonicals, hreflang links and sitemap entries use fina
 - Expanded the SEO audit to cover Twitter cards, localized page schema, language markup, utility-page noindex, exact redirects, 404s, machine-readable endpoints and security headers.
 - Release validation: 181 Next.js routes built, 138 canonical URLs passed, 126 internal links passed, full 178-URL HTML inventory returned no critical/high/medium/low findings, and npm reported zero high/critical vulnerabilities.
 - Overall implementation-readiness rubric: 92.8/100. Code-verifiable technical SEO: 100/100. External authority, medical review, account ownership and field performance remain unverified.
+
+## 20 August 2026 complete implementation pass
+
+- Added canonical English/Telugu clinic visit pages with verified NAP, hours, doctor, services, map, appointment pathways and honest accessibility TODO wording.
+- Added canonical English/Telugu medical disclaimer pages.
+- Preserved `/psychiatrist-in-vijayawada` and `/doctor/pamarthi-krishna-das` equity; added exact 301 aliases for the shorter requested variants instead of duplicate pages.
+- Added a central objective SEO validation utility and build-time static SEO validator.
+- Extended core SEO records with search intent, primary/secondary topics and breadcrumb labels.
+- Added visible Editorial Team attribution, update dates, family/caregiver guidance and authoritative references to all 60 English/Telugu condition pages.
+- Added 35 verified authoritative reference URLs and visible/schema citations.
+- Added medical content governance with explicit clinic/Telugu-reviewer TODOs.
+- Added WebPage/ProfilePage/ContactPage relationships where appropriate.
+- Expanded safe analytics events to appointment start/submit, contact and email while excluding patient information.
+- Hardened appointment validation for India-local dates, past dates, payload size, cache prevention and rate-map cleanup.
+- Improved mobile/desktop navigation, 404 pathways, footer trust links and service-to-condition/doctor/clinic linking.
+- Removed five dead components and unused Framer Motion, Radix Accordion, Next Themes, Next third-party and dialog dependencies.
+- Isolated the full client gallery from homepage preview, reducing initial client payload and mobile TBT.
+- Final release: 185 generated routes, 142 canonical sitemap URLs, 188 public URLs audited, 130 internal routes passed, zero critical/high/medium/low findings, and zero high/critical npm vulnerabilities.
+- Lighthouse: desktop 100/100/100/100 with LCP 0.6s; mobile median 95 Performance and 100 Accessibility/Best Practices/SEO, LCP 2.558s, TBT 173ms, CLS 0.
+- Final implementation-readiness rubric: 95.2/100. Technical SEO checks: 100/100. Mobile LCP target, field INP, medical review, external account ownership and off-site authority remain not fully verified.

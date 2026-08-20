@@ -1,0 +1,60 @@
+{
+  "auditDate": "2026-08-20",
+  "auditTarget": "local production build using NEXT_PUBLIC_SITE_URL=https://drkrishnadas.netlify.app",
+  "lighthouseVersion": "12.8.2",
+  "browser": "Chromium 140.0.7339.16",
+  "mobileRuns": [
+    {
+      "performance": 95,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 2558,
+      "tbtMs": 173,
+      "cls": 0
+    },
+    {
+      "performance": 98,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 2255,
+      "tbtMs": 114,
+      "cls": 0
+    },
+    {
+      "performance": 92,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 2603,
+      "tbtMs": 254,
+      "cls": 0
+    }
+  ],
+  "mobileMedian": {
+    "performance": 95,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "seo": 100,
+    "lcpMs": 2558,
+    "tbtMs": 173,
+    "cls": 0
+  },
+  "desktop": {
+    "performance": 100,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "seo": 100,
+    "fcpMs": 300,
+    "lcpMs": 600,
+    "tbtMs": 0,
+    "cls": 0
+  },
+  "interpretation": {
+    "mobileLcpTarget": "NOT CONSISTENTLY MET — median 2.558s versus <=2.5s target; one run measured 2.255s",
+    "inp": "NOT VERIFIED — Lighthouse lab runs do not provide real-user INP",
+    "fieldCoreWebVitals": "NOT VERIFIED — requires CrUX/Search Console data after deployment",
+    "accessibility": "Lighthouse automated accessibility scored 100; independent assistive-technology testing remains recommended"
+  }
+}

@@ -100,6 +100,27 @@ export function OrganizationJsonLd() {
   return <JsonLd data={[clinic, physician, website]} />;
 }
 
+export function WebPageJsonLd({ name, description, path, type = "WebPage", aboutId, mainEntityId, dateModified, language = "en-IN" }: { name: string; description: string; path: string; type?: "WebPage" | "MedicalWebPage" | "ProfilePage" | "ContactPage" | "CollectionPage"; aboutId?: string; mainEntityId?: string; dateModified?: string; language?: "en-IN" | "te-IN" }) {
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": type,
+        "@id": `${absoluteUrl(path)}#webpage`,
+        name,
+        description,
+        url: absoluteUrl(path),
+        isPartOf: { "@id": `${siteConfig.url}/#website` },
+        publisher: { "@id": `${siteConfig.url}/#clinic` },
+        inLanguage: language,
+        ...(aboutId ? { about: { "@id": aboutId.startsWith("#") ? `${siteConfig.url}/${aboutId}` : absoluteUrl(aboutId) } } : {}),
+        ...(mainEntityId ? { mainEntity: { "@id": mainEntityId.startsWith("#") ? `${siteConfig.url}/${mainEntityId}` : absoluteUrl(mainEntityId) } } : {}),
+        ...(dateModified ? { dateModified } : {}),
+      }}
+    />
+  );
+}
+
 export function BreadcrumbJsonLd({ items }: { items: { name: string; item: string }[] }) {
   return (
     <JsonLd
@@ -133,7 +154,7 @@ export function FAQJsonLd({ faqs }: { faqs: { question: string; answer: string }
   );
 }
 
-export function MedicalWebPageJsonLd({ name, description, path, about, dateModified, review, language = "en-IN" }: { name: string; description: string; path: string; about: string; dateModified: string; review?: MedicalReview; language?: "en-IN" | "te-IN" }) {
+export function MedicalWebPageJsonLd({ name, description, path, about, dateModified, review, citations = [], language = "en-IN" }: { name: string; description: string; path: string; about: string; dateModified: string; review?: MedicalReview; citations?: string[]; language?: "en-IN" | "te-IN" }) {
   const reviewed = Boolean(review?.reviewed && review.reviewedAt);
   return (
     <JsonLd
@@ -146,6 +167,7 @@ export function MedicalWebPageJsonLd({ name, description, path, about, dateModif
         dateModified,
         about: { "@type": "MedicalCondition", name: about },
         publisher: { "@id": `${siteConfig.url}/#clinic` },
+        ...(citations.length ? { citation: citations } : {}),
         ...(reviewed ? { reviewedBy: { "@id": `${siteConfig.url}/#physician` }, lastReviewed: review?.reviewedAt } : {}),
         inLanguage: language,
       }}
@@ -153,7 +175,7 @@ export function MedicalWebPageJsonLd({ name, description, path, about, dateModif
   );
 }
 
-export function ArticleJsonLd({ article, path, headline, description, language = "en-IN", includeMedicalReview = true }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string; medicalReview?: MedicalReview }; path?: string; headline?: string; description?: string; language?: "en-IN" | "te-IN"; includeMedicalReview?: boolean }) {
+export function ArticleJsonLd({ article, path, headline, description, language = "en-IN", includeMedicalReview = true }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string; medicalReview?: MedicalReview; references?: { href: string }[] }; path?: string; headline?: string; description?: string; language?: "en-IN" | "te-IN"; includeMedicalReview?: boolean }) {
   const reviewed = Boolean(includeMedicalReview && article.medicalReview?.reviewed && article.medicalReview.reviewedAt);
   return (
     <JsonLd
@@ -169,6 +191,7 @@ export function ArticleJsonLd({ article, path, headline, description, language =
         ...(reviewed ? { reviewedBy: { "@id": `${siteConfig.url}/#physician` }, lastReviewed: article.medicalReview?.reviewedAt } : {}),
         publisher: { "@id": `${siteConfig.url}/#clinic` },
         image: absoluteUrl(articleImage(article.slug)),
+        ...(article.references?.length ? { citation: article.references.map((reference) => reference.href) } : {}),
         inLanguage: language,
       }}
     />

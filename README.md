@@ -16,15 +16,16 @@ A production-ready Next.js website for **Dr. Pamarthi Krishna Das, MBBS, MD (Psy
 - Bilingual Gallery / గ్యాలరీ section on both homepages plus dedicated `/gallery` and `/te/gallery` pages
 - 30 locally optimised archive slides: 7 representative album images plus 23 additional public Facebook Photos-page images, each linked back to its original source
 - Direct full-width gallery with no embedded window, border or blurred backdrop; 9-second autoplay, slow zoom, 1.5-second fade-in, play/pause, previous/next, thumbnails, keyboard arrows, mobile swipe, hover pause and reduced-motion support
-- Canonical clinic, doctor, services, conditions, patient journey, resources, FAQ, appointment, contact, emergency, privacy and terms pages in both languages
-- 30 medically responsible condition guides in English and Telugu
+- Canonical clinic, doctor, services, conditions, patient journey, resources, FAQ, appointment, contact, emergency, medical disclaimer, privacy and terms pages in both languages
+- Dedicated `/clinic-vijayawada` visit-planning page with verified NAP, hours, directions and explicit unverified-accessibility wording
+- 30 medically responsible condition guides in English and Telugu with visible editorial attribution, family guidance and authoritative references
 - 10 service pages in both languages
 - 12 local-access pages plus dedicated Vijayawada search-intent pages in both languages
 - 12 long-form patient/family articles translated into Telugu, plus 100 detailed SEO editorial briefs
 - Privacy-minimised React Hook Form + Zod appointment flow collecting only name, phone, consultation preference, preferred date/time and reply method
 - Optional secure webhook with a privacy-preserving direct WhatsApp fallback
 - Native call, WhatsApp, directions and emergency pathways with voice calls fixed to 81217 43999 and WhatsApp/appointment messages routed to +91 81257 43999
-- Conditional, consent-based Google Analytics / Tag Manager loading
+- Conditional, consent-based Google Analytics / Tag Manager loading with privacy-safe call, WhatsApp, appointment-start, appointment-submit, directions and contact events
 - MedicalClinic, LocalBusiness, Organization, WebSite, Person, Physician, EducationalOccupationalCredential, FAQPage, BreadcrumbList, MedicalWebPage, Article and Service structured data
 - Conditional medical-review UI and reviewedBy/lastReviewed schema support; nothing is displayed until a verified review flag and date exist
 - Sitemap modification dates derive from static-page, condition, service and article content dates rather than request time
@@ -32,6 +33,7 @@ A production-ready Next.js website for **Dr. Pamarthi Krishna Das, MBBS, MD (Psy
 - Dynamic sitemap, robots, canonical metadata, Open Graph and Twitter cards
 - Migration-safe `/llms.txt` plus optional Google Search Console and Bing Webmaster verification metadata
 - Production Content Security Policy and supporting security headers
+- Unused theme, analytics-loader, dialog and exit-intent dependencies/components removed from the shipped source
 - Loading, empty, success, error, global error and 404 states
 - WCAG-oriented semantics, keyboard interactions, reduced-motion support and strong contrast
 - Optimised local WebP imagery, generated SVG illustration assets and no external font dependency
@@ -48,6 +50,7 @@ The `content/` directory includes:
 - `marketing/youtube-30-scripts.md`
 - `seo-strategy.md`
 - `launch-checklist.md`
+- `medical-content-governance.md` — authorship, review, source, update and prohibited-claim policy
 
 ## Run locally
 
@@ -67,7 +70,7 @@ npm run start
 npm run seo:audit
 ```
 
-The bilingual build generates **181 routes**, including the machine-readable `/llms.txt` endpoint. The deliberately curated sitemap exposes **138 canonical English/Telugu URLs** with reciprocal `hreflang` alternates; redirects and noindex utility/local-access routes are excluded.
+The bilingual build generates **185 routes**, including the machine-readable `/llms.txt` endpoint. The deliberately curated sitemap exposes **142 canonical English/Telugu URLs** with reciprocal `hreflang` alternates; redirects and noindex utility/local-access routes are excluded.
 
 ## Environment
 
@@ -87,9 +90,10 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - TypeScript: passed
 - ESLint: passed
 - Next.js production build: passed
-- Enhanced SEO audit passed across all 138 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, Twitter cards, localized page schema, language markup, image alt attributes, redirects, 404 handling, security headers, robots, sitemap and llms.txt
-- Full 178-URL audit: 0 CRITICAL, 0 HIGH, 0 MEDIUM and 0 LOW findings
-- 126 discovered internal links tested without broken destinations
+- Build-time static SEO validation covers core SEO configuration, 30 condition images, 35 authoritative reference URLs, medical-review invariants and privacy-safe conversion events
+- Enhanced SEO audit passed across all 142 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, Twitter cards, localized page schema, language markup, visible sources/authorship/family guidance, image alt attributes, redirects, 404 handling, security headers, robots, sitemap and llms.txt
+- Full 188-URL audit: 0 CRITICAL, 0 HIGH, 0 MEDIUM and 0 LOW findings
+- 130 discovered internal links tested without broken destinations
 - English and Telugu appointment validation plus WhatsApp fallback: browser-tested
 - Voice call links verified on +91 81217 43999; all WhatsApp and appointment-form delivery links verified on +91 81257 43999
 - Page-preserving language toggle, server-rendered `te-IN` Telugu content wrappers, theme, consent controls and mobile navigation: verified
@@ -99,7 +103,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - Condition and archive image files, condition/article mappings and responsive image delivery verified
 - No visible image-generation tags remain in English, Telugu, article, condition or gallery output
 - No browser runtime errors in tested flows
-- Final local production Lighthouse: desktop **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.7s, CLS 0, TBT 20ms); mobile lab median **97 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** across three runs (LCP median 2.4s, CLS 0, TBT median 120ms). Production field data is not yet available.
+- Current local production Lighthouse: desktop **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.6s, CLS 0, TBT 0ms); mobile median **95 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** across three runs (LCP median 2.558s, CLS 0, TBT median 173ms). The mobile LCP <=2.5s target was not met consistently; production field INP/Core Web Vitals remain unavailable.
 
 ## Before public launch
 
