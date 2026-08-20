@@ -9,6 +9,9 @@ import { AnalyticsConsent } from "@/components/privacy/analytics-consent";
 import { OrganizationJsonLd, VerifiedReviewJsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: "Krishna Neuro Psychiatric Centre | Dr. Pamarthi Krishna Das",
@@ -31,6 +34,10 @@ export const metadata: Metadata = {
   alternates: { canonical: siteConfig.url, languages: { "en-IN": siteConfig.url, "te-IN": absoluteUrl("/te") } },
   openGraph: { type: "website", locale: "en_IN", alternateLocale: ["te_IN"], url: siteConfig.url, siteName: siteConfig.name, title: "Hopeful psychiatric care in Vijayawada", description: siteConfig.description, images: [{ url: absoluteUrl("/opengraph-image"), width: 1200, height: 630, alt: "Krishna Neuro Psychiatric Centre in Vijayawada" }] },
   twitter: { card: "summary_large_image", title: "Hopeful psychiatric care in Vijayawada", description: siteConfig.description, images: [absoluteUrl("/opengraph-image")] },
+  verification: {
+    ...(googleSiteVerification ? { google: googleSiteVerification } : {}),
+    ...(bingSiteVerification ? { other: { "msvalidate.01": bingSiteVerification } } : {}),
+  },
   other: { "geo.region": "IN-AP", "geo.placename": "Vijayawada", "geo.position": `${siteConfig.geo.latitude};${siteConfig.geo.longitude}`, ICBM: `${siteConfig.geo.latitude}, ${siteConfig.geo.longitude}` },
 };
 

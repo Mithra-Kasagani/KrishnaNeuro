@@ -32,28 +32,25 @@ Do not commit `.env.local`; it is already ignored.
 
 The included `netlify.toml` already contains these build settings.
 
-## 3. Choose the free site address
+## 3. Current production address
 
-After the first deploy:
-
-1. Open **Site configuration → Domain management**.
-2. Select **Options → Edit site name**.
-3. Choose a name such as `krishna-neuro-vijayawada` if available.
-4. The free address becomes:
+The verified live Netlify address is:
 
 ```text
-https://krishna-neuro-vijayawada.netlify.app
+https://drkrishnadas.netlify.app
 ```
 
-Netlify provides HTTPS automatically.
+Netlify provides HTTPS automatically. If the site name or domain changes, update `NEXT_PUBLIC_SITE_URL` and redeploy before asking search engines to index the new hostname.
 
 ## 4. Configure environment variables
 
 Open **Site configuration → Environment variables** and add:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://YOUR-SITE-NAME.netlify.app
+NEXT_PUBLIC_SITE_URL=https://drkrishnadas.netlify.app
 
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
+NEXT_PUBLIC_BING_SITE_VERIFICATION=
 NEXT_PUBLIC_GOOGLE_BUSINESS_URL=
 NEXT_PUBLIC_GA_ID=
 NEXT_PUBLIC_GTM_ID=
@@ -65,7 +62,7 @@ NEXT_PUBLIC_GOOGLE_RATING=
 NEXT_PUBLIC_GOOGLE_REVIEW_COUNT=
 ```
 
-Only `NEXT_PUBLIC_SITE_URL` is needed for correct canonical URLs, sitemap entries and structured data.
+Only `NEXT_PUBLIC_SITE_URL` is required for correct canonical URLs, sitemap entries and structured data. Google and Bing verification values are optional; add only the token supplied by the verified webmaster account.
 
 Leave the webhook variables blank if you want the existing direct WhatsApp appointment flow. Never prefix the webhook secret with `NEXT_PUBLIC_`.
 
@@ -76,12 +73,13 @@ After adding the variables, trigger **Deploys → Trigger deploy → Clear cache
 Open and test:
 
 ```text
-https://YOUR-SITE-NAME.netlify.app/
-https://YOUR-SITE-NAME.netlify.app/te
-https://YOUR-SITE-NAME.netlify.app/gallery
-https://YOUR-SITE-NAME.netlify.app/appointment
-https://YOUR-SITE-NAME.netlify.app/robots.txt
-https://YOUR-SITE-NAME.netlify.app/sitemap.xml
+https://drkrishnadas.netlify.app/
+https://drkrishnadas.netlify.app/te
+https://drkrishnadas.netlify.app/gallery
+https://drkrishnadas.netlify.app/appointment
+https://drkrishnadas.netlify.app/robots.txt
+https://drkrishnadas.netlify.app/sitemap.xml
+https://drkrishnadas.netlify.app/llms.txt
 ```
 
 Check:

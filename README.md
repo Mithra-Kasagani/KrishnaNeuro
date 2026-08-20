@@ -25,11 +25,13 @@ A production-ready Next.js website for **Dr. Pamarthi Krishna Das, MBBS, MD (Psy
 - Optional secure webhook with a privacy-preserving direct WhatsApp fallback
 - Native call, WhatsApp, directions and emergency pathways with voice calls fixed to 81217 43999 and WhatsApp/appointment messages routed to +91 81257 43999
 - Conditional, consent-based Google Analytics / Tag Manager loading
-- MedicalClinic, LocalBusiness, Organization, WebSite, Physician, FAQPage, BreadcrumbList, MedicalWebPage, Article and Service structured data
+- MedicalClinic, LocalBusiness, Organization, WebSite, Person, Physician, EducationalOccupationalCredential, FAQPage, BreadcrumbList, MedicalWebPage, Article and Service structured data
 - Conditional medical-review UI and reviewedBy/lastReviewed schema support; nothing is displayed until a verified review flag and date exist
 - Sitemap modification dates derive from static-page, condition, service and article content dates rather than request time
 - Review schema that remains disabled until verified first-party Google data is configured
 - Dynamic sitemap, robots, canonical metadata, Open Graph and Twitter cards
+- Migration-safe `/llms.txt` plus optional Google Search Console and Bing Webmaster verification metadata
+- Production Content Security Policy and supporting security headers
 - Loading, empty, success, error, global error and 404 states
 - WCAG-oriented semantics, keyboard interactions, reduced-motion support and strong contrast
 - Optimised local WebP imagery, generated SVG illustration assets and no external font dependency
@@ -65,13 +67,14 @@ npm run start
 npm run seo:audit
 ```
 
-The bilingual build generates **180 routes**. The deliberately curated sitemap exposes **138 canonical English/Telugu URLs** with reciprocal `hreflang` alternates; redirects and noindex utility/local-access routes are excluded.
+The bilingual build generates **181 routes**, including the machine-readable `/llms.txt` endpoint. The deliberately curated sitemap exposes **138 canonical English/Telugu URLs** with reciprocal `hreflang` alternates; redirects and noindex utility/local-access routes are excluded.
 
 ## Environment
 
 Copy `.env.example` to `.env.local` and configure:
 
-- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_SITE_URL` — current production value: `https://drkrishnadas.netlify.app`
+- optional `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` and `NEXT_PUBLIC_BING_SITE_VERIFICATION`
 - optional `NEXT_PUBLIC_GTM_ID` or `NEXT_PUBLIC_GA_ID`
 - optional `APPOINTMENT_WEBHOOK_URL` and secret
 - verified Google Business Profile URL
@@ -84,12 +87,12 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - TypeScript: passed
 - ESLint: passed
 - Next.js production build: passed
-- Automated SEO audit passed across all 138 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, image alt attributes, robots and sitemap
+- Enhanced SEO audit passed across all 138 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, Twitter cards, localized page schema, language markup, image alt attributes, redirects, 404 handling, security headers, robots, sitemap and llms.txt
 - Full 178-URL audit: 0 CRITICAL, 0 HIGH, 0 MEDIUM and 0 LOW findings
 - 126 discovered internal links tested without broken destinations
 - English and Telugu appointment validation plus WhatsApp fallback: browser-tested
 - Voice call links verified on +91 81217 43999; all WhatsApp and appointment-form delivery links verified on +91 81257 43999
-- Page-preserving language toggle, `te-IN` document language, theme, consent controls and mobile navigation: browser-tested
+- Page-preserving language toggle, server-rendered `te-IN` Telugu content wrappers, theme, consent controls and mobile navigation: verified
 - Reciprocal English/Telugu canonical and `hreflang` links verified
 - All clinical routes retain mapped editorial imagery; gallery routes use the supplied Facebook archive photographs
 - All 30 condition slugs have a matching unique image file; all 60 English/Telugu condition routes were verified against the correct image

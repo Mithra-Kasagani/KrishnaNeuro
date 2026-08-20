@@ -52,10 +52,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
   const title = localizedCondition?.seoTitle || pageTitle(slug);
   const description = localizedCondition?.seoDescription || (localizedCondition ? `${localizedCondition.name} లక్షణాలు, నిర్ధారణ, చికిత్స ఎంపికలు మరియు విజయవాడలో సైకియాట్రిక్ కన్సల్టేషన్ సమాచారం.` : `${title} గురించి బాధ్యతాయుత తెలుగు సమాచారం మరియు విజయవాడలో కన్సల్టేషన్ వివరాలు.`);
   const image = slug[0] === "gallery" ? gallerySlides[0].src : slug[0] === "conditions" && slug[1] ? conditionImage(slug[1]) : slug[0] === "services" && slug[1] ? serviceImage(slug[1]) : slug[0] === "blog" && slug[1] ? articleImage(slug[1]) : slug[0] === "locations" ? locationImage() : pageImage(slug[0] || "home");
+  const isLocationGuide = slug[0] === "locations";
+  const isAppointmentSuccess = slug[0] === "appointment" && slug[1] === "success";
   return {
     title,
     description,
-    robots: slug[0] === "locations" ? { index: false, follow: true } : { index: true, follow: true },
+    robots: isAppointmentSuccess ? { index: false, follow: false } : isLocationGuide ? { index: false, follow: true } : { index: true, follow: true },
     alternates: { canonical: absoluteUrl(tePath), languages: { "te-IN": absoluteUrl(tePath), "en-IN": absoluteUrl(route) } },
     openGraph: { type: slug[0] === "blog" && Boolean(slug[1]) ? "article" : "website", locale: "te_IN", alternateLocale: ["en_IN"], url: absoluteUrl(tePath), siteName: siteConfig.name, title, description, images: [{ url: absoluteUrl(image), width: 1586, height: 992, alt: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్" }] },
     twitter: { card: "summary_large_image", title, description, images: [absoluteUrl(image)] },
@@ -71,8 +73,8 @@ function teluguBreadcrumbLabel(slug: string[]) {
 
 export default async function TeluguRoute({ params, searchParams }: { params: Promise<{ slug?: string[] }>; searchParams: Promise<{ reference?: string }> }) {
   const { slug = [] } = await params;
-  const withBreadcrumb = (content: React.ReactNode) => <><BreadcrumbJsonLd items={[{ name: "హోమ్", item: "/te" }, { name: teluguBreadcrumbLabel(slug), item: "" }]} />{content}</>;
-  if (!slug.length) return <TeHome />;
+  const withBreadcrumb = (content: React.ReactNode) => <div lang="te-IN"><BreadcrumbJsonLd items={[{ name: "హోమ్", item: "/te" }, { name: teluguBreadcrumbLabel(slug), item: "" }]} />{content}</div>;
+  if (!slug.length) return <div lang="te-IN"><TeHome /></div>;
   if (slug[0] === "about" && slug.length === 1) return withBreadcrumb(<TeStandardPage page="about-doctor" />);
   if (slug[0] === "doctor" && slug[1] === "pamarthi-krishna-das") return withBreadcrumb(<TeStandardPage page="about-doctor" />);
   if (slug[0] === "faq" && slug.length === 1) return withBreadcrumb(<TeStandardPage page="faqs" />);

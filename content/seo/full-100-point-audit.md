@@ -1,136 +1,77 @@
-# Full SEO Audit — 100/100 Assessment
+# Full SEO Audit — Current Release Assessment
 
-## Important scoring note
+**Audit date:** 20 August 2026  
+**Canonical production origin:** https://drkrishnadas.netlify.app  
+**Detailed report:** [master-seo-final-deliverable.md](./master-seo-final-deliverable.md)
 
-Google does not provide a single universal SEO score. This report separates:
+## Scoring note
 
-1. **Code-verifiable technical SEO**, which can be audited locally.
-2. **Performance**, which is measured by Lighthouse lab tests and later by field data.
-3. **Medical E-E-A-T and off-site authority**, which cannot be truthfully completed in code alone.
+Google does not provide one universal SEO score. This release separates code-verifiable technical checks from medical review, off-site authority, account ownership, rankings and field performance.
 
-## Verified technical score
+## Verified release-build technical result
 
-| Category | Result |
+| Check | Result |
 |---|---:|
-| Lighthouse SEO — desktop | 100/100 |
-| Lighthouse SEO — mobile | 100/100 |
-| Accessibility — desktop/mobile | 100/100 |
-| Best Practices — desktop/mobile | 100/100 |
-| Canonical/indexability audit | 138/138 passed |
-| Internal links | 126/126 passed |
-| JSON-LD validity | Passed |
-| Breadcrumbs | Passed |
-| Reciprocal hreflang | Passed |
-| Sitemap and robots | Passed |
-| Unique title/description/H1 | Passed |
-| Security audit | 0 vulnerabilities |
+| Production build | PASS — 181 routes |
+| Canonical sitemap URLs | 138/138 passed |
+| Full public HTML inventory | 178 URLs audited |
+| Critical/high/medium/low route findings | 0 / 0 / 0 / 0 |
+| Internal links | 126 checked |
+| Titles, descriptions and H1s | PASS |
+| Canonicals and indexability | PASS |
+| Open Graph and Twitter/X cards | PASS |
+| English/Telugu hreflang | PASS |
+| English/Telugu page-specific schema | PASS |
+| JSON-LD parsing | PASS |
+| Breadcrumbs | PASS |
+| Image alt attributes | PASS |
+| Redirects and 404 behavior | PASS |
+| Sitemap, robots and llms.txt | PASS |
+| Security headers | PASS |
+| TypeScript and ESLint | PASS |
+| npm high/critical vulnerabilities | 0 |
 
 **Code-verifiable technical SEO: 100/100.**
 
-## Full public-route audit
+## Overall readiness score
 
-- Public URLs inventoried: 178
-- Canonical indexable URLs: 138
-- Redirect/noindex URLs: 40
-- CRITICAL findings: 0
-- HIGH findings: 0
-- MEDIUM findings: 0
-- LOW findings: 0
-- No-change rows: 178
+The transparent 20-category rubric in the master deliverable produces **92.8/100** for the validated release build. The result is below 100 because the following cannot be completed or verified through code alone:
 
-No code-verifiable critical, high, medium or low findings remain in the full public-route audit.
+1. Dr. Pamarthi Krishna Das has not yet supplied genuine page-level medical-review dates.
+2. Telugu clinical review is not verified.
+3. Google Search Console and Bing Webmaster ownership are not verified.
+4. The exact verified Google Business Profile URL is not supplied.
+5. Production field Core Web Vitals are unavailable.
+6. Rankings, local-pack visibility, backlinks, citations, reviews, AI citations and conversions require external evidence.
+7. Legal/privacy and independent accessibility review are pending.
 
-## Performance
+## Honest medical-review warning
 
-### Desktop — verified
+The enhanced audit reports one intentional warning:
 
-- Performance: 100
-- Accessibility: 100
-- Best Practices: 100
-- SEO: 100
-- LCP: 0.8s
+- **84 English/Telugu condition and article URLs are not marked as medically reviewed.**
+
+The reviewer UI and schema remain conditional. They must not be enabled until genuine review and a real date are recorded. English review must not automatically be treated as Telugu clinical review.
+
+## Performance status
+
+The last recorded lab baseline before this pass was:
+
+- Desktop Performance/Accessibility/Best Practices/SEO: 100/100/100/100
+- Mobile median Performance: 97
+- Mobile median LCP: 2.4 seconds
 - CLS: 0
-- TBT: 0ms
 
-### Mobile lab — verified
+This pass preserved the existing low-JavaScript architecture, responsive images, deferred map and reduced-motion behavior. **Current production field LCP and INP remain NOT VERIFIED — REQUIRES EXTERNAL VALIDATION.**
 
-- Performance: 97 median across three repeated runs (94 / 97 / 98)
-- Accessibility: 100
-- Best Practices: 100
-- SEO: 100
-- LCP: 2.4s median (2.6s / 2.4s / 2.2s)
-- CLS: 0
-- TBT: 120ms median
+## Deployment status
 
-**Mobile lab LCP target is now met on the median run.** A 100 Performance score is not consistent across runs, and production field performance after CDN deployment is still not verified.
+The updated source and deployment archive are ready, but the new release must be deployed to Netlify. At the final live-domain check, `/llms.txt` was still 404, `/te/appointment/success` was still indexable and the new CSP was not present, confirming that production was serving the prior release.
 
-## Medical E-E-A-T
+After deployment, run:
 
-The reusable medical-review component, visible byline structure and conditional `reviewedBy`/`lastReviewed` schema are implemented.
+```bash
+BASE_URL=https://drkrishnadas.netlify.app npm run seo:audit
+```
 
-Current audit warning:
-
-- 84 English/Telugu condition/article URLs do not have a verified medical-review flag and genuine review date.
-
-**Medical review by Dr. Pamarthi Krishna Das: Not verified.**
-
-The site correctly omits reviewer claims until actual review is confirmed. Falsely enabling the flag would not improve legitimate E-E-A-T.
-
-## Production URL and indexing
-
-- URL architecture derives from `NEXT_PUBLIC_SITE_URL`: verified in code.
-- Netlify production guard: implemented.
-- Local fallback: `http://localhost:3000` for development only.
-- Final production HTTPS domain: **Not verified**.
-- Google Search Console ownership: **Not verified**.
-- Production sitemap submission: **Not verified**.
-- Google Business Profile URL: **Not verified**.
-
-## Local SEO
-
-Verified in code:
-
-- Clinic entity: Krishna Neuro Psychiatric Centre
-- Doctor entity: Dr. Pamarthi Krishna Das
-- Location: Suryaraopet, Vijayawada, Andhra Pradesh, India
-- NAP centralized in `siteConfig`
-- Call and WhatsApp routing consistent
-- MedicalClinic/LocalBusiness/Organization + Physician graph
-- Verified Facebook profile in `sameAs`
-- Neighbourhood doorway pages remain noindex and excluded from sitemap
-
-Not verified externally:
-
-- Google Maps/Business Profile ownership and exact profile URL
-- Existing local citations
-- Review count and quality
-- Backlink authority
-- Current rankings and impressions
-
-## What prevents a legitimate overall 100/100 claim
-
-1. Production real-user Core Web Vitals are not yet available.
-2. Doctor review of medical content is not verified.
-3. Telugu medical review is not verified.
-4. Final production domain is not configured in this environment.
-5. Search Console is not connected.
-6. Google Business Profile URL/ownership is not verified.
-7. Backlinks, citations, rankings, reviews and real-user Core Web Vitals require external data.
-
-## Actions required outside code
-
-1. Set `NEXT_PUBLIC_SITE_URL=https://YOUR-PRODUCTION-DOMAIN` in Netlify.
-2. Have Dr. Pamarthi Krishna Das review priority medical pages and provide actual review dates.
-3. Have a qualified Telugu medical reviewer validate Telugu content.
-4. Verify the Google Business Profile and add its exact URL.
-5. Verify Google Search Console and submit `/sitemap.xml`.
-6. Collect production Core Web Vitals field data.
-7. Build legitimate medical/local citations and backlinks.
-
-## Final status
-
-- Technical SEO: **100/100 verified**
-- Desktop Lighthouse categories: **100/100 verified**
-- Mobile Lighthouse SEO/Accessibility/Best Practices: **100/100 verified**
-- Mobile Lighthouse Performance: **97 median verified across three runs; not consistently 100**
-- Overall organic ranking readiness: **cannot truthfully be represented as 100/100 until the external and medical-review requirements above are completed**
+Then verify the sitemap in Search Console and monitor field data. No ranking outcome is guaranteed.

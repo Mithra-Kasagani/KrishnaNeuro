@@ -71,13 +71,14 @@ for (let offset = 0; offset < inventory.length; offset += 10) {
   const batch = inventory.slice(offset, offset + 10);
   const batchRows = await Promise.all(batch.map(async (url) => {
     const rawResponse = await fetch(`${base}${url}`, { redirect: "manual" });
-    const redirectLocation = rawResponse.headers.get("location") || "";
+    const rawRedirectLocation = rawResponse.headers.get("location") || "";
+    const redirectLocation = rawRedirectLocation ? `${canonicalOrigin}${new URL(rawRedirectLocation, base).pathname}${new URL(rawRedirectLocation, base).search}` : "";
     if ([301, 302, 307, 308].includes(rawResponse.status)) {
       return {
         URL: url, "Page purpose": "Legacy URL preserving existing SEO equity", "Current title": `Permanent redirect to ${redirectLocation}`, "Recommended title": `Keep permanent redirect to ${redirectLocation}`,
         "Current meta description": "N/A — redirect", "Recommended meta description": "N/A — redirect", "Current H1": "N/A — redirect", "Recommended H1": "N/A — redirect",
         "Primary search intent": "Legacy navigation", "Primary keyword/topic": pathTopic(url), Indexability: "Redirect — not indexable", Canonical: redirectLocation, Schema: "Inherited from destination",
-        "H2/H3 review": "N/A", "Robots / indexability": "Permanent 308", "Open Graph": "Inherited from destination", "Images / alt text": "N/A", "Internal links": "Internal links updated to destination",
+        "H2/H3 review": "N/A", "Robots / indexability": `Permanent ${rawResponse.status}`, "Open Graph": "Inherited from destination", "Images / alt text": "N/A", "Internal links": "Internal links updated to destination",
         "External links": "N/A", "Duplicate / cannibalization": "Consolidated by redirect", "Content issues": "None — equity preserved", "Performance / CWV": "Redirect only; negligible", "Mobile / accessibility": "Destination audited",
         "CTA / local SEO": "Destination audited", "Entity / factual accuracy": "Destination audited", Priority: "NO CHANGE", Status: rawResponse.status, "Redirect target": redirectLocation,
       };

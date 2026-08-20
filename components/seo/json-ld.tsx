@@ -12,6 +12,15 @@ function JsonLd({ data }: { data: Record<string, unknown> | Record<string, unkno
 }
 
 export function OrganizationJsonLd() {
+  const clinicAddress = {
+    "@type": "PostalAddress",
+    streetAddress: `${siteConfig.address.line1}, ${siteConfig.address.line2}, ${siteConfig.address.locality}`,
+    addressLocality: siteConfig.address.city,
+    addressRegion: siteConfig.address.region,
+    postalCode: siteConfig.address.postalCode,
+    addressCountry: "IN",
+  };
+
   const clinic = {
     "@context": "https://schema.org",
     "@type": ["MedicalClinic", "LocalBusiness", "Organization"],
@@ -29,13 +38,11 @@ export function OrganizationJsonLd() {
     medicalSpecialty: "Psychiatric",
     telephone: siteConfig.phones[0],
     email: siteConfig.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: `${siteConfig.address.line1}, ${siteConfig.address.line2}`,
-      addressLocality: siteConfig.address.city,
-      addressRegion: siteConfig.address.region,
-      postalCode: siteConfig.address.postalCode,
-      addressCountry: "IN",
+    address: clinicAddress,
+    areaServed: {
+      "@type": "City",
+      name: siteConfig.address.city,
+      containedInPlace: { "@type": "State", name: siteConfig.address.region },
     },
     geo: {
       "@type": "GeoCoordinates",
@@ -61,15 +68,23 @@ export function OrganizationJsonLd() {
 
   const physician = {
     "@context": "https://schema.org",
-    "@type": "Physician",
+    "@type": ["Person", "Physician"],
     "@id": `${siteConfig.url}/#physician`,
     name: siteConfig.doctor,
+    honorificPrefix: "Dr.",
+    jobTitle: siteConfig.role,
     url: absoluteUrl("/doctor/pamarthi-krishna-das"),
     image: absoluteUrl("/images/doctor-portrait.webp"),
     description: `${siteConfig.credentials}. ${siteConfig.role} in Vijayawada.`,
     medicalSpecialty: "Psychiatry",
+    hasCredential: [
+      { "@type": "EducationalOccupationalCredential", credentialCategory: "degree", name: "MBBS" },
+      { "@type": "EducationalOccupationalCredential", credentialCategory: "degree", name: "MD (Psychiatry)" },
+    ],
+    knowsAbout: ["Psychiatry", "Mental health", "Addiction psychiatry", "Child and adolescent psychiatry", "Old age psychiatry"],
     worksFor: { "@id": `${siteConfig.url}/#clinic` },
-    address: { "@id": `${siteConfig.url}/#clinic` },
+    workLocation: { "@id": `${siteConfig.url}/#clinic` },
+    address: clinicAddress,
   };
 
   const website = {
@@ -118,7 +133,7 @@ export function FAQJsonLd({ faqs }: { faqs: { question: string; answer: string }
   );
 }
 
-export function MedicalWebPageJsonLd({ name, description, path, about, dateModified, review }: { name: string; description: string; path: string; about: string; dateModified: string; review?: MedicalReview }) {
+export function MedicalWebPageJsonLd({ name, description, path, about, dateModified, review, language = "en-IN" }: { name: string; description: string; path: string; about: string; dateModified: string; review?: MedicalReview; language?: "en-IN" | "te-IN" }) {
   const reviewed = Boolean(review?.reviewed && review.reviewedAt);
   return (
     <JsonLd
@@ -132,35 +147,35 @@ export function MedicalWebPageJsonLd({ name, description, path, about, dateModif
         about: { "@type": "MedicalCondition", name: about },
         publisher: { "@id": `${siteConfig.url}/#clinic` },
         ...(reviewed ? { reviewedBy: { "@id": `${siteConfig.url}/#physician` }, lastReviewed: review?.reviewedAt } : {}),
-        inLanguage: "en-IN",
+        inLanguage: language,
       }}
     />
   );
 }
 
-export function ArticleJsonLd({ article }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string; medicalReview?: MedicalReview } }) {
-  const reviewed = Boolean(article.medicalReview?.reviewed && article.medicalReview.reviewedAt);
+export function ArticleJsonLd({ article, path, headline, description, language = "en-IN", includeMedicalReview = true }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string; medicalReview?: MedicalReview }; path?: string; headline?: string; description?: string; language?: "en-IN" | "te-IN"; includeMedicalReview?: boolean }) {
+  const reviewed = Boolean(includeMedicalReview && article.medicalReview?.reviewed && article.medicalReview.reviewedAt);
   return (
     <JsonLd
       data={{
         "@context": "https://schema.org",
         "@type": "Article",
-        headline: article.title,
-        description: article.description,
-        mainEntityOfPage: absoluteUrl(`/blog/${article.slug}`),
+        headline: headline || article.title,
+        description: description || article.description,
+        mainEntityOfPage: absoluteUrl(path || `/blog/${article.slug}`),
         datePublished: article.publishedAt,
         dateModified: article.updatedAt,
         author: { "@type": "Organization", name: `${siteConfig.name} Editorial Team`, url: siteConfig.url },
         ...(reviewed ? { reviewedBy: { "@id": `${siteConfig.url}/#physician` }, lastReviewed: article.medicalReview?.reviewedAt } : {}),
         publisher: { "@id": `${siteConfig.url}/#clinic` },
         image: absoluteUrl(articleImage(article.slug)),
-        inLanguage: "en-IN",
+        inLanguage: language,
       }}
     />
   );
 }
 
-export function LocalServiceJsonLd({ name, description, path, area }: { name: string; description: string; path: string; area: string }) {
+export function LocalServiceJsonLd({ name, description, path, area, language = "en-IN" }: { name: string; description: string; path: string; area: string; language?: "en-IN" | "te-IN" }) {
   return (
     <JsonLd
       data={{
@@ -171,7 +186,8 @@ export function LocalServiceJsonLd({ name, description, path, area }: { name: st
         url: absoluteUrl(path),
         provider: { "@id": `${siteConfig.url}/#clinic` },
         areaServed: { "@type": "Place", name: area },
-        serviceType: "Psychiatric consultation",
+        serviceType: name,
+        inLanguage: language,
       }}
     />
   );
