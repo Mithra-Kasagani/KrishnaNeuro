@@ -4,9 +4,9 @@ Post-implementation verification generated against the complete current route in
 
 ## Inventory
 
-- Canonical sitemap URLs: **138**
-- Redirected/noindex public URLs: **40**
-- Total public URLs audited: **178**
+- Canonical sitemap URLs: **142**
+- Redirected/noindex public URLs: **46**
+- Total public URLs audited: **188**
 
 ## Priority summary
 
@@ -14,7 +14,7 @@ Post-implementation verification generated against the complete current route in
 - HIGH: **0**
 - MEDIUM: **0**
 - LOW: **0**
-- NO CHANGE: **178**
+- NO CHANGE: **188**
 
 ## Audit dimensions
 
@@ -30,4 +30,4 @@ No medium/low findings.
 
 ## Full page-level report
 
-See [existing-page-audit.csv](./existing-page-audit.csv) for all 178 rows and all required columns.
+See [existing-page-audit.csv](./existing-page-audit.csv) for all 188 rows and all required columns.
