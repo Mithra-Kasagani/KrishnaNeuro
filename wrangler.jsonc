@@ -10,12 +10,7 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "services": [
-    {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "krishna-neuro-psychiatric-centre"
-    }
-  ],
+  
   "images": {
     "binding": "IMAGES"
   },
