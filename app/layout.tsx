@@ -6,7 +6,7 @@ import { BiText } from "@/components/i18n/bilingual-text";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { AnalyticsConsent } from "@/components/privacy/analytics-consent";
-import { OrganizationJsonLd, VerifiedReviewJsonLd } from "@/components/seo/json-ld";
+import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -45,7 +45,8 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, view
 
 const bootScript = `(function(){
   var p=location.pathname,te=p==='/te'||p.indexOf('/te/')===0,r=document.documentElement;
-  r.dataset.locale=te?'te':'en';r.lang=te?'te-IN':'en-IN';
+  var appointmentRoute=p==='/appointment'||p.indexOf('/appointment/')===0||p==='/te/appointment'||p.indexOf('/te/appointment/')===0;
+  r.dataset.locale=te?'te':'en';r.dataset.appointmentRoute=appointmentRoute?'true':'false';r.lang=te?'te-IN':'en-IN';
   try{var t=localStorage.getItem('knpc-theme'),d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.classList.toggle('dark',d)}catch(e){}
   addEventListener('DOMContentLoaded',function(){
     var b=document.getElementById('theme-toggle');if(b)b.addEventListener('click',function(){var n=!r.classList.contains('dark');r.classList.toggle('dark',n);try{localStorage.setItem('knpc-theme',n?'dark':'light')}catch(e){}});
@@ -61,7 +62,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="pb-18 md:pb-0">
         <a href="#main-content" className="skip-link"><BiText en="Skip to main content" te="ప్రధాన విషయానికి వెళ్లండి" /></a>
         <OrganizationJsonLd />
-        <VerifiedReviewJsonLd />
         <SiteHeader />
         <main id="main-content" className="min-h-screen">{children}</main>
         <SiteFooter />

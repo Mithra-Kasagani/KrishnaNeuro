@@ -11,7 +11,6 @@
 - [ ] Languages available for consultation
 - [ ] Accessibility details: stairs/lift, wheelchair access, parking and toilets
 - [ ] Verified Google Business Profile URL
-- [ ] Current Google rating/count only if displayed from a reliable source
 - [ ] Secure CRM/webhook for appointment delivery, or approve WhatsApp-only flow
 - [ ] Legal review of privacy policy and terms under applicable Indian law
 - [ ] Clinical review and signed approval of all medical content

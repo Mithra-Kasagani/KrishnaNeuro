@@ -35,6 +35,7 @@ export function GET() {
 - Treatment approach: ${absoluteUrl("/treatments")}
 - Patient and family resources: ${absoluteUrl("/resources")}
 - Mental-health articles: ${absoluteUrl("/blog")}
+- Clinic photo and video gallery: ${absoluteUrl("/gallery")}
 - Appointment request: ${absoluteUrl("/appointment")}
 - Clinic visit information: ${absoluteUrl("/clinic-vijayawada")}
 - Contact and directions: ${absoluteUrl("/contact")}

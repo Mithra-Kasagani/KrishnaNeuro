@@ -20,13 +20,39 @@ function slugs(relativePath) {
 const conditionSlugs = slugs("data/conditions.ts");
 const serviceSlugs = slugs("data/services.ts");
 const articleSlugs = slugs("data/articles.ts");
+const videoSource = read("data/gallery-videos.ts");
+const videoIds = [...videoSource.matchAll(/\bid:\s*"([A-Za-z0-9_-]{11})"/g)].map((match) => match[1]);
+const videoUrls = [...videoSource.matchAll(/youtubeUrl:\s*"(https:\/\/www\.youtube\.com\/watch\?v=[A-Za-z0-9_-]{11})"/g)].map((match) => match[1]);
 
 if (conditionSlugs.length !== 30) failures.push(`Expected 30 condition records, found ${conditionSlugs.length}`);
 if (serviceSlugs.length !== 10) failures.push(`Expected 10 service records, found ${serviceSlugs.length}`);
 if (articleSlugs.length !== 12) failures.push(`Expected 12 article records, found ${articleSlugs.length}`);
+if (videoIds.length !== 7 || videoUrls.length !== 7) failures.push(`Expected 7 YouTube gallery records, found ${videoIds.length} IDs and ${videoUrls.length} URLs`);
+unique(videoIds, "Gallery video data");
+unique(videoUrls, "Gallery video URLs");
+for (const id of videoIds) {
+  if (!videoUrls.some((url) => url.endsWith(`v=${id}`))) failures.push(`Gallery video ${id} does not have a matching YouTube URL`);
+  if (!fs.existsSync(path.join(root, "public", "images", "gallery", "videos", `${id}.webp`))) failures.push(`Missing local gallery video thumbnail for ${id}`);
+}
 unique(conditionSlugs, "Condition data");
 unique(serviceSlugs, "Service data");
 unique(articleSlugs, "Article data");
+
+const serviceSource = read("data/services.ts");
+const relatedConditionBlocks = [...serviceSource.matchAll(/relatedConditions:\s*\[([^\]]+)\]/g)].map((match) => [...match[1].matchAll(/"([a-z0-9-]+)"/g)].map((item) => item[1]));
+const serviceFaqBlocks = [...serviceSource.matchAll(/\bfaqs:\s*\[/g)].length;
+if (relatedConditionBlocks.length !== serviceSlugs.length) failures.push(`Expected related-condition mappings for ${serviceSlugs.length} services, found ${relatedConditionBlocks.length}`);
+if (serviceFaqBlocks !== serviceSlugs.length) failures.push(`Expected FAQ data for ${serviceSlugs.length} services, found ${serviceFaqBlocks}`);
+for (const relatedSlug of relatedConditionBlocks.flat()) if (!conditionSlugs.includes(relatedSlug)) failures.push(`Service references unknown condition slug: ${relatedSlug}`);
+const teluguSource = read("data/te.ts");
+for (const slug of serviceSlugs) {
+  const escaped = slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  if (!new RegExp(`(?:"${escaped}"|\\b${escaped}):\\s*\\[`).test(teluguSource)) failures.push(`Missing Telugu service FAQs for ${slug}`);
+}
+const teluguArticleSource = read("data/te-article-sections.ts");
+for (const slug of articleSlugs) {
+  if (!teluguArticleSource.includes(`"${slug}": [`)) failures.push(`Missing unique Telugu article sections for ${slug}`);
+}
 
 for (const slug of conditionSlugs) {
   const image = path.join(root, "public", "images", "conditions", "individual", `${slug}.webp`);
@@ -62,6 +88,12 @@ for (const event of ["clinic_phone_click", "clinic_whatsapp_click", "appointment
   if (!analyticsSource.includes(event)) failures.push(`Missing privacy-safe conversion event: ${event}`);
 }
 
+const entitySources = ["app", "components", "data", "lib"].flatMap((directory) => fs.readdirSync(path.join(root, directory), { recursive: true, withFileTypes: true }).filter((entry) => entry.isFile() && /\.(?:ts|tsx)$/.test(entry.name)).map((entry) => path.join(entry.parentPath || entry.path, entry.name))).map((file) => fs.readFileSync(file, "utf8")).join("\n");
+if (/Dr\. Krishna Das|డా\. కృష్ణ దాస్|Pamarti|Krishnadas|Dr\. P\. Krishna/.test(entitySources)) failures.push("Abbreviated or inconsistent doctor-name variant found in public source data");
+
+const schemaSource = read("components/seo/json-ld.tsx");
+if (/AggregateRating|NEXT_PUBLIC_GOOGLE_RATING|NEXT_PUBLIC_GOOGLE_REVIEW_COUNT/.test(schemaSource)) failures.push("Review/rating schema must not be emitted without an eligible visible review system");
+
 const siteSource = read("lib/site.ts");
 if (!/process\.env\.NEXT_PUBLIC_SITE_URL/.test(siteSource)) failures.push("Central site URL is not derived from NEXT_PUBLIC_SITE_URL");
 if (!/http:\/\/localhost:3000/.test(siteSource)) failures.push("Safe local-development URL fallback is missing");
@@ -83,4 +115,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Static SEO validation passed: ${conditionSlugs.length} conditions, ${serviceSlugs.length} services, ${articleSlugs.length} articles, ${coreCanonicals.length} core SEO records, ${new Set(medicalReferenceUrls).size} authoritative reference URLs, unique core metadata, canonical paths, medical-review invariants and condition image coverage.`);
+console.log(`Static SEO validation passed: ${conditionSlugs.length} conditions, ${serviceSlugs.length} services, ${articleSlugs.length} English/Telugu article sets, ${videoIds.length} gallery videos, ${coreCanonicals.length} core SEO records, ${new Set(medicalReferenceUrls).size} authoritative reference URLs, unique core metadata, canonical paths, medical-review invariants and image coverage.`);

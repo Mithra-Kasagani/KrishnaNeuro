@@ -1,45 +1,39 @@
-# Full SEO Audit — Current Release
+# Full SEO Audit — Final Release
 
 **Date:** 20 August 2026  
 **Canonical origin:** https://drkrishnadas.netlify.app  
 **Complete report:** [10-of-10-implementation-report.md](./10-of-10-implementation-report.md)
 
-## Verified technical result
+## Verified release-build result
 
-- Production build: PASS — 185 generated routes
-- Static SEO configuration/data validation: PASS
-- Sitemap: 142 canonical English/Telugu URLs
-- Full public canonical/redirect/noindex audit: 188 URLs
-- Internal routes: 130 passed
-- CRITICAL/HIGH/MEDIUM/LOW automated findings: 0/0/0/0
-- Titles, descriptions, H1s, canonicals, robots, OG, Twitter and hreflang: PASS
-- Localized MedicalWebPage, Article, Service and WebPage schema: PASS
-- JSON-LD parse and visible-content consistency checks: PASS
-- Condition authorship, family guidance and sources: PASS
-- Redirects, 404, noindex utility routes, security headers and machine-readable endpoints: PASS
-- TypeScript and ESLint: PASS
+- 181 generated routes
+- 142 canonical sitemap URLs
+- 188 canonical/redirect/noindex public URLs audited
+- 146 internal routes, 202 anchors and 117 rendered image/social assets passed
+- 0 orphan pages, redirect chains, broken anchors or near-duplicate detail pages above thresholds
+- 0 critical/high/medium/low full-route findings
+- Titles, descriptions, H1 hierarchy, canonicals/query normalization, OG, Twitter, hreflang and indexability passed
+- English/Telugu condition/article/service schema and visible-content checks passed
+- Static SEO data validation, TypeScript, ESLint and production build passed
 - npm high/critical vulnerabilities: 0
-
-**Code-verifiable technical SEO: 100/100.**
 
 ## Performance and accessibility
 
-- Desktop Lighthouse: 100 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; LCP 0.6s, TBT 0ms, CLS 0.
-- Mobile Lighthouse median across three runs: 95 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; LCP 2.558s, TBT 173ms, CLS 0.
-- Mobile LCP <=2.5s: **NOT CONSISTENTLY VERIFIED**.
-- INP and production field Core Web Vitals: **NOT VERIFIED**.
-- Independent assistive-technology audit: **NOT VERIFIED**.
+- Desktop: 100 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; FCP 0.304s, LCP 0.699s, TBT 20ms, CLS 0.
+- Mobile three-run median: 96 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; FCP 1.071s, LCP 2.467s, TBT 146ms, CLS 0.
+- Mobile median LCP <=2.5s: PASS in lab.
+- Real-user INP/CrUX: NOT VERIFIED.
+- Independent assistive-technology testing: NOT VERIFIED.
 
-## Why overall is not 100
+## Evidence-based score
 
-The release-build implementation-readiness rubric is **95.2/100**, not 100, because:
+**91/100 — Excellent**, using the requested weighted rubric. A higher score is not claimed because:
 
-- 84 English/Telugu condition/article URLs lack genuine medical-review dates;
-- qualified Telugu clinical review is pending;
-- Search Console, Bing and Google Business Profile ownership are not verified;
-- production INP/CrUX, rankings, snippets, conversions and AI citations are unavailable;
-- parking/accessibility, consultation languages and teleconsultation policy are unverified;
-- legal/privacy and external accessibility review are pending;
-- backlinks, citations and genuine reviews require off-site work.
+- 84 medical condition/article language URLs lack genuine doctor review dates;
+- qualified Telugu clinical review is not verified;
+- production field INP/CrUX is unavailable;
+- Search Console and analytics account delivery are not verified;
+- legal and independent accessibility review are pending;
+- latest release is not yet deployed to Netlify.
 
-The updated release must still be deployed to Netlify. No ranking or outcome is guaranteed.
+The current live Netlify deployment failed 25 checks that the release build passes. Deploy and rerun the production crawl before marking production current.

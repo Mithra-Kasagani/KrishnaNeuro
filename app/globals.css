@@ -36,7 +36,7 @@
   --border: #dce6ef;
   --primary: #0f4c81;
   --primary-foreground: #ffffff;
-  --secondary: #2e8b57;
+  --secondary: #287b4d;
   --accent: #4a90e2;
   --success: #22c55e;
   --ring: #4a90e2;
@@ -86,6 +86,14 @@ html[data-locale="te"] body,
 :lang(te) {
   font-family: "Noto Sans Telugu Variable", "Noto Sans Telugu", "Nirmala UI", "Gautami", var(--font-sans);
   letter-spacing: normal;
+}
+
+html[data-appointment-route="true"] .mobile-appointment-actions {
+  display: none;
+}
+
+html[data-appointment-route="true"] body {
+  padding-bottom: 0;
 }
 
 body {

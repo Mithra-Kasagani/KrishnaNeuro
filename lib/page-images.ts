@@ -82,7 +82,6 @@ const pageMap: Record<string, string> = {
   treatments: aiImages.psychosis,
   services: aiImages.wellbeing,
   "patient-journey": aiImages.wellbeing,
-  testimonials: aiImages.family,
   resources: aiImages.wellbeing,
   blog: aiImages.wellbeing,
   faqs: aiImages.family,
@@ -95,7 +94,6 @@ const pageMap: Record<string, string> = {
   "privacy-policy": aiImages.wellbeing,
   terms: aiImages.wellbeing,
   "psychiatrist-in-vijayawada": aiImages.mood,
-  "best-psychiatrist-in-vijayawada": aiImages.wellbeing,
 };
 
 export function conditionImage(slug: string) { return conditionMap[slug] || aiImages.wellbeing; }

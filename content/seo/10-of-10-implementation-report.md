@@ -1,341 +1,314 @@
-# Complete SEO Implementation Report
+# Final SEO Validation, Fix and Implementation Report
 
 **Project:** Krishna Neuro Psychiatric Centre  
 **Doctor:** Dr. Pamarthi Krishna Das, MBBS, MD (Psychiatry)  
-**Canonical origin:** https://drkrishnadas.netlify.app  
-**Validated release date:** 20 August 2026
+**Canonical deployment origin:** https://drkrishnadas.netlify.app  
+**Validation date:** 20 August 2026
 
-## Important status
+## 1. Final score
 
-This report covers the updated **local production release build**. The source and deployment archive must still be deployed to Netlify. Search rankings, Google Business Profile ownership, Search Console data, real-user Core Web Vitals, medical approval and off-site authority cannot be completed or inferred from code.
+**SEO Implementation Score: 91/100 — Excellent**
 
-There is no universal Google SEO score. A transparent implementation-readiness rubric gives this release **95.2/100**. Code-verifiable technical SEO checks pass at 100%; the overall score remains below 100 because medical review, field INP/LCP, webmaster accounts, GBP, legal review and off-site evidence are not verified.
+This score uses the exact weighted categories requested in the final brief. It applies to the **validated release build in the repository**. The current Netlify deployment is serving the preceding release and failed 25 checks that the updated release build now passes. Deployment is therefore a required manual action.
 
-## Acceptance scorecard
+A score of 100 is not claimed because page-level medical review, qualified Telugu clinical review, production field INP/Core Web Vitals, Search Console data, independent assistive-technology testing, legal review and off-site authority are not verified.
 
-| Category | Score | Status |
+## 2. Evidence-based scorecard
+
+| Weighted category | Score | Evidence/status |
 |---|---:|---|
-| Technical SEO | 10/10 | Verified in release build |
-| Indexability | 10/10 | 142 canonical URLs passed |
-| Architecture | 10/10 | Canonicals, aliases and noindex routes validated |
-| On-page SEO | 9.7/10 | Verified; search-result performance external |
-| Keyword architecture | 9.3/10 | Intent mapped without stuffing; query data unavailable |
-| Internal linking | 10/10 | 130 discovered internal routes passed |
-| Schema | 9.7/10 | JSON parsed and matched visible content; external rich-result eligibility not guaranteed |
-| Core Web Vitals | 9.0/10 | Desktop target met; mobile LCP median 2.558s, narrowly above 2.5s target; field INP unavailable |
-| Mobile UX | 9.5/10 | No horizontal overflow; navigation/forms/CTAs browser-tested |
-| Accessibility | 10/10 automated | Lighthouse 100; independent assistive-technology audit not verified |
-| Medical E-E-A-T implementation | 8.5/10 | Authorship, sources and review controls complete; actual doctor/Telugu review pending |
-| Local website SEO | 9.2/10 | Clinic/local pages and NAP complete; GBP/citations external |
-| Content quality | 9.2/10 | Condition-specific content, caregiver guidance and sources present; clinical approval pending |
-| Image SEO | 10/10 automated | Responsive dimensions and alt checks passed |
-| Security | 9.7/10 | CSP/headers/dependencies/forms checked; independent penetration/legal review pending |
-| Analytics implementation | 9.5/10 | Consent and safe events implemented; account IDs not supplied |
-| Conversion tracking implementation | 10/10 | Safe call/WhatsApp/appointment/directions/contact events implemented |
+| Technical SEO — 15 | **14.0** | Local release passes comprehensive crawl/build QA; latest release is not yet deployed to Netlify |
+| On-page SEO — 15 | **14.5** | 142 canonical pages pass title, description, H1 hierarchy, canonical, OG, Twitter and language checks |
+| Architecture/internal linking — 10 | **10.0** | 146 internal routes, 202 anchors, no orphans, no broken internal destinations or redirect chains |
+| Content quality — 15 | **13.5** | Unique condition/service/article content, service FAQs, sources and caregiver guidance; clinical approval remains external |
+| Medical E-E-A-T — 15 | **11.0** | Authorship, sources and conditional reviewer system exist; 84 medical URLs have no genuine review date |
+| Schema — 10 | **9.5** | JSON-LD parses and matches visible content; external rich-result eligibility and validator account data are not guaranteed |
+| Performance — 10 | **9.0** | Mobile median LCP 2.467s, TBT 146ms, CLS 0; desktop LCP 0.699s; real-user INP/CrUX unavailable |
+| Accessibility — 5 | **4.5** | Lighthouse 100 and multi-viewport browser tests pass; independent screen-reader/physical-device audit not verified |
+| Conversion/UX — 5 | **5.0** | Call, WhatsApp, appointment, directions and consent-safe conversion events implemented and tested |
+| **Total** | **91/100** | **Excellent; not fully externally validated** |
 
-## 1. Completed
+## 3. Significant fixes implemented
 
-### Technical SEO
+### Crawlability, indexability and URL integrity
 
-- Central configurable canonical origin through `NEXT_PUBLIC_SITE_URL`.
-- Self-referencing HTTPS canonicals and reciprocal `en-IN`/`te-IN` hreflang.
-- Generated sitemap containing only canonical, indexable public pages.
-- Generated robots policy blocking API and appointment-success utility routes without blocking assets.
-- Exact HTTP 301 redirect aliases, including:
-  - `/psychiatrist-vijayawada` → `/psychiatrist-in-vijayawada`
-  - `/doctor/dr-pamarthi-krishna-das` → `/doctor/pamarthi-krishna-das`
-  - `/clinic` → `/clinic-vijayawada`
-  - matching Telugu aliases
-- Professional 404 with Home, Conditions, Services, Doctor, Appointment and Contact paths.
-- English and Telugu appointment-success pages are noindex and excluded from sitemap.
-- Build-time SEO data validation plus full rendered-site SEO audit.
+- Kept one configurable canonical origin through `NEXT_PUBLIC_SITE_URL` with a safe local fallback.
+- Verified 142 canonical English/Telugu URLs in generated XML sitemap.
+- Kept API and appointment-success utility routes outside the sitemap.
+- Ensured English and Telugu appointment-success routes use `noindex, nofollow`.
+- Preserved canonical doctor/local URLs and added exact HTTP 301 aliases without chains.
+- Verified query-parameter requests canonicalize to clean URLs.
+- Added automated checks for lowercase/internal URL normalization, mixed HTTP resources, 404 behavior and redirect targets.
 
-### Metadata and content architecture
+### Metadata and headings
 
-- Existing single metadata helper preserved and strengthened.
-- Structured core SEO configuration now includes search intent, primary topic, secondary topics and breadcrumb label.
-- Objective configuration validation rejects missing/unsafe canonical, title, description, H1, schema, OG image and update data.
-- Unique titles, descriptions, canonicals, H1s, Open Graph and Twitter/X metadata verified across all sitemap pages.
-- Current canonical doctor and Vijayawada URLs preserved to avoid unnecessary migration or cannibalization.
-- The shorter URL variants requested in the brief are permanent aliases, not duplicate indexable pages.
+- Preserved the single metadata helper and structured core SEO configuration.
+- Added objective build-time SEO validation for title, description, canonical, H1, schema, OG image and update date.
+- Verified unique titles/descriptions and one H1 on all sitemap URLs.
+- Fixed real heading-level skips on the patient-journey and English/Telugu gallery pages.
+- Verified complete Open Graph, Twitter/X and reciprocal language metadata.
 
-### Local SEO and conversion
+### Local and entity architecture
 
-- Added a genuinely distinct `/clinic-vijayawada` visit-planning page and Telugu equivalent.
-- Clinic page includes verified clinic name, doctor, address, hours, map, directions, call, WhatsApp, appointment, services, conditions and visit preparation.
-- Parking and step-free access are explicitly marked unverified rather than guessed.
-- Primary Vijayawada psychiatrist page remains `/psychiatrist-in-vijayawada` and links to the new clinic page.
-- Desktop/mobile navigation now exposes Doctor, Conditions, Services, Clinic, Articles and Contact.
-- Footer contains official NAP, hours, doctor, clinic, services, conditions, appointment and trust/legal pages.
-- Mobile CTA remains Call | WhatsApp | Appointment and has no page-width overflow.
+- Added bilingual `/clinic-vijayawada` visit-planning pages with verified NAP, hours, doctor, map, directions and appointment paths.
+- Kept thin neighbourhood pages noindex to avoid doorway-page behavior.
+- Linked MedicalClinic/Organization, Person/Physician and WebSite entities.
+- Used only verified MBBS and MD (Psychiatry) credentials.
+- Removed remaining abbreviated doctor-name variants from public source data and added a build-time consistency check.
+- Domain migration and Google Business Profile work were explicitly excluded and were not performed.
 
-### Medical E-E-A-T and content quality
+### Condition, service and article quality
 
-- Added reusable editorial attribution and medical references components.
-- All 60 English/Telugu condition pages now show:
-  - Editorial Team authorship
-  - actual content-update date
-  - condition/category-specific family and caregiver guidance
-  - authoritative sources and further reading
-  - source citations in MedicalWebPage JSON-LD
-  - conditional medical reviewer UI/schema only after genuine review
-- Added 35 unique authoritative reference URLs from WHO, NICE, NIMH, NHS, Government of India and other recognized public institutions.
-- Added a bilingual medical disclaimer page.
-- Added repository medical-content governance covering authorship, sources, review frequency, update triggers, prohibited claims, corrections and analytics privacy.
-- Telugu review remains separate from English review and is never inferred automatically.
+- All 60 English/Telugu condition pages include Editorial Team attribution, update date, family/caregiver guidance, authoritative references and schema citations.
+- All 20 English/Telugu service-detail pages now include:
+  - service-specific FAQs;
+  - matching FAQPage schema;
+  - related condition links;
+  - doctor, clinic and appointment links;
+  - safety and suitability limitations.
+- Added unique, topic-specific Telugu article sections for all 12 articles.
+- Reduced maximum Telugu-article main-content shingle similarity from 68.0% to 31.1%.
+- Added distinct Telugu article modification dates in sitemap and Article schema.
+- Retained the honest medical-review warning; no reviewer or date was fabricated.
 
-### Schema and entity architecture
+### Reviews and medical trust
 
-- Linked MedicalClinic/LocalBusiness/Organization, Person/Physician and WebSite entities.
-- Added verified MBBS and MD (Psychiatry) EducationalOccupationalCredential data.
-- Added WebPage, MedicalWebPage, ProfilePage and ContactPage relationships where appropriate.
-- Added localized MedicalWebPage, Article and Service schema.
-- Added citations to Article and condition MedicalWebPage schema.
-- Corrected Service `serviceType` so it matches the visible service.
-- Preserved conditional AggregateRating and reviewedBy/lastReviewed behavior; no fake ratings/reviews.
+- Removed unreachable composite patient-story/testimonial source code.
+- Removed the unreachable “best psychiatrist” content page while preserving its ethical 301 redirect.
+- Removed conditional AggregateRating/review schema because there is no eligible visible review system.
+- Updated Terms to state that the website does not currently publish patient testimonials.
+- Retained only conditional `reviewedBy`/`lastReviewed` medical-review markup tied to actual page data.
+- Added bilingual medical disclaimer and repository medical-content governance.
 
-### Performance and dependencies
+### Gallery, images and third parties
 
-- Homepage preview no longer imports the full client-side gallery slideshow.
-- Full slideshow remains isolated to dedicated gallery pages.
-- Removed unused dependencies/components for Framer Motion, Radix Accordion, Next Themes, Next third-party loader, Radix Dialog, exit-intent and dead gallery loader.
-- Direct dependency/dev-dependency declarations reduced to 21; installed audit set reduced from 407 to 392 packages.
-- Client components remain limited to forms, search/filter and the full gallery.
-- Maps and optional analytics remain deferred.
+- Embedded seven clinic-supplied YouTube videos in English/Telugu gallery pages.
+- Added seven local 640×360 WebP thumbnails.
+- Used click-to-load `youtube-nocookie.com` players, so no video iframe loads initially.
+- Added accessible play/close controls, direct sources, bilingual descriptions and privacy disclosure.
+- Updated CSP to allow only the privacy-enhanced YouTube frame origin.
+- Fixed gallery overflow at the 768px/tablet breakpoint.
+- Verified 117 rendered image/social assets and all manifest icons return valid image responses.
 
-### Accessibility, forms, security and analytics
+### Mobile UX and accessibility
 
-- Server-rendered Telugu content wrappers use `lang="te-IN"`.
-- Mobile Playwright check: viewport and document width both 390px; no horizontal scrolling.
-- Mobile navigation opened successfully with 13 actionable links.
-- Appointment form labels and empty-submit errors browser-tested.
-- API rejects invalid/past dates and oversized payloads, rate-limits requests and returns `Cache-Control: no-store`.
-- No names, phone numbers, diagnoses, symptoms or messages are sent to analytics.
-- Safe consent-controlled events implemented for:
-  - `clinic_phone_click`
-  - `clinic_whatsapp_click`
-  - `appointment_button_click`
-  - `appointment_form_started`
-  - `appointment_form_submitted`
-  - `directions_click`
-  - `clinic_contact_click`
-  - `clinic_email_click`
-- CSP, frame protection, content-type, referrer, permissions, opener and cross-domain headers validated.
-- No exposed secrets found; npm high/critical audit reports zero vulnerabilities.
+- Tested 320, 375, 390, 414, 768 and 1440px widths.
+- Fixed a boot-script syntax error found by browser testing.
+- Hid the redundant fixed mobile appointment bar on appointment/success routes, preventing form-button obstruction.
+- Confirmed no horizontal overflow, one H1, working mobile navigation and no browser console/page errors.
+- Fixed low-contrast service step numbers and secondary button colors.
+- Representative homepage, condition, service and gallery Lighthouse accessibility/SEO scores are 100.
 
-## 2. Changed files
+### Performance and code quality
 
-### Created
+- Kept public information primarily server-rendered/static.
+- Isolated full gallery hydration from the homepage preview.
+- Deferred map and optional analytics loading.
+- Removed dead exit-intent, theme-provider, third-party analytics loader, old gallery loader, Radix accordion and testimonial/review components.
+- Removed unused Framer Motion, Next Themes, Next third-party, Radix Dialog and Radix Accordion dependencies.
+- Final direct dependency/dev-dependency declarations: 21.
+
+### Forms, privacy, analytics and security
+
+- Appointment API validates India-local dates, rejects past/invalid dates and oversized payloads, rate-limits requests and returns `Cache-Control: no-store`.
+- Public forms collect scheduling information only; no symptoms, diagnosis or records.
+- Consent-safe events cover phone, WhatsApp, appointment start/submit, directions, contact and email.
+- No names, phone numbers, symptoms, diagnoses or appointment details are sent to analytics.
+- Secret scan, unsafe-new-tab scan and npm high/critical audit passed.
+- CSP, frame, referrer, permissions, content-type and opener headers validated.
+
+## 4. Files created
 
 - `app/clinic-vijayawada/page.tsx`
 - `app/medical-disclaimer/page.tsx`
 - `app/llms.txt/route.ts`
+- `components/gallery/youtube-video-gallery.tsx`
 - `components/medical/content-attribution.tsx`
 - `components/medical/medical-references.tsx`
+- `data/gallery-videos.ts`
 - `data/medical-references.ts`
+- `data/te-article-sections.ts`
 - `lib/seo-validation.ts`
 - `scripts/validate-static-seo.mjs`
 - `content/medical-content-governance.md`
 - `content/seo/lighthouse-summary-2026-08-20.json`
+- `content/seo/final-validation-matrix.md`
 - `content/seo/10-of-10-implementation-report.md`
+- 7 thumbnails under `public/images/gallery/videos/`
 
-### Modified
+## 5. Main files modified
 
 - `.env.example`
-- `package.json`
-- `package-lock.json`
+- `package.json`, `package-lock.json`
 - `next.config.ts`
-- `README.md`
-- `DEPLOY_NETLIFY.md`
-- `app/page.tsx`
-- `app/layout.tsx`
-- `app/not-found.tsx`
-- `app/robots.ts`
-- `app/sitemap.ts`
+- `README.md`, `DEPLOY_NETLIFY.md`
+- `app/layout.tsx`, `app/globals.css`, `app/not-found.tsx`
+- `app/page.tsx`, `app/sitemap.ts`, `app/robots.ts`
 - `app/api/appointment/route.ts`
-- `app/contact/page.tsx`
-- `app/doctor/pamarthi-krishna-das/page.tsx`
 - `app/conditions/[slug]/page.tsx`
 - `app/services/[slug]/page.tsx`
+- `app/doctor/pamarthi-krishna-das/page.tsx`
 - `app/psychiatrist-in-vijayawada/page.tsx`
+- `app/gallery/page.tsx`, `app/privacy-policy/page.tsx`, `app/terms/page.tsx`
 - `app/te/[[...slug]]/page.tsx`
-- `components/appointment/appointment-form.tsx`
-- `components/appointment/telugu-appointment-form.tsx`
-- `components/brand/logo.tsx`
-- `components/gallery/gallery-section.tsx`
-- `components/layout/site-header.tsx`
-- `components/layout/site-footer.tsx`
-- `components/medical/medical-review.tsx`
-- `components/privacy/analytics-consent.tsx`
-- `components/seo/json-ld.tsx`
-- `components/shared/map-card.tsx`
-- `components/te/telugu-pages.tsx`
-- `data/conditions.ts`
-- `data/services.ts`
-- `data/seo-pages.ts`
-- `lib/appointment-schema.ts`
-- `lib/metadata.ts`
-- `lib/page-images.ts`
-- `scripts/seo-audit.mjs`
-- `scripts/full-existing-page-audit.mjs`
-- `content/launch-checklist.md`
+- appointment, gallery, navigation, footer, analytics, medical and schema components
+- `data/conditions.ts`, `data/services.ts`, `data/te.ts`, `data/seo-pages.ts`
+- `lib/appointment-schema.ts`, `lib/metadata.ts`, `lib/page-images.ts`
+- `scripts/seo-audit.mjs`, `scripts/full-existing-page-audit.mjs`
 - generated reports under `content/seo/`
 
-### Removed as verified dead code
+### Removed verified dead/ineligible source
 
+- `app/testimonials/page.tsx`
+- `app/best-psychiatrist-in-vijayawada/page.tsx`
+- `components/shared/patient-stories.tsx`
+- `components/shared/google-reviews.tsx`
+- `data/testimonials.ts`
 - `components/conversion/exit-intent.tsx`
 - `components/gallery/lazy-gallery-slideshow.tsx`
 - `components/privacy/analytics-scripts.tsx`
 - `components/theme/theme-provider.tsx`
 - `components/ui/accordion.tsx`
 
-## 3. Final SEO architecture
+Redirects for legacy testimonial/superlative URLs remain active.
 
-### Canonical English
+## 6. Test results
 
-- `/`
-- `/doctor/pamarthi-krishna-das`
-- `/psychiatrist-in-vijayawada`
-- `/clinic-vijayawada`
-- `/conditions` and 30 `/conditions/[slug]` pages
-- `/services` and 10 `/services/[slug]` pages
-- `/treatments`
-- `/patient-journey`
-- `/resources`
-- `/blog` and 12 `/blog/[slug]` pages
-- `/faq`
-- `/gallery`
-- `/contact`
-- `/appointment`
-- `/privacy-policy`
-- `/terms`
-- `/medical-disclaimer`
-- `/emergency`
+### Build and source validation
 
-### Telugu
+- Static SEO data validation: **PASS**
+- TypeScript: **PASS**
+- ESLint: **PASS**
+- Next.js production build: **PASS — 181 generated routes**
+- npm high/critical audit: **0 vulnerabilities**
+- Exposed-secret scan: **none found**
+- Unsafe `target=_blank` links: **none found**
 
-Equivalent canonical pages under `/te/...`, including `/te/clinic-vijayawada` and `/te/medical-disclaimer`.
+### Local production crawl
 
-### Utility
+- Canonical sitemap URLs: **142**
+- Complete canonical/redirect/noindex inventory: **188**
+- Full route findings: **0 critical / 0 high / 0 medium / 0 low**
+- Internal routes: **146 passed**
+- Anchors: **202 passed**
+- Rendered image/social assets: **117 passed**
+- Orphan pages: **0**
+- Near-duplicate detail pages above thresholds: **0**
+- Redirect chains: **0**
+- JSON-LD syntax errors: **0**
+- The only warning is the truthful lack of verified medical-review dates on 84 condition/article language URLs.
 
-- `/robots.txt`
-- `/sitemap.xml`
-- `/llms.txt`
-- `/site.webmanifest`
-- `/opengraph-image`
-- noindex appointment-success routes
-- non-indexable API endpoint
+### Browser/mobile validation
 
-## 4. Metadata
+- Widths tested: **320, 375, 390, 414, 768, 1440px**
+- Representative page/viewport checks: **24**
+- Horizontal overflow: **0**
+- H1 failures: **0**
+- Browser console errors: **0**
+- Mobile navigation: **PASS**
+- Appointment validation: **PASS**
+- Appointment sticky-bar conflict: **fixed and retested**
+- Click-to-load YouTube iframe: **PASS**
 
-- Central helper: `lib/metadata.ts`
-- Validated core config: `data/seo-pages.ts`
-- Validator: `lib/seo-validation.ts`
-- Dynamic condition/service/article metadata remains generated from structured content records.
-- Domain migration remains controlled only by `NEXT_PUBLIC_SITE_URL`.
-- All 142 sitemap pages passed unique title, description, canonical, H1, OG, Twitter and hreflang checks.
+### Lighthouse — final local production build
 
-## 5. Schema
+#### Mobile, three runs
 
-Implemented types include MedicalClinic, LocalBusiness, Organization, WebSite, WebPage, MedicalWebPage, ProfilePage, ContactPage, Person, Physician, EducationalOccupationalCredential, MedicalCondition, Article, Service, FAQPage, Question, Answer, BreadcrumbList, ListItem, PostalAddress, GeoCoordinates, City, State, Place, OpeningHoursSpecification, ContactPoint and ImageObject. AggregateRating and medical-review fields remain conditional only.
+- Performance: **96 / 95 / 97 — median 96**
+- Accessibility: **100 / 100 / 100**
+- Best Practices: **100 / 100 / 100**
+- SEO: **100 / 100 / 100**
+- FCP median: **1.071s**
+- LCP median: **2.467s**
+- TBT median: **146ms**
+- CLS: **0**
+- Transfer median: **262,512 bytes**
+- JavaScript transfer: **173,000 bytes**
+- Local server-response audit: **6ms median**
 
-## 6. Sitemap
-
-- Generated by `app/sitemap.ts`.
-- **142 canonical indexable URLs**.
-- Uses genuine stored modification dates.
-- Excludes redirects, noindex utility pages, API and thin neighbourhood guides.
-- English/Telugu alternate URLs match page canonicals.
-
-## 7. Robots
-
-Generated by `app/robots.ts`:
-
-```text
-User-Agent: *
-Allow: /
-Disallow: /api/
-Disallow: /appointment/success
-Disallow: /te/appointment/success
-Sitemap: https://drkrishnadas.netlify.app/sitemap.xml
-```
-
-CSS, JavaScript, images and public pages are not blocked.
-
-## 8. Core Web Vitals and Lighthouse
-
-### Desktop production build
+#### Desktop
 
 - Performance: **100**
 - Accessibility: **100**
 - Best Practices: **100**
 - SEO: **100**
-- FCP: **0.3s**
-- LCP: **0.6s**
-- TBT: **0ms**
+- FCP: **0.304s**
+- LCP: **0.699s**
+- TBT: **20ms**
 - CLS: **0**
 
-### Mobile — three runs
+**Mobile LCP <=2.5s:** met on the median lab run.  
+**INP:** NOT VERIFIED — requires real-user data.  
+**Production CrUX/Core Web Vitals:** NOT VERIFIED.
 
-- Performance: **95 / 98 / 92; median 95**
-- Accessibility: **100 / 100 / 100**
-- Best Practices: **100 / 100 / 100**
-- SEO: **100 / 100 / 100**
-- LCP: **2.558s / 2.255s / 2.603s; median 2.558s**
-- TBT: **173ms / 114ms / 254ms; median 173ms**
-- CLS: **0 / 0 / 0**
+## 7. Important route audit
 
-**Mobile LCP <=2.5s: NOT CONSISTENTLY VERIFIED.** One run passed; the median was 58ms over target.  
-**INP: NOT VERIFIED.** Requires real-user field data.  
-**Production CrUX/Core Web Vitals: NOT VERIFIED.**
+| Route | Local release status | Indexability/canonical |
+|---|---:|---|
+| `/` | 200 | Indexable, self-canonical |
+| `/psychiatrist-in-vijayawada` | 200 | Indexable, self-canonical |
+| `/psychiatrist-vijayawada` | 301 | Alias to canonical local page |
+| `/doctor/pamarthi-krishna-das` | 200 | Indexable ProfilePage |
+| `/doctor/dr-pamarthi-krishna-das` | 301 | Alias to canonical doctor page |
+| `/clinic-vijayawada` | 200 | Indexable clinic visit page |
+| `/conditions` and 30 details | 200 | Indexable; English/Telugu alternates |
+| `/services` and 10 details | 200 | Indexable; visible FAQs/related care |
+| `/blog` and 12 details | 200 | Indexable; unique English/Telugu content |
+| `/gallery` | 200 | Indexable; 30 photos + 7 click-to-load videos |
+| `/appointment` | 200 | Indexable transactional page |
+| appointment-success routes | 200 | `noindex, nofollow`; excluded from sitemap |
+| `/privacy-policy`, `/terms`, `/medical-disclaimer` | 200 | Indexable trust pages |
+| `/robots.txt`, `/sitemap.xml`, `/llms.txt` | 200 | Valid generated endpoints |
+| intentional missing URL | 404 | Correct custom 404 |
+| legacy testimonials/superlative URLs | 301 | Consolidated; no testimonial/superlative source page |
 
-## 9. Accessibility
+## 8. Actual live-production crawl
 
-- Lighthouse automated accessibility: **100 desktop and all three mobile runs**.
-- Mobile viewport, no-overflow, navigation, labels and validation browser-tested.
-- No browser console or page errors in the tested mobile flows.
-- Keyboard semantics, native details/summary, skip link, visible focus, alt text and language wrappers are implemented.
-- Independent screen-reader and physical-device testing: **NOT VERIFIED**.
+The live Netlify URL was crawled after the release was prepared. It is still serving the preceding deployment.
 
-## 10. Broken links
+- Live homepage, clinic, disclaimer, robots, sitemap and llms.txt: 200.
+- Live Telugu appointment-success: correctly `noindex, nofollow`.
+- Enhanced current audit against live production: **FAIL — 25 release-difference findings**.
+- Differences are the not-yet-deployed gallery headings/videos and service FAQs/schema.
 
-- **130 internal routes tested: no broken destination.**
-- 142 sitemap pages returned successful canonical content.
-- 188 public canonical/redirect/noindex URLs audited with 0 critical/high/medium/low findings.
-- 35 authoritative medical-reference URLs checked; successful HTTP responses were confirmed after replacing one inaccessible source.
-- Facebook, WhatsApp, Google Maps and other third-party behavior can change and requires periodic external review.
+This is not a source-code defect in the release build. It is a deployment gap. The latest release must be deployed and then crawled again before production can be marked current.
 
-## 11. Remaining content gaps
+## 9. Remaining genuine issues
 
-- 84 English/Telugu condition/article URLs do not have verified medical-review dates.
-- Telugu article bodies need qualified Telugu clinical/editorial approval.
-- Doctor registration number, memberships, publications, awards, experience duration and affiliations were not supplied and remain unpublished.
-- Consultation languages and teleconsultation policy are not verified for publication.
-- Parking, lift, wheelchair access and toilet information are not verified.
-- No genuine patient testimonials with documented consent were supplied.
+- Latest release is not deployed to Netlify.
+- 84 condition/article language URLs have no genuine doctor review date.
+- Qualified Telugu clinical/editorial approval is not verified.
+- Search Console ownership, indexing reports and search-query data are not available.
+- GA4/GTM account IDs are not supplied; event code is ready but account delivery is not verified.
+- Real-user INP and CrUX/Core Web Vitals are not available.
+- Independent screen-reader, keyboard-only physical-device and legal/privacy review are not verified.
+- Doctor registration, memberships, publications, awards, affiliations and experience duration were not supplied and remain unpublished.
+- Consultation languages, current teleconsultation policy and physical-accessibility/parking details require verified clinic input.
+- Legitimate backlinks, citations and real consented testimonials are external activities.
 
-## 12. Manual actions required
+## 10. Manual actions required
 
-1. Deploy the updated package to Netlify.
-2. Re-run `BASE_URL=https://drkrishnadas.netlify.app npm run seo:audit` after deployment.
-3. Verify Google Search Console and submit `/sitemap.xml`.
-4. Verify Bing Webmaster Tools.
-5. Supply the exact verified Google Business Profile URL.
-6. Have Dr. Pamarthi Krishna Das review priority clinical pages and provide actual dates.
-7. Obtain qualified Telugu review.
-8. Add GA4/GTM IDs only after account access and consent configuration are approved.
-9. Monitor CrUX/Search Console INP, LCP, queries, CTR and indexing.
-10. Obtain legal/privacy and independent accessibility review.
-11. Build genuine citations, backlinks and reviews outside the codebase.
+1. Deploy `/home/user/krishna-neuro-deploy.zip` to the existing Netlify site.
+2. After deployment run: `BASE_URL=https://drkrishnadas.netlify.app EXPECTED_ORIGIN=https://drkrishnadas.netlify.app npm run seo:audit`.
+3. Verify Search Console ownership and submit `/sitemap.xml`.
+4. Add GA4/GTM IDs only with approved account access and consent settings.
+5. Have Dr. Pamarthi Krishna Das review priority medical pages and provide real dates.
+6. Obtain qualified Telugu clinical/editorial approval.
+7. Monitor production CrUX/INP, indexing, queries and CTR after sufficient traffic.
+8. Obtain independent accessibility and Indian legal/privacy review.
+9. Build legitimate external citations/backlinks and publish real testimonials only with authenticity, consent and privacy safeguards.
 
-## 13. Explicit TODOs
+Custom-domain migration and Google Business Profile work were excluded and are not part of this action list.
 
-- **TODO — clinic:** designate the final content publication approver.
-- **TODO — clinic:** designate and verify a qualified Telugu clinical/editorial reviewer.
-- **TODO — doctor/clinic:** provide approved registration details only if they should be public.
-- **TODO — clinic:** verify consultation languages and teleconsultation rules.
-- **TODO — clinic:** verify parking and physical-accessibility details.
-- **TODO — webmaster:** provide Search Console, Bing, GBP and analytics IDs/URLs.
-- **TODO — legal:** review privacy, terms, disclaimer and appointment handling under applicable Indian law.
+## 11. Final TODO list
 
-No ranking, local-pack, featured-snippet, AI-citation, conversion or medical-outcome guarantee is made.
+- **TODO — DEPLOYMENT:** publish the latest release and rerun the production crawl.
+- **TODO — VERIFIED INFORMATION REQUIRED:** page-level medical review and actual review dates.
+- **TODO — VERIFIED INFORMATION REQUIRED:** qualified Telugu reviewer and final publication approver.
+- **TODO — VERIFIED INFORMATION REQUIRED:** registration/membership/publication/experience information, only if approved for publication.
+- **TODO — VERIFIED INFORMATION REQUIRED:** consultation languages, teleconsultation policy, parking and accessibility details.
+- **TODO — ACCESS REQUIRED:** Search Console and analytics accounts.
+- **TODO — FIELD DATA REQUIRED:** production INP, CrUX and conversion results.
+- **TODO — PROFESSIONAL REVIEW REQUIRED:** legal/privacy and independent accessibility review.
+
+No ranking, featured-snippet, local-pack, AI-citation, conversion or medical-outcome guarantee is made.

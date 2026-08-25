@@ -107,3 +107,30 @@ All internal navigation, canonicals, hreflang links and sitemap entries use fina
 - Final release: 185 generated routes, 142 canonical sitemap URLs, 188 public URLs audited, 130 internal routes passed, zero critical/high/medium/low findings, and zero high/critical npm vulnerabilities.
 - Lighthouse: desktop 100/100/100/100 with LCP 0.6s; mobile median 95 Performance and 100 Accessibility/Best Practices/SEO, LCP 2.558s, TBT 173ms, CLS 0.
 - Final implementation-readiness rubric: 95.2/100. Technical SEO checks: 100/100. Mobile LCP target, field INP, medical review, external account ownership and off-site authority remain not fully verified.
+
+## Gallery video addition — 20 August 2026
+
+- Added all seven clinic-supplied YouTube videos to the English and Telugu gallery pages.
+- Verified each YouTube ID, public title/source channel and embed availability.
+- Created seven local 640×360 WebP thumbnails to avoid initial third-party image requests.
+- Added accessible responsive players using `youtube-nocookie.com`; no video iframe is present until the visitor presses Play.
+- Added direct source links, bilingual labels/descriptions, close controls, privacy disclosure and CSP permission limited to the privacy-enhanced YouTube frame origin.
+- Added build-time checks for seven unique IDs, matching URLs and local thumbnails, plus rendered-page checks for seven links and zero initial YouTube iframes.
+- Updated gallery metadata, sitemap modification date, privacy policy, llms.txt and implementation documentation.
+- TypeScript, ESLint, production build, enhanced 142-URL SEO audit and full 188-URL public audit passed; all seven privacy-enhanced embed endpoints returned HTTP 200.
+
+## Final validation and remediation pass — 20 August 2026
+
+- Added unique FAQs and related-condition links to all 20 English/Telugu service detail pages with matching FAQPage schema.
+- Replaced repeated Telugu article body templates with 12 topic-specific structured article sets; maximum main-content similarity fell from 68.0% to 31.1%.
+- Added language-specific Telugu article modification dates to visible bylines, Article schema and sitemap.
+- Expanded automated QA for canonical query handling, URL hygiene, mixed content, heading hierarchy, orphan pages, near duplicates, anchors, rendered image assets, manifest icons and redirect chains.
+- Fixed heading-level skips on patient-journey and gallery pages.
+- Fixed tablet gallery horizontal overflow.
+- Fixed a root boot-script syntax error and removed the redundant mobile sticky appointment bar from appointment routes, eliminating form-button obstruction.
+- Fixed service-page color contrast; representative homepage, condition, service and gallery Lighthouse accessibility scores now reach 100.
+- Removed unreachable composite patient-story/review source, the dead superlative page and AggregateRating schema support; legacy URLs remain exact 301 redirects.
+- Removed abbreviated doctor-name variants and added a source validation guard for canonical entity naming.
+- Final release: 181 generated routes, 142 sitemap URLs, 188 public URLs audited, 146 internal routes, 202 anchors and 117 rendered image/social assets passed with zero critical/high/medium/low findings.
+- Final Lighthouse: desktop 100/100/100/100, LCP 0.699s; mobile median 96/100/100/100, FCP 1.071s, LCP 2.467s, TBT 146ms, CLS 0.
+- Evidence-based weighted implementation score: 91/100. The live Netlify deployment remains one release behind and failed 25 current checks until the package is deployed.

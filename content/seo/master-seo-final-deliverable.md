@@ -1,30 +1,29 @@
 # Master SEO Final Deliverable
 
-The current complete report is:
+Current detailed report:
 
 - [10-of-10-implementation-report.md](./10-of-10-implementation-report.md)
+- [final-validation-matrix.md](./final-validation-matrix.md)
 
-## Current validated release summary — 20 August 2026
+## Final validated release summary — 20 August 2026
 
-- Canonical production origin: `https://drkrishnadas.netlify.app`
-- Next.js generated routes: **185**
+- Evidence-based weighted SEO implementation score: **91/100 — Excellent**
+- Generated Next.js routes: **181**
 - Canonical sitemap URLs: **142**
-- Full canonical/redirect/noindex public audit: **188 URLs**
-- Internal routes checked: **130**
-- Automated CRITICAL/HIGH/MEDIUM/LOW findings: **0 / 0 / 0 / 0**
-- Build-time static SEO validation: PASS
-- TypeScript: PASS
-- ESLint: PASS
-- Production build: PASS
+- Public canonical/redirect/noindex audit inventory: **188**
+- Internal routes: **146 passed**
+- Anchors: **202 passed**
+- Rendered image/social assets: **117 passed**
+- Orphan pages: **0**
+- Near-duplicate pages above thresholds: **0**
+- CRITICAL/HIGH/MEDIUM/LOW route findings: **0/0/0/0**
+- TypeScript, ESLint, static SEO validation and production build: **PASS**
 - npm high/critical vulnerabilities: **0**
-- Desktop Lighthouse: **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO**
-- Mobile Lighthouse median: **95 Performance / 100 Accessibility / 100 Best Practices / 100 SEO**
-- Mobile LCP median: **2.558s — target not consistently verified**
-- Mobile TBT median: **173ms**
-- CLS: **0**
-- Real-user INP and production CrUX: **NOT VERIFIED**
-- Overall implementation-readiness rubric: **95.2/100**
-- Code-verifiable technical SEO: **100/100**
-- Medical review warning: **84 English/Telugu condition and article URLs remain unverified and are not falsely labelled as reviewed**
+- Desktop Lighthouse: **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO**, LCP 0.699s, TBT 20ms, CLS 0
+- Mobile Lighthouse median: **96 Performance / 100 Accessibility / 100 Best Practices / 100 SEO**, LCP 2.467s, TBT 146ms, CLS 0
+- Multi-viewport browser tests: **0 overflow, 0 H1 failures, 0 console errors**
+- Medical review: **NOT VERIFIED for 84 condition/article language URLs**
+- Real-user INP/CrUX: **NOT VERIFIED**
+- Latest Netlify deployment: **NOT CURRENT — live crawl failed 25 release-difference checks**
 
-The updated source and deployment package still require Netlify deployment. Search Console, Bing, Google Business Profile, medical review, Telugu clinical review, legal review, real-user field data, reviews, citations, backlinks, rankings and AI citations require external access or evidence.
+Custom-domain migration and Google Business Profile work were excluded from this task.

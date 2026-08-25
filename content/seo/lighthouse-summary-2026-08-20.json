@@ -1,58 +1,45 @@
 {
   "auditDate": "2026-08-20",
-  "auditTarget": "local production build using NEXT_PUBLIC_SITE_URL=https://drkrishnadas.netlify.app",
+  "auditTarget": "final local production build using NEXT_PUBLIC_SITE_URL=https://drkrishnadas.netlify.app",
   "lighthouseVersion": "12.8.2",
   "browser": "Chromium 140.0.7339.16",
   "mobileRuns": [
-    {
-      "performance": 95,
-      "accessibility": 100,
-      "bestPractices": 100,
-      "seo": 100,
-      "lcpMs": 2558,
-      "tbtMs": 173,
-      "cls": 0
-    },
-    {
-      "performance": 98,
-      "accessibility": 100,
-      "bestPractices": 100,
-      "seo": 100,
-      "lcpMs": 2255,
-      "tbtMs": 114,
-      "cls": 0
-    },
-    {
-      "performance": 92,
-      "accessibility": 100,
-      "bestPractices": 100,
-      "seo": 100,
-      "lcpMs": 2603,
-      "tbtMs": 254,
-      "cls": 0
-    }
+    { "performance": 96, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcpMs": 1060, "lcpMs": 2467, "tbtMs": 141, "cls": 0, "transferBytes": 262513, "ttfbMs": 6 },
+    { "performance": 95, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcpMs": 1085, "lcpMs": 2627, "tbtMs": 146, "cls": 0, "transferBytes": 262512, "ttfbMs": 5 },
+    { "performance": 97, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcpMs": 1071, "lcpMs": 2106, "tbtMs": 175, "cls": 0, "transferBytes": 262512, "ttfbMs": 6 }
   ],
   "mobileMedian": {
-    "performance": 95,
+    "performance": 96,
     "accessibility": 100,
     "bestPractices": 100,
     "seo": 100,
-    "lcpMs": 2558,
-    "tbtMs": 173,
-    "cls": 0
+    "fcpMs": 1071,
+    "lcpMs": 2467,
+    "tbtMs": 146,
+    "cls": 0,
+    "transferBytes": 262512,
+    "javascriptTransferBytes": 173000,
+    "ttfbMs": 6
   },
   "desktop": {
     "performance": 100,
     "accessibility": 100,
     "bestPractices": 100,
     "seo": 100,
-    "fcpMs": 300,
-    "lcpMs": 600,
-    "tbtMs": 0,
-    "cls": 0
+    "fcpMs": 304,
+    "lcpMs": 699,
+    "tbtMs": 20,
+    "cls": 0,
+    "transferBytes": 272215,
+    "ttfbMs": 11
+  },
+  "representativePageAudits": {
+    "condition": { "accessibility": 100, "seo": 100 },
+    "service": { "accessibility": 100, "seo": 100 },
+    "gallery": { "accessibility": 100, "seo": 100 }
   },
   "interpretation": {
-    "mobileLcpTarget": "NOT CONSISTENTLY MET — median 2.558s versus <=2.5s target; one run measured 2.255s",
+    "mobileLcpTarget": "MET ON MEDIAN LAB RUN — 2.467s versus <=2.5s target; one of three runs measured 2.627s",
     "inp": "NOT VERIFIED — Lighthouse lab runs do not provide real-user INP",
     "fieldCoreWebVitals": "NOT VERIFIED — requires CrUX/Search Console data after deployment",
     "accessibility": "Lighthouse automated accessibility scored 100; independent assistive-technology testing remains recommended"

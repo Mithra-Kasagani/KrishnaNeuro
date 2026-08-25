@@ -7,6 +7,7 @@ import { siteConfig } from "@/lib/site";
 type SitemapSource = {
   path: string;
   updatedAt: string;
+  teluguUpdatedAt?: string;
   priority: number;
   changeFrequency: "weekly" | "monthly";
 };
@@ -25,11 +26,11 @@ const staticPages: SitemapSource[] = [
   { path: "/appointment", updatedAt: "2026-08-15", priority: 0.9, changeFrequency: "monthly" },
   { path: "/contact", updatedAt: "2026-08-15", priority: 0.86, changeFrequency: "monthly" },
   { path: "/clinic-vijayawada", updatedAt: "2026-08-20", priority: 0.82, changeFrequency: "monthly" },
-  { path: "/privacy-policy", updatedAt: "2026-08-15", priority: 0.45, changeFrequency: "monthly" },
+  { path: "/privacy-policy", updatedAt: "2026-08-20", priority: 0.45, changeFrequency: "monthly" },
   { path: "/medical-disclaimer", updatedAt: "2026-08-20", priority: 0.45, changeFrequency: "monthly" },
-  { path: "/terms", updatedAt: "2026-08-15", priority: 0.45, changeFrequency: "monthly" },
+  { path: "/terms", updatedAt: "2026-08-20", priority: 0.45, changeFrequency: "monthly" },
   { path: "/emergency", updatedAt: "2026-08-15", priority: 0.75, changeFrequency: "monthly" },
-  { path: "/gallery", updatedAt: "2026-08-15", priority: 0.62, changeFrequency: "monthly" },
+  { path: "/gallery", updatedAt: "2026-08-20", priority: 0.67, changeFrequency: "monthly" },
   { path: "/psychiatrist-in-vijayawada", updatedAt: "2026-08-20", priority: 0.88, changeFrequency: "monthly" },
 ];
 
@@ -38,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...conditions.map((item) => ({ path: `/conditions/${item.slug}`, updatedAt: item.updatedAt, priority: 0.82, changeFrequency: "monthly" as const })),
     ...services.map((item) => ({ path: `/services/${item.slug}`, updatedAt: item.updatedAt, priority: 0.76, changeFrequency: "monthly" as const })),
-    ...articles.map((item) => ({ path: `/blog/${item.slug}`, updatedAt: item.updatedAt, priority: 0.7, changeFrequency: "monthly" as const })),
+    ...articles.map((item) => ({ path: `/blog/${item.slug}`, updatedAt: item.updatedAt, teluguUpdatedAt: "2026-08-20", priority: 0.7, changeFrequency: "monthly" as const })),
   ];
 
   return sources.flatMap((source) => {
@@ -46,9 +47,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const teluguUrl = `${siteConfig.url}/te${source.path}`;
     const alternates = { languages: { "en-IN": englishUrl, "te-IN": teluguUrl } };
     const lastModified = new Date(source.updatedAt);
+    const teluguLastModified = new Date(source.teluguUpdatedAt || source.updatedAt);
     return [
       { url: englishUrl, lastModified, changeFrequency: source.changeFrequency, priority: source.priority, alternates },
-      { url: teluguUrl, lastModified, changeFrequency: source.changeFrequency, priority: Math.max(0.4, source.priority - 0.02), alternates },
+      { url: teluguUrl, lastModified: teluguLastModified, changeFrequency: source.changeFrequency, priority: Math.max(0.4, source.priority - 0.02), alternates },
     ];
   });
 }

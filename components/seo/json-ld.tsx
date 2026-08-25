@@ -175,7 +175,7 @@ export function MedicalWebPageJsonLd({ name, description, path, about, dateModif
   );
 }
 
-export function ArticleJsonLd({ article, path, headline, description, language = "en-IN", includeMedicalReview = true }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string; medicalReview?: MedicalReview; references?: { href: string }[] }; path?: string; headline?: string; description?: string; language?: "en-IN" | "te-IN"; includeMedicalReview?: boolean }) {
+export function ArticleJsonLd({ article, path, headline, description, dateModified, language = "en-IN", includeMedicalReview = true }: { article: { title: string; description: string; slug: string; publishedAt: string; updatedAt: string; medicalReview?: MedicalReview; references?: { href: string }[] }; path?: string; headline?: string; description?: string; dateModified?: string; language?: "en-IN" | "te-IN"; includeMedicalReview?: boolean }) {
   const reviewed = Boolean(includeMedicalReview && article.medicalReview?.reviewed && article.medicalReview.reviewedAt);
   return (
     <JsonLd
@@ -186,7 +186,7 @@ export function ArticleJsonLd({ article, path, headline, description, language =
         description: description || article.description,
         mainEntityOfPage: absoluteUrl(path || `/blog/${article.slug}`),
         datePublished: article.publishedAt,
-        dateModified: article.updatedAt,
+        dateModified: dateModified || article.updatedAt,
         author: { "@type": "Organization", name: `${siteConfig.name} Editorial Team`, url: siteConfig.url },
         ...(reviewed ? { reviewedBy: { "@id": `${siteConfig.url}/#physician` }, lastReviewed: article.medicalReview?.reviewedAt } : {}),
         publisher: { "@id": `${siteConfig.url}/#clinic` },
@@ -211,29 +211,6 @@ export function LocalServiceJsonLd({ name, description, path, area, language = "
         areaServed: { "@type": "Place", name: area },
         serviceType: name,
         inLanguage: language,
-      }}
-    />
-  );
-}
-
-export function VerifiedReviewJsonLd() {
-  const rating = Number(process.env.NEXT_PUBLIC_GOOGLE_RATING);
-  const count = Number(process.env.NEXT_PUBLIC_GOOGLE_REVIEW_COUNT);
-  if (!rating || !count || rating < 1 || rating > 5 || count < 1) return null;
-  return (
-    <JsonLd
-      data={{
-        "@context": "https://schema.org",
-        "@type": "MedicalClinic",
-        "@id": `${siteConfig.url}/#clinic`,
-        name: siteConfig.name,
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: rating,
-          reviewCount: count,
-          bestRating: 5,
-          worstRating: 1,
-        },
       }}
     />
   );

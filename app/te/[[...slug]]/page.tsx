@@ -11,7 +11,7 @@ import { teArticleMeta, teConditions, teServices } from "@/data/te";
 import { articleImage, conditionImage, locationImage, pageImage, serviceImage } from "@/lib/page-images";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
-const standard = ["about-doctor", "treatments", "patient-journey", "testimonials", "resources", "faqs", "contact", "clinic-vijayawada", "privacy-policy", "medical-disclaimer", "terms", "emergency", "psychiatrist-in-vijayawada", "best-psychiatrist-in-vijayawada"];
+const standard = ["about-doctor", "treatments", "patient-journey", "resources", "faqs", "contact", "clinic-vijayawada", "privacy-policy", "medical-disclaimer", "terms", "emergency", "psychiatrist-in-vijayawada"];
 
 export function generateStaticParams() {
   return [
@@ -40,7 +40,7 @@ function pageTitle(parts: string[]) {
   if (parts[0] === "conditions" && parts[1]) return `${teConditions[parts[1]]?.name || "మానసిక ఆరోగ్యం"} చికిత్స విజయవాడ`;
   if (parts[0] === "services" && parts[1]) return `${teServices[parts[1]]?.name || "సైకియాట్రిక్ సేవలు"} విజయవాడ`;
   if (parts[0] === "blog" && parts[1]) return teArticleMeta[parts[1]]?.title || "తెలుగు మానసిక ఆరోగ్య వ్యాసం";
-  const titles: Record<string,string> = { about: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్ గురించి", faq: "తరచుగా అడిగే ప్రశ్నలు", gallery: "క్లినిక్ గ్యాలరీ", conditions: "మానసిక ఆరోగ్య పరిస్థితులు", services: "సైకియాట్రిక్ సేవలు", blog: "తెలుగు మానసిక ఆరోగ్య వ్యాసాలు", locations: "విజయవాడ సమీప ప్రాంతాల కోసం సైకియాట్రిస్ట్", appointment: "సైకియాట్రిస్ట్ అపాయింట్‌మెంట్", "about-doctor": "డా. పామర్తి కృష్ణ దాస్ గురించి", treatments: "సైకియాట్రిక్ చికిత్స విధానం", "patient-journey": "రోగి ప్రయాణం", testimonials: "రోగి అనుభవం", resources: "మానసిక ఆరోగ్య వనరులు", faqs: "తరచుగా అడిగే ప్రశ్నలు", contact: "క్లినిక్ సంప్రదింపు", "clinic-vijayawada": "విజయవాడలో కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్", "privacy-policy": "గోప్యతా విధానం", "medical-disclaimer": "వైద్య సమాచార పరిమితులు", terms: "వెబ్‌సైట్ నిబంధనలు", emergency: "మానసిక ఆరోగ్య అత్యవసర సహాయం", "psychiatrist-in-vijayawada": "విజయవాడలో సైకియాట్రిస్ట్", "best-psychiatrist-in-vijayawada": "విజయవాడలో మంచి సైకియాట్రిస్ట్‌ను ఎలా ఎంచుకోవాలి" };
+  const titles: Record<string,string> = { about: "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్ గురించి", faq: "తరచుగా అడిగే ప్రశ్నలు", gallery: "క్లినిక్ గ్యాలరీ", conditions: "మానసిక ఆరోగ్య పరిస్థితులు", services: "సైకియాట్రిక్ సేవలు", blog: "తెలుగు మానసిక ఆరోగ్య వ్యాసాలు", locations: "విజయవాడ సమీప ప్రాంతాల కోసం సైకియాట్రిస్ట్", appointment: "సైకియాట్రిస్ట్ అపాయింట్‌మెంట్", "about-doctor": "డా. పామర్తి కృష్ణ దాస్ గురించి", treatments: "సైకియాట్రిక్ చికిత్స విధానం", "patient-journey": "రోగి ప్రయాణం", resources: "మానసిక ఆరోగ్య వనరులు", faqs: "తరచుగా అడిగే ప్రశ్నలు", contact: "క్లినిక్ సంప్రదింపు", "clinic-vijayawada": "విజయవాడలో కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్", "privacy-policy": "గోప్యతా విధానం", "medical-disclaimer": "వైద్య సమాచార పరిమితులు", terms: "వెబ్‌సైట్ నిబంధనలు", emergency: "మానసిక ఆరోగ్య అత్యవసర సహాయం", "psychiatrist-in-vijayawada": "విజయవాడలో సైకియాట్రిస్ట్" };
   return titles[parts[0]] || "కృష్ణ న్యూరో సైకియాట్రిక్ సెంటర్";
 }
 

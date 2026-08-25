@@ -58,8 +58,6 @@ NEXT_PUBLIC_GTM_ID=
 APPOINTMENT_WEBHOOK_URL=
 APPOINTMENT_WEBHOOK_SECRET=
 
-NEXT_PUBLIC_GOOGLE_RATING=
-NEXT_PUBLIC_GOOGLE_REVIEW_COUNT=
 ```
 
 Only `NEXT_PUBLIC_SITE_URL` is required for correct canonical URLs, sitemap entries and structured data. Google and Bing verification values are optional; add only the token supplied by the verified webmaster account.

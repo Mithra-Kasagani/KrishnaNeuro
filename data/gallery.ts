@@ -53,8 +53,8 @@ const albumSlides: GallerySlide[] = [
     titleTe: "వృత్తిపరమైన మానసిక ఆరోగ్య అవగాహన సమావేశం",
     description: "An archival photograph from an educational talk delivered to a professional audience.",
     descriptionTe: "వృత్తిపరమైన ప్రేక్షకుల కోసం నిర్వహించిన అవగాహన ప్రసంగం నుంచి పాత చిత్రం.",
-    alt: "Dr. Krishna Das speaking at a mental health awareness session",
-    altTe: "మానసిక ఆరోగ్య అవగాహన సమావేశంలో మాట్లాడుతున్న డా. కృష్ణ దాస్",
+    alt: "Dr. Pamarthi Krishna Das speaking at a mental health awareness session",
+    altTe: "మానసిక ఆరోగ్య అవగాహన సమావేశంలో మాట్లాడుతున్న డా. పామర్తి కృష్ణ దాస్",
   },
   {
     id: "1292379584142684",

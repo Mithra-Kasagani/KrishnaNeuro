@@ -15,7 +15,8 @@ A production-ready Next.js website for **Dr. Pamarthi Krishna Das, MBBS, MD (Psy
 - Symptom-specific editorial imagery across English/Telugu clinical routes, cards and condition-aware Open Graph images
 - Bilingual Gallery / గ్యాలరీ section on both homepages plus dedicated `/gallery` and `/te/gallery` pages
 - 30 locally optimised archive slides: 7 representative album images plus 23 additional public Facebook Photos-page images, each linked back to its original source
-- Direct full-width gallery with no embedded window, border or blurred backdrop; 9-second autoplay, slow zoom, 1.5-second fade-in, play/pause, previous/next, thumbnails, keyboard arrows, mobile swipe, hover pause and reduced-motion support
+- 7 clinic-supplied YouTube videos with local WebP thumbnails and privacy-enhanced, click-to-load embeds in both English and Telugu galleries
+- Direct full-width photo gallery with no embedded social-media window, border or blurred backdrop; 9-second autoplay, slow zoom, 1.5-second fade-in, play/pause, previous/next, thumbnails, keyboard arrows, mobile swipe, hover pause and reduced-motion support
 - Canonical clinic, doctor, services, conditions, patient journey, resources, FAQ, appointment, contact, emergency, medical disclaimer, privacy and terms pages in both languages
 - Dedicated `/clinic-vijayawada` visit-planning page with verified NAP, hours, directions and explicit unverified-accessibility wording
 - 30 medically responsible condition guides in English and Telugu with visible editorial attribution, family guidance and authoritative references
@@ -70,7 +71,7 @@ npm run start
 npm run seo:audit
 ```
 
-The bilingual build generates **185 routes**, including the machine-readable `/llms.txt` endpoint. The deliberately curated sitemap exposes **142 canonical English/Telugu URLs** with reciprocal `hreflang` alternates; redirects and noindex utility/local-access routes are excluded.
+The bilingual build generates **181 routes**, including the machine-readable `/llms.txt` endpoint. The deliberately curated sitemap exposes **142 canonical English/Telugu URLs** with reciprocal `hreflang` alternates; redirects and noindex utility/local-access routes are excluded.
 
 ## Environment
 
@@ -81,7 +82,6 @@ Copy `.env.example` to `.env.local` and configure:
 - optional `NEXT_PUBLIC_GTM_ID` or `NEXT_PUBLIC_GA_ID`
 - optional `APPOINTMENT_WEBHOOK_URL` and secret
 - verified Google Business Profile URL
-- verified Google rating/count only if the clinic chooses to display current first-party data
 
 Without a webhook, validated appointment details are not stored by the site. A WhatsApp message is prepared and is delivered only after the visitor reviews it and presses **Send**.
 
@@ -91,9 +91,9 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - ESLint: passed
 - Next.js production build: passed
 - Build-time static SEO validation covers core SEO configuration, 30 condition images, 35 authoritative reference URLs, medical-review invariants and privacy-safe conversion events
-- Enhanced SEO audit passed across all 142 indexable sitemap URLs: unique titles/descriptions, exactly one H1, canonicals, indexability, Open Graph, Twitter cards, localized page schema, language markup, visible sources/authorship/family guidance, image alt attributes, redirects, 404 handling, security headers, robots, sitemap and llms.txt
+- Enhanced SEO audit passed across all 142 indexable sitemap URLs: unique titles/descriptions, H1 hierarchy, canonical/query normalization, indexability, Open Graph, Twitter cards, localized page schema, visible sources/authorship/family guidance/service FAQs, image assets, orphan/near-duplicate checks, anchors, redirects, security headers, robots, sitemap and llms.txt
 - Full 188-URL audit: 0 CRITICAL, 0 HIGH, 0 MEDIUM and 0 LOW findings
-- 130 discovered internal links tested without broken destinations
+- 146 internal routes, 202 anchors and 117 rendered image/social assets tested without broken destinations
 - English and Telugu appointment validation plus WhatsApp fallback: browser-tested
 - Voice call links verified on +91 81217 43999; all WhatsApp and appointment-form delivery links verified on +91 81257 43999
 - Page-preserving language toggle, server-rendered `te-IN` Telugu content wrappers, theme, consent controls and mobile navigation: verified
@@ -103,7 +103,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - Condition and archive image files, condition/article mappings and responsive image delivery verified
 - No visible image-generation tags remain in English, Telugu, article, condition or gallery output
 - No browser runtime errors in tested flows
-- Current local production Lighthouse: desktop **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.6s, CLS 0, TBT 0ms); mobile median **95 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** across three runs (LCP median 2.558s, CLS 0, TBT median 173ms). The mobile LCP <=2.5s target was not met consistently; production field INP/Core Web Vitals remain unavailable.
+- Final local production Lighthouse: desktop **100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** (LCP 0.699s, CLS 0, TBT 20ms); mobile median **96 Performance / 100 Accessibility / 100 Best Practices / 100 SEO** across three runs (FCP 1.071s, LCP 2.467s, CLS 0, TBT 146ms). The mobile LCP <=2.5s target was met on the median lab run; production field INP/Core Web Vitals remain unavailable.
 
 ## Before public launch
 
@@ -112,7 +112,7 @@ Without a webhook, validated appointment details are not stored by the site. A W
 - Have a qualified clinician approve all medical content and an Indian legal professional review privacy/terms.
 - Verify the Google Business Profile URL and map pin.
 - Never present composite care scenarios as real reviews.
-- Never enable review schema using invented, copied or stale rating data.
+- Never add review schema for invented, copied, self-serving or stale rating data.
 
 ## Medical and crisis policy
 
