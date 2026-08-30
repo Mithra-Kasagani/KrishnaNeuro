@@ -1,0 +1,51 @@
+name: Scheduled Cloudflare Deployment
+
+on:
+  # 31 August 2026 — 09:36 AM IST
+  # 09:36 IST = 04:06 UTC
+  schedule:
+    - cron: "6 4 31 8 *"
+
+  # Allows manual testing
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build and Deploy krishnaneuro
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy to Cloudflare Workers
+        run: pnpm deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Deployment completed
+        run: |
+          echo "============================================"
+          echo "Deployment completed successfully"
+          echo "Worker: krishnaneuro"
+          echo "Domain: https://drkrishnadas.in"
+          echo "============================================"
