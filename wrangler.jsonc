@@ -16,5 +16,16 @@
   },
   "observability": {
     "enabled": true
+  },
+
+"routes": [
+  {
+    "pattern": "drkrishnadas.in",
+    "custom_domain": true
+  },
+  {
+    "pattern": "www.drkrishnadas.in",
+    "custom_domain": true
   }
+]
 }
