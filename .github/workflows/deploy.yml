@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-        name: Verify Cloudflare Authentication
+      - name: Verify Cloudflare Authentication
         run: pnpm exec wrangler whoami
 
       - name: Deploy to Cloudflare Workers
